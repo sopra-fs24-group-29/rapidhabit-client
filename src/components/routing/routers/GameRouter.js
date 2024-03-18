@@ -1,30 +1,27 @@
 import React from "react";
-import {Navigate, Route, Routes} from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Game from "../../views/Game";
 import PropTypes from "prop-types";
+import Player from "components/views/Player";
+import PlayerEdit from "components/views/PlayerEdit"; // Importiere die PlayerEdit Komponente
 
 const GameRouter = () => {
   return (
-    <div style={{display: "flex", flexDirection: "column"}}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <Routes>
-
         <Route path="" element={<Game />} />
-
         <Route path="dashboard" element={<Game />} />
-
+        <Route path="player/:id" element={<Player />} />
+        <Route path="playeredit/:id" element={<PlayerEdit />} />{" "}
+        {/* Ändere die Route, um eine ID zu akzeptieren */}
         <Route path="*" element={<Navigate to="dashboard" replace />} />
-
       </Routes>
-   
     </div>
   );
 };
-/*
-* Don't forget to export your component!
- */
 
 GameRouter.propTypes = {
-  base: PropTypes.string
-}
+  base: PropTypes.string,
+};
 
 export default GameRouter;

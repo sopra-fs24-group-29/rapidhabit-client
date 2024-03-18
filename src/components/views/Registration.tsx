@@ -15,35 +15,38 @@ As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
 
-const Login = () => {
+const Registration = () => {
   const navigate = useNavigate();
-  const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const doLogin = async () => {
+  const doRegistration = async () => {
     try {
       const requestBody = JSON.stringify({ username, password });
       console.log(requestBody);
-      const response = await api.post("/login", requestBody);
-      console.log(response.data);
-      // Store the token into the local storage.
-      localStorage.setItem("token", response.data);
-      // Login successfully worked --> navigate to the route /game in the GameRouter
-      navigate("/game");
+      let response = await api.post("/users", requestBody);
+      if (response.status === 201) {
+        console.log("Registration successful", response.data);
+        response = await api.post("/login", requestBody);
+        console.log(response.data);
+        localStorage.setItem("token", response.data);
+
+        navigate("/game");
+      } else if (response.status === 409) {
+        // Der Statuscode 400 bedeutet eine fehlerhafte Anfrage
+        console.log("Username is already taken.", response.data);
+        // Behandle den Fehler, z.B. zeige eine Fehlermeldung an
+      }
     } catch (error) {
-      alert(`Something went wrong during the login: \n${handleError(error)}`);
+      alert(`Username is already taken: \n${handleError(error)}`);
     }
   };
 
-  const doRegister = async () => {
+  const returnToLogin = async () => {
     try {
-      navigate("/registration");
+      navigate("/login");
     } catch (error) {
-      alert(
-        `Something went wrong. Routing to registration menu failed. \n${handleError(
-          error
-        )}`
-      );
+      alert("Something went wrong. Return to login screen failed.");
     }
   };
 
@@ -56,6 +59,7 @@ const Login = () => {
             value={username}
             onChange={(un: string) => setUsername(un)}
           />
+
           <FormField
             label="Password"
             value={password}
@@ -65,13 +69,13 @@ const Login = () => {
             <div className="login button-container">
               <Button
                 disabled={!username || !password}
-                onClick={() => doLogin()}
+                onClick={() => doRegistration()}
               >
-                Login
+                Sign up
               </Button>
             </div>
             <div className="login button-container">
-              <Button onClick={() => doRegister()}>Sign up</Button>
+              <Button onClick={() => returnToLogin()}>Back to login</Button>
             </div>
           </div>
         </div>
@@ -83,4 +87,4 @@ const Login = () => {
 /**
  * You can get access to the history object's properties via the useLocation, useNavigate, useParams, ... hooks.
  */
-export default Login;
+export default Registration;

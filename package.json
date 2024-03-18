@@ -3,6 +3,8 @@
   "version": "0.24.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.6.7",
     "eslint-config-react-app": "^7.0.1",
     "react": "^18.2.0",
@@ -38,7 +40,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/eslint-parser": "^7.23.10",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint-plugin-react": "^7.33.2",
     "sass": "^1.70.0"
   }
 }

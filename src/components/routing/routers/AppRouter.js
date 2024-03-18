@@ -1,9 +1,11 @@
 import React from "react";
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import {GameGuard} from "../routeProtectors/GameGuard";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { GameGuard } from "../routeProtectors/GameGuard";
 import GameRouter from "./GameRouter";
-import {LoginGuard} from "../routeProtectors/LoginGuard";
+import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../views/Login";
+import { RegistrationGuard } from "../routeProtectors/RegistrationGuard";
+import Registration from "../../views/Registration";
 
 /**
  * Main router of your application.
@@ -12,31 +14,37 @@ import Login from "../../views/Login";
  * The main difference between these two routes is the following:
  * /login renders another component without any sub-route
  * /game renders a Router that contains other sub-routes that render in turn other react components
- * Documentation about routing in React: https://reactrouter.com/en/main/start/tutorial 
+ * Documentation about routing in React: https://reactrouter.com/en/main/start/tutorial
  */
+
+/** BrowserRouter: Ein Router, der die HTML5-History-API verwendet, um die UI mit der URL zu synchronisieren. (Umfasst alle Routen)
+ * Routes: Ein Container für due Route-Definitionen. Er ersetzt den älteren Switch-Komponenten und sorgt dafür, dass nur eine Route gleichzeitig gerendert wird – die, die mit der aktuellen URL übereinstimmt.
+ * Route: Definiert eine einzelne Route mit einem Pfad und der zugehörigen Komponente.
+ */
+
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route path="/game/*" element={<GameGuard />}>
-          <Route path="/game/*" element={<GameRouter base="/game"/>} />
+          <Route path="*" element={<GameRouter base="/game" />} />
         </Route>
 
         <Route path="/login" element={<LoginGuard />}>
-          <Route path="/login" element={<Login/>} />
+          <Route path="" element={<Login />} />
         </Route>
 
-        <Route path="/" element={
-          <Navigate to="/game" replace />
-        }/>
+        <Route path="/registration" element={<RegistrationGuard />}>
+          <Route path="" element={<Registration />} />
+        </Route>
 
+        <Route path="/" element={<Navigate to="/game" replace />} />
       </Routes>
     </BrowserRouter>
   );
 };
 
 /*
-* Don't forget to export your component!
+ * Don't forget to export your component!
  */
 export default AppRouter;
