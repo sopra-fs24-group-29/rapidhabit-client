@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { GameGuard } from "../routeProtectors/GameGuard";
-import GameRouter from "./GameRouter";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../views/Login";
 import { RegistrationGuard } from "../routeProtectors/RegistrationGuard";
 import Registration from "../../views/Registration";
+import WelcomePage from "../../ui/WelcomePage";
+import NotFoundPage from "../../ui/NotFoundPage";
 
 /**
  * Main router of your application.
@@ -26,10 +26,6 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/game/*" element={<GameGuard />}>
-          <Route path="*" element={<GameRouter base="/game" />} />
-        </Route>
-
         <Route path="/login" element={<LoginGuard />}>
           <Route path="" element={<Login />} />
         </Route>
@@ -38,7 +34,9 @@ const AppRouter = () => {
           <Route path="" element={<Registration />} />
         </Route>
 
-        <Route path="/" element={<Navigate to="/game" replace />} />
+        <Route path="/" element={<WelcomePage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

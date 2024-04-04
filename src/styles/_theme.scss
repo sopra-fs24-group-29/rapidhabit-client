@@ -8,10 +8,11 @@
    feel free to play around with these and see what other look you can come up with! :D
 */
 
-$accent: #97ABFF;
-$accentDark: #123597;
-$textColor: white;
-$background: #262632;
+$background: #000000;
+$textColor: #ffffff;
+$primary: #dece45;
+$halfPrimary: lighten($primary, 50%);
+$secondary: #2a2907;
 
 /* some constants */
 
