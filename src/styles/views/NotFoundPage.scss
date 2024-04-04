@@ -1,0 +1,28 @@
+@import "../theme";
+
+.notFoundPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notFoundPage .content h1 {
+  text-align: center;
+  font-size: 8em;
+  color: $primary;
+  cursor: pointer;
+  margin: 0;
+}
+.notFoundPage .content h2 {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.notFoundPage .content p {
+  text-align: center;
+  font-size: 1.2em;
+}
+.notFoundPage .content h1:hover {
+  transform: translate(1px, 1px);
+}

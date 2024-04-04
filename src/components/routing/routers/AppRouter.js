@@ -4,8 +4,8 @@ import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../views/Login";
 import { RegistrationGuard } from "../routeProtectors/RegistrationGuard";
 import Registration from "../../views/Registration";
-import WelcomePage from "../../ui/WelcomePage";
-import NotFoundPage from "../../ui/NotFoundPage";
+import WelcomePage from "../../views/WelcomePage";
+import NotFoundPage from "../../views/NotFoundPage";
 
 /**
  * Main router of your application.
