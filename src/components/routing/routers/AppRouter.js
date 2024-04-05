@@ -6,6 +6,9 @@ import { RegistrationGuard } from "../routeProtectors/RegistrationGuard";
 import Registration from "../../views/Registration";
 import WelcomePage from "../../views/WelcomePage";
 import NotFoundPage from "../../views/NotFoundPage";
+import LoginPage from "../../views/LoginPage";
+import SignUpPage from "../../views/SignUpPage";
+import HomePage from "../../views/HomePage";
 
 /**
  * Main router of your application.
@@ -26,13 +29,19 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginGuard />}>
-          <Route path="" element={<Login />} />
-        </Route>
+        <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/registration" element={<RegistrationGuard />}>
+        <Route path="/registration" element={<SignUpPage />} />
+
+        <Route path="/home" element={<HomePage />} />
+
+        {/* <Route path="/login" element={<LoginGuard />}>
+          <Route path="" element={<Login />} />
+        </Route> */}
+
+        {/*<Route path="/registration" element={<RegistrationGuard />}>
           <Route path="" element={<Registration />} />
-        </Route>
+        </Route>*/}
 
         <Route path="/" element={<WelcomePage />} />
 
