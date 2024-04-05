@@ -50,21 +50,21 @@ const SignUpPage = () => {
       <div className="content">
         <div className="login form">
           <h1>Create account</h1>
-          <h3>First name</h3>
+          <h3>Firstname</h3>
           <FormField
             type="text"
             label=""
             value={firstname}
             onChange={(un: string) => setFirstname(un)}
           />
-          <h3>Last name</h3>
+          <h3>Lastname</h3>
           <FormField
             type="text"
             label=""
             value={lastname}
             onChange={(un: string) => setLastname(un)}
           />
-          <h3>E-mail</h3>
+          <h3>Email</h3>
           <FormField
             type="email"
             label=""
