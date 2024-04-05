@@ -3,7 +3,6 @@ import BaseContainer from "components/ui/BaseContainer";
 import { Button } from "components/ui/Button";
 import Logo from "components/ui/Logo";
 import { useNavigate } from "react-router-dom";
-import "styles/views/WelcomePage.scss";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
