@@ -1,0 +1,57 @@
+@import "../theme";
+
+.signUpPage {
+  height: 100vh;
+}
+.logo,
+.login.form {
+  display: block;
+  text-align: center;
+}
+.logo img {
+  width: 100px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.login.form {
+  width: 100%;
+  margin: 0 auto;
+}
+.signUpPage h3 {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.signUpPage button {
+  display: block;
+  border-radius: 8px;
+  height: 50px;
+  cursor: pointer;
+  color: $primary;
+  background-color: transparentize($primary, 0.5);
+}
+.login.button-container {
+  width: 100%;
+  margin-top: 20px;
+}
+.signUpPage .toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-input {
+  padding-right: 40px; /* Adjust padding to accommodate the toggle icon */
+}
+
+.password-toggle {
+  position: absolute;
+  top: 35%;
+  right: 20px; /* Adjust the position of the toggle icon as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
