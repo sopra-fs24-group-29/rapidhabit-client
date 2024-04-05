@@ -1,5 +1,3 @@
-// formatDateTime.tsx
-
 const formatDateTime = (dateTimeString: string): string => {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",

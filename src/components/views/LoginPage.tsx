@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { api, handleError } from "helpers/api";
-import { useNavigate, Link } from "react-router-dom";
 import FormField from "components/ui/FormField";
-import "styles/views/LoginPage.scss"
+import { api, handleError } from "helpers/api";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "styles/views/LoginPage.scss";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -10,15 +10,12 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const doLogin = async () => {
+  const performLogin = async () => {
     try {
       const requestBody = JSON.stringify({ email, password });
-      console.log(requestBody);
       const response = await api.post("/users/login", requestBody);
-      console.log(response.data);
-      // Store the token into the local storage.
+
       localStorage.setItem("token", response.data);
-      // Login successfully worked --> navigate to the route /game in the GameRouter
       navigate("/home");
     } catch (error) {
       alert(`Something went wrong during the login: \n${handleError(error)}`);
@@ -49,16 +46,24 @@ const LoginPage = () => {
               onChange={(un: string) => setPassword(un)}
               className="password-input"
             />
-            <div className="toggle password-toggle" onClick={() => setShowPassword(!showPassword)}>
-              <img src={showPassword ? "/hide.png" : "/show.png"} alt={showPassword ? "Hide" : "Show"}
-                   style={{ width: "24px", height: "24px" }} />
+            <div
+              className="toggle password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <img
+                src={showPassword ? "/hide.png" : "/show.png"}
+                alt={showPassword ? "Hide" : "Show"}
+                style={{ width: "24px", height: "24px" }}
+              />
             </div>
           </div>
           <div className="buttons-container">
             <div className="login button-container">
-              <button type="button"
-                      disabled={!email || !password}
-                      onClick={() => doLogin()}>
+              <button
+                type="button"
+                disabled={!email || !password}
+                onClick={performLogin}
+              >
                 Login
               </button>
             </div>
@@ -70,6 +75,6 @@ const LoginPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;

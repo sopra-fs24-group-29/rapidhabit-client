@@ -1,50 +1,31 @@
-import React, { useState } from "react";
-import { api, handleError } from "helpers/api";
-import User from "models/User"; // refers to an object defining the the structure of a user
-import { useNavigate } from "react-router-dom";
+import BaseContainer from "components/ui/BaseContainer";
 import { Button } from "components/ui/Button";
-import "styles/ui/Login.scss";
-import BaseContainer from "components/ui/BaseContainer"; // UI-Wrapper, probably used for layout purposes
-import PropTypes from "prop-types"; // ! I dont understand what this import is used for
 import FormField from "components/ui/FormField";
-
-/*
-It is possible to add multiple components inside a single file,
-however be sure not to clutter your files with an endless amount!
-As a rule of thumb, use one file per component and only add small,
-specific components that belong to the main one in the same file.
- */
+import { api, handleError } from "helpers/api";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "styles/ui/Login.scss";
 
 const Login = () => {
   const navigate = useNavigate();
+
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
 
   const doLogin = async () => {
     try {
       const requestBody = JSON.stringify({ username, password });
-      console.log(requestBody);
       const response = await api.post("/login", requestBody);
-      console.log(response.data);
-      // Store the token into the local storage.
+
       localStorage.setItem("token", response.data);
-      // Login successfully worked --> navigate to the route /game in the GameRouter
-      navigate("/game");
+      navigate("/dashboard");
     } catch (error) {
       alert(`Something went wrong during the login: \n${handleError(error)}`);
     }
   };
 
-  const doRegister = async () => {
-    try {
-      navigate("/registration");
-    } catch (error) {
-      alert(
-        `Something went wrong. Routing to registration menu failed. \n${handleError(
-          error
-        )}`
-      );
-    }
+  const navigateToSignUp = async () => {
+    navigate("/registration");
   };
 
   return (
@@ -59,7 +40,7 @@ const Login = () => {
           <FormField
             label="Password"
             value={password}
-            onChange={(n) => setPassword(n)}
+            onChange={(value) => setPassword(value)}
           />
           <div className="buttons-container">
             <div className="login button-container">
@@ -71,7 +52,7 @@ const Login = () => {
               </Button>
             </div>
             <div className="login button-container">
-              <Button onClick={() => doRegister()}>Sign up</Button>
+              <Button onClick={navigateToSignUp}>Sign up</Button>
             </div>
           </div>
         </div>
@@ -80,7 +61,4 @@ const Login = () => {
   );
 };
 
-/**
- * You can get access to the history object's properties via the useLocation, useNavigate, useParams, ... hooks.
- */
 export default Login;

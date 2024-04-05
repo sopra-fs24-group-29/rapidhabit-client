@@ -1,6 +1,5 @@
-import React from "react";
-import "styles/views/WelcomePage.scss"
 import { useNavigate } from "react-router-dom";
+import "styles/views/WelcomePage.scss";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
@@ -8,19 +7,23 @@ const WelcomePage = () => {
     <div className="welcomePage">
       <div className="content">
         <div className="logo">
-          <img src="/logo.png" alt="logo"/>
+          <img src="/logo.png" alt="logo" />
         </div>
         <div className="title">
-          <h1>Welcome to RapidTracker !</h1>
-          <h2>please login or register to continue</h2>
+          <h1>Welcome to RapidTracker</h1>
+          <h2>Please login or register to continue</h2>
         </div>
         <div className="buttons">
-          <button type="button" onClick={() => navigate("login")}>LOGIN</button>
-          <button type="button" onClick={() => navigate("registration")}>SIGN UP</button>
+          <button type="button" onClick={() => navigate("login")}>
+            Login
+          </button>
+          <button type="button" onClick={() => navigate("registration")}>
+            Sign up
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default WelcomePage;

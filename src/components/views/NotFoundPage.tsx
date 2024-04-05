@@ -1,13 +1,12 @@
-import React from "react";
-import "styles/views/NotFoundPage.scss"
 import { useNavigate } from "react-router-dom";
+import "styles/views/NotFoundPage.scss";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
   const doNav = () => {
     localStorage.removeItem("token");
     navigate("/");
-  }
+  };
 
   return (
     <div className="notFoundPage">
@@ -18,6 +17,6 @@ const NotFoundPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default NotFoundPage;

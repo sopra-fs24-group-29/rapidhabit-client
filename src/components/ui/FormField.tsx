@@ -1,7 +1,12 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+interface FormFieldProps {
+  label?: string;
+  value?: string;
+  className?: string;
+  onChange: (value: string) => void;
+  type?: React.HTMLInputTypeAttribute;
+}
 
-const FormField = (props) => {
+const FormField = (props: FormFieldProps) => {
   return (
     <div className="login field">
       <input
@@ -13,13 +18,6 @@ const FormField = (props) => {
       />
     </div>
   );
-};
-
-FormField.propTypes = {
-  label: PropTypes.string, // label muss zwingend ein string sein und muss zwingend als String übergeben werden
-  value: PropTypes.string, // gleich wie bei value
-  onChange: PropTypes.func, // callback funktion, die übergeben wird, falls sich einer der werte ändert
-  type: PropTypes.string
 };
 
 export default FormField;

@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import { api, handleError } from "helpers/api";
+import FormField from "components/ui/FormField";
+import { api } from "helpers/api";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "styles/ui/Login.scss";
-import FormField from "components/ui/FormField";
-import "styles/views/SignUpPage.scss"
-
-/*
-It is possible to add multiple components inside a single file,
-however be sure not to clutter your files with an endless amount!
-As a rule of thumb, use one file per component and only add small,
-specific components that belong to the main one in the same file.
- */
+import "styles/views/SignUpPage.scss";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -22,23 +15,23 @@ const SignUpPage = () => {
 
   const doRegistration = async () => {
     try {
-      const requestBody = JSON.stringify({ firstname, lastname, email, password });
-      console.log(requestBody);
+      const requestBody = JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        password,
+      });
       let response = await api.post("/users", requestBody);
       if (response.status === 201) {
-        console.log("Registration successful", response.data);
         response = await api.post("/users/login", requestBody);
-        console.log(response.data);
         localStorage.setItem("token", response.data);
-
         navigate("/home");
       } else if (response.status === 409) {
-        // Der Statuscode 400 bedeutet eine fehlerhafte Anfrage
+        // TODO: Show error message
         console.log("Email is already taken.", response.data);
-        // Behandle den Fehler, z.B. zeige eine Fehlermeldung an
       }
     } catch (error) {
-      alert(`Email is already taken: \n${handleError(error)}`);
+      // TODO: Show generic error message
     }
   };
 
@@ -80,16 +73,24 @@ const SignUpPage = () => {
               onChange={(un: string) => setPassword(un)}
               className="password-input"
             />
-            <div className="toggle password-toggle" onClick={() => setShowPassword(!showPassword)}>
-              <img src={showPassword ? "/hide.png" : "/show.png"} alt={showPassword ? "Hide" : "Show"}
-                   style={{ width: "24px", height: "24px" }} />
+            <div
+              className="toggle password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <img
+                src={showPassword ? "/hide.png" : "/show.png"}
+                alt={showPassword ? "Hide" : "Show"}
+                style={{ width: "24px", height: "24px" }}
+              />
             </div>
           </div>
           <div className="buttons-container">
             <div className="login button-container">
-              <button type="button"
-                      disabled={!firstname || !lastname || !email || !password}
-                      onClick={() => doRegistration()}>
+              <button
+                type="button"
+                disabled={!firstname || !lastname || !email || !password}
+                onClick={doRegistration}
+              >
                 Create account
               </button>
             </div>
@@ -100,7 +101,4 @@ const SignUpPage = () => {
   );
 };
 
-/**
- * You can get access to the history object's properties via the useLocation, useNavigate, useParams, ... hooks.
- */
 export default SignUpPage;
