@@ -1,5 +1,6 @@
+import clsx from "clsx";
 import React from "react";
-import "../../styles/ui/Button.scss";
+import "../../styles/ui/Button.css";
 
 interface ButtonProps extends React.ComponentProps<"button"> {
   style?: React.CSSProperties;
@@ -11,7 +12,7 @@ export const Button = (props: ButtonProps) => (
   <button
     {...props}
     style={props.style}
-    className={`primary-button ${props.className}`}
+    className={clsx("primary-button", props.className)}
   >
     {props.children}
   </button>

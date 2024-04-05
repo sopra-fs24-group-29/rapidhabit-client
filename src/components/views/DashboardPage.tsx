@@ -1,7 +1,9 @@
+import BaseContainer from "components/ui/BaseContainer";
+
 const DashboardPage = () => (
-  <div>
+  <BaseContainer>
     <h1>hello hello</h1>
-  </div>
+  </BaseContainer>
 );
 
 export default DashboardPage;

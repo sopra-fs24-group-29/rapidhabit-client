@@ -1,3 +1,5 @@
+import AuthContainer from "components/ui/AuthContainer";
+import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
 import { api, handleError } from "helpers/api";
 import { useState } from "react";
@@ -23,57 +25,59 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="loginPage">
-      <div className="logo">
-        <img src="/logo.png" alt="logo" />
-      </div>
-      <div className="content">
-        <div className="login form">
-          <h1>Login</h1>
-          <h3>Email</h3>
-          <FormField
-            label=""
-            type="email"
-            value={email}
-            onChange={(un: string) => setEmail(un)}
-          />
-          <h3>Password</h3>
-          <div className="password-container">
+    <BaseContainer className="loginPage">
+      <AuthContainer>
+        <div className="logo">
+          <img src="/logo.png" alt="logo" />
+        </div>
+        <div className="content">
+          <div className="login form">
+            <h1>Login</h1>
+            <h3>Email</h3>
             <FormField
-              type={showPassword ? "text" : "password"}
               label=""
-              value={password}
-              onChange={(un: string) => setPassword(un)}
-              className="password-input"
+              type="email"
+              value={email}
+              onChange={(un: string) => setEmail(un)}
             />
-            <div
-              className="toggle password-toggle"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <img
-                src={showPassword ? "/hide.png" : "/show.png"}
-                alt={showPassword ? "Hide" : "Show"}
-                style={{ width: "24px", height: "24px" }}
+            <h3>Password</h3>
+            <div className="password-container">
+              <FormField
+                type={showPassword ? "text" : "password"}
+                label=""
+                value={password}
+                onChange={(un: string) => setPassword(un)}
+                className="password-input"
               />
-            </div>
-          </div>
-          <div className="buttons-container">
-            <div className="login button-container">
-              <button
-                type="button"
-                disabled={!email || !password}
-                onClick={performLogin}
+              <div
+                className="toggle password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
               >
-                Login
-              </button>
+                <img
+                  src={showPassword ? "/hide.png" : "/show.png"}
+                  alt={showPassword ? "Hide" : "Show"}
+                  style={{ width: "24px", height: "24px" }}
+                />
+              </div>
             </div>
-          </div>
-          <div className="nav">
-            <Link to="/registration">Create account</Link>
+            <div className="buttons-container">
+              <div className="login button-container">
+                <button
+                  type="button"
+                  disabled={!email || !password}
+                  onClick={performLogin}
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+            <div className="nav">
+              <Link to="/registration">Create account</Link>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </AuthContainer>
+    </BaseContainer>
   );
 };
 

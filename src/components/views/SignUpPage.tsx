@@ -1,3 +1,4 @@
+import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
 import { api } from "helpers/api";
 import { useState } from "react";
@@ -7,10 +8,13 @@ import "styles/views/SignUpPage.scss";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+
   const [firstname, setFirstname] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
   const [showPassword, setShowPassword] = useState(false);
 
   const doRegistration = async () => {
@@ -36,7 +40,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="signUpPage">
+    <BaseContainer className="signUpPage">
       <div className="logo">
         <img src="/logo.png" alt="logo" />
       </div>
@@ -97,7 +101,7 @@ const SignUpPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </BaseContainer>
   );
 };
 
