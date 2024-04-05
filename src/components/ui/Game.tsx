@@ -5,7 +5,7 @@ import { Button } from "components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-import "styles/views/Game.scss";
+import "styles/ui/Game.scss";
 import { User } from "types";
 import PlayerField from "components/ui/PlayerField";
 

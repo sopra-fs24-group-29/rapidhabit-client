@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
-import Login from "../../views/Login";
+import Login from "../../ui/Login";
 import { RegistrationGuard } from "../routeProtectors/RegistrationGuard";
-import Registration from "../../views/Registration";
+import Registration from "../../ui/Registration";
 import WelcomePage from "../../views/WelcomePage";
 import NotFoundPage from "../../views/NotFoundPage";
 import LoginPage from "../../views/LoginPage";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Game from "../../views/Game";
+import Game from "../../ui/Game";
 import PropTypes from "prop-types";
 import Player from "components/views/Player";
 import PlayerEdit from "components/views/PlayerEdit"; // Importiere die PlayerEdit Komponente

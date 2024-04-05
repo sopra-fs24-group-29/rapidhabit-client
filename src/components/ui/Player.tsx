@@ -1,46 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Importiere useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import { api, handleError } from "helpers/api";
 import { Spinner } from "components/ui/Spinner";
 import BaseContainer from "components/ui/BaseContainer";
-import "styles/views/Game.scss";
+import "styles/ui/Game.scss";
 import User from "models/User";
 import PlayerData from "components/ui/PlayerData";
 import { Button } from "components/ui/Button";
+import EditButton from "components/ui/EditButton";
 
-const EditPlayer = () => {
+const Player = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Initialisiere useNavigate
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response = await api.get(`/users/${id}`, {
+        const userResponse = await api.get(`/users/${id}`, {
           headers: { Authorization: localStorage.getItem("token") },
         });
-        const userData = new User(response.data); // Erstelle eine neue User-Instanz
-        setUser(userData);
-        console.log(response.data);
-        console.log(user);
+        setUser(new User(userResponse.data));
+
+        const editResponse = await api.get(`/allowEdit?id=${id}`, {
+          headers: { Authorization: localStorage.getItem("token") },
+        });
+        setIsEditable(editResponse.data);
       } catch (error) {
-        console.error(`Error fetching user details: ${handleError(error)}`);
-        alert(
-          "Error fetching user details. Check console for more information."
-        );
+        console.error(`Error fetching data: ${handleError(error)}`);
+        alert("Error fetching data. Check console for more information.");
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchUser();
+    fetchData();
   }, [id]);
 
   const doReturn = () => {
-    // Entferne async, wenn du keine asynchronen Operationen ausführst
     navigate("/game");
+  };
+
+  const doEdit = () => {
+    navigate(`/game/playeredit/${id}`);
   };
 
   if (isLoading) {
@@ -50,17 +55,6 @@ const EditPlayer = () => {
   if (!user) {
     return <div className="player-details">User not found</div>;
   }
-  let content = <Spinner />;
-  content = (
-    <div className="game">
-      <ul className="game user-list">
-        <li className="detail">Username: {user.username}</li>
-        <li className="detail">Status: {user.status}</li>
-        <li className="detail">Creation Date: {user.creationDate}</li>
-        <li className="detail">Birthdate: {user.birthdate}</li>
-      </ul>
-    </div>
-  );
 
   return (
     <BaseContainer className="game container">
@@ -72,12 +66,13 @@ const EditPlayer = () => {
           <PlayerData user={user} attribute="creationDate" />
           <PlayerData user={user} attribute="birthdate" />
         </ul>
-      </div>
-      <div className="login button-container">
-        <Button onClick={() => doReturn()}>Return</Button>
+        <div className="buttons-container">
+          <Button onClick={doReturn}>Return</Button>
+          <EditButton editFunction={doEdit} allowEdit={isEditable} />
+        </div>
       </div>
     </BaseContainer>
   );
 };
 
-export default EditPlayer;
+export default Player;

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { api, handleError } from "helpers/api";
 import { Spinner } from "components/ui/Spinner";
 import BaseContainer from "components/ui/BaseContainer";
-import "styles/views/Game.scss";
+import "styles/ui/Game.scss";
 import { Button } from "components/ui/Button";
 
 const PlayerEdit = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { api, handleError } from "helpers/api";
 import { useNavigate } from "react-router-dom";
-import "styles/views/Login.scss";
+import "styles/ui/Login.scss";
 import FormField from "components/ui/FormField";
 import "styles/views/SignUpPage.scss"
 
