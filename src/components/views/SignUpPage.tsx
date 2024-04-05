@@ -27,7 +27,7 @@ const SignUpPage = () => {
       let response = await api.post("/users", requestBody);
       if (response.status === 201) {
         console.log("Registration successful", response.data);
-        response = await api.post("/login", requestBody);
+        response = await api.post("/users/login", requestBody);
         console.log(response.data);
         localStorage.setItem("token", response.data);
 
