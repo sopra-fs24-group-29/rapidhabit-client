@@ -4,10 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
+  const doNav = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
   return (
     <div className="notFoundPage">
       <div className="content">
-        <h1 onClick={() => navigate("/")}>Error 404</h1>
+        <h1 onClick={doNav}>Error 404</h1>
         <h2>Page Not Found</h2>
         <p>The page you&apos;re looking for does not seem to exist</p>
       </div>
