@@ -3,8 +3,9 @@ import FormField from "components/ui/FormField";
 import { api } from "helpers/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "styles/ui/Login.scss";
-import "styles/views/SignUpPage.scss";
+import AuthContainer from "../ui/AuthContainer.tsx";
+import Logo from "../ui/Logo.tsx";
+import { Button } from "../ui/Button.tsx";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -41,66 +42,64 @@ const SignUpPage = () => {
 
   return (
     <BaseContainer className="signUpPage">
-      <div className="logo">
-        <img src="/logo.png" alt="logo" />
-      </div>
-      <div className="content">
-        <div className="login form">
-          <h1>Create account</h1>
-          <h3>Firstname</h3>
-          <FormField
-            type="text"
-            label=""
-            value={firstname}
-            onChange={(un: string) => setFirstname(un)}
-          />
-          <h3>Lastname</h3>
-          <FormField
-            type="text"
-            label=""
-            value={lastname}
-            onChange={(un: string) => setLastname(un)}
-          />
-          <h3>Email</h3>
-          <FormField
-            type="email"
-            label=""
-            value={email}
-            onChange={(un: string) => setEmail(un)}
-          />
-          <h3>Password</h3>
-          <div className="password-container">
+      <AuthContainer>
+        <Logo />
+        <div className="content">
+          <div className="login form">
+            <h1>Create account</h1>
+            <h3>Firstname</h3>
             <FormField
-              type={showPassword ? "text" : "password"}
+              type="text"
               label=""
-              value={password}
-              onChange={(un: string) => setPassword(un)}
-              className="password-input"
+              value={firstname}
+              onChange={(un: string) => setFirstname(un)}
             />
-            <div
-              className="toggle password-toggle"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <img
-                src={showPassword ? "/hide.png" : "/show.png"}
-                alt={showPassword ? "Hide" : "Show"}
-                style={{ width: "24px", height: "24px" }}
+            <h3>Lastname</h3>
+            <FormField
+              type="text"
+              label=""
+              value={lastname}
+              onChange={(un: string) => setLastname(un)}
+            />
+            <h3>Email</h3>
+            <FormField
+              type="email"
+              label=""
+              value={email}
+              onChange={(un: string) => setEmail(un)}
+            />
+            <h3>Password</h3>
+            <div className="password-container">
+              <FormField
+                type={showPassword ? "text" : "password"}
+                label=""
+                value={password}
+                onChange={(un: string) => setPassword(un)}
+                className="password-input"
               />
-            </div>
-          </div>
-          <div className="buttons-container">
-            <div className="login button-container">
-              <button
-                type="button"
-                disabled={!firstname || !lastname || !email || !password}
-                onClick={doRegistration}
+              <div
+                className="toggle password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
               >
-                Create account
-              </button>
+                <img
+                  src={showPassword ? "/hide.png" : "/show.png"}
+                  alt={showPassword ? "Hide" : "Show"}
+                  style={{ width: "24px", height: "24px" }}
+                />
+              </div>
+            </div>
+            <div className="buttons-container">
+                <Button
+                  type="button"
+                  disabled={!firstname || !lastname || !email || !password}
+                  onClick={doRegistration}
+                >
+                  Create account
+                </Button>
             </div>
           </div>
         </div>
-      </div>
+      </AuthContainer>
     </BaseContainer>
   );
 };
