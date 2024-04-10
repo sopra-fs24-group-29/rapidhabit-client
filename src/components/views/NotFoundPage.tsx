@@ -5,9 +5,9 @@ import "styles/views/NotFoundPage.scss";
 const NotFoundPage = () => (
   <BaseContainer className="notFoundPage">
     <div className="content">
-      <h2>Page Not Found</h2>
+      <h1>Page Not Found</h1>
       <p>The page you&apos;re looking for does not seem to exist</p>
-      <Link to="/">Go back</Link>
+      <Link className="centeredLink" to="/">Go back</Link>
     </div>
   </BaseContainer>
 );

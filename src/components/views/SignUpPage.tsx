@@ -29,7 +29,7 @@ const SignUpPage = () => {
       if (response.status === 201) {
         response = await api.post("/users/login", requestBody);
         localStorage.setItem("token", response.data);
-        navigate("/home");
+        navigate("/app");
       } else if (response.status === 409) {
         // TODO: Show error message
         console.log("Email is already taken.", response.data);

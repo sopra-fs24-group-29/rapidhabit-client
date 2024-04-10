@@ -12,7 +12,7 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/app" element={<RequireSignedIn />}>
-          <Route path="/app/dashboard" element={<DashboardPage />} />
+          <Route path="/app" element={<DashboardPage />} />
         </Route>
 
         <Route path="/login" element={<RequireNotSignedIn />}>

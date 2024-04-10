@@ -3,9 +3,17 @@
 .loginPage {
   height: 100vh;
 }
+.loginPage .logo{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .loginPage h1 {
   text-align: left;
   margin-bottom: 5px;
+  font-size: 24px;
 }
 .logo,
 .login.form {

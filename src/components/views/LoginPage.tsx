@@ -1,4 +1,3 @@
-import AuthContainer from "components/ui/AuthContainer";
 import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
 import { api, handleError } from "helpers/api";
@@ -12,13 +11,13 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const performLogin = async () => {
+  const doLogin = async () => {
     try {
       const requestBody = JSON.stringify({ email, password });
       const response = await api.post("/users/login", requestBody);
 
       localStorage.setItem("token", response.data);
-      navigate("/home");
+      navigate("/app");
     } catch (error) {
       alert(`Something went wrong during the login: \n${handleError(error)}`);
     }
@@ -26,7 +25,6 @@ const LoginPage = () => {
 
   return (
     <BaseContainer className="loginPage">
-      <AuthContainer>
         <div className="logo">
           <img src="/logo.png" alt="logo" />
         </div>
@@ -65,7 +63,7 @@ const LoginPage = () => {
                 <button
                   type="button"
                   disabled={!email || !password}
-                  onClick={performLogin}
+                  onClick={doLogin}
                 >
                   Login
                 </button>
@@ -76,7 +74,6 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
-      </AuthContainer>
     </BaseContainer>
   );
 };

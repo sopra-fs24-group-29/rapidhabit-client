@@ -1,9 +1,12 @@
 import BaseContainer from "components/ui/BaseContainer";
 
-const DashboardPage = () => (
-  <BaseContainer>
-    <h1>hello hello</h1>
+const DashboardPage = () => {
+
+  return (
+    <BaseContainer>
+    <h1 className="text-center text-4xl">Dashboard</h1>
   </BaseContainer>
-);
+  );
+}
 
 export default DashboardPage;
