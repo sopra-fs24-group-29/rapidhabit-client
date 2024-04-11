@@ -29,50 +29,51 @@ const LoginPage = () => {
     <BaseContainer>
       <AuthContainer>
         <Logo />
-          <div className="content">
-            <div className="login form">
-              <h1>Login</h1>
-              <h3>Email</h3>
+        <div>
+          <div>
+            <h1 className="text-left text-2xl lg:text-4xl">Login</h1>
+            <h3 className="text-left mt-3">Email</h3>
+            <FormField
+              label=""
+              type="email"
+              value={email}
+              onChange={(un: string) => setEmail(un)}
+            />
+            <h3 className="text-left mt-3">Password</h3>
+            <div className="relative">
               <FormField
+                type={showPassword ? "text" : "password"}
                 label=""
-                type="email"
-                value={email}
-                onChange={(un: string) => setEmail(un)}
+                value={password}
+                onChange={(un: string) => setPassword(un)}
               />
-              <h3>Password</h3>
-              <div className="password-container">
-                <FormField
-                  type={showPassword ? "text" : "password"}
-                  label=""
-                  value={password}
-                  onChange={(un: string) => setPassword(un)}
-                  className="password-input"
+              <div
+                className="absolute right-0 top-1/2 transform -translate-y-1/2"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                <img
+                  className="cursor-pointer"
+                  src={showPassword ? "/hide.png" : "/show.png"}
+                  alt={showPassword ? "Hide" : "Show"}
+                  style={{ width: "24px", height: "24px" }}
                 />
-                <div
-                  className="toggle password-toggle"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  <img
-                    src={showPassword ? "/hide.png" : "/show.png"}
-                    alt={showPassword ? "Hide" : "Show"}
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                </div>
-              </div>
-              <div className="buttons-container">
-                <Button
-                  type="button"
-                  disabled={!email || !password}
-                  onClick={doLogin}
-                >
-                  Login
-                </Button>
-              </div>
-              <div className="nav">
-                <Link to="/registration">Create account</Link>
               </div>
             </div>
+            <div>
+              <Button
+                className="cursor-pointer py-1 px-4 mt-5 w-full"
+                type="button"
+                disabled={!email || !password}
+                onClick={doLogin}
+              >
+                Login
+              </Button>
+            </div>
+            <div className="mt-5 hover:underline">
+              <Link to="/registration">Create account</Link>
+            </div>
           </div>
+        </div>
       </AuthContainer>
     </BaseContainer>
   );

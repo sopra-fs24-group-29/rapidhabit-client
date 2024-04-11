@@ -41,55 +41,56 @@ const SignUpPage = () => {
   };
 
   return (
-    <BaseContainer className="signUpPage">
+    <BaseContainer>
       <AuthContainer>
         <Logo />
-        <div className="content">
-          <div className="login form">
-            <h1>Create account</h1>
-            <h3>Firstname</h3>
+        <div>
+          <div>
+            <h1 className="text-left text-2xl lg:text-4xl">Create account</h1>
+            <h3 className="text-left  mt-3">Firstname</h3>
             <FormField
               type="text"
               label=""
               value={firstname}
               onChange={(un: string) => setFirstname(un)}
             />
-            <h3>Lastname</h3>
+            <h3 className="text-left  mt-3">Lastname</h3>
             <FormField
               type="text"
               label=""
               value={lastname}
               onChange={(un: string) => setLastname(un)}
             />
-            <h3>Email</h3>
+            <h3 className="text-left  mt-3">Email</h3>
             <FormField
               type="email"
               label=""
               value={email}
               onChange={(un: string) => setEmail(un)}
             />
-            <h3>Password</h3>
-            <div className="password-container">
+            <h3 className="text-left  mt-3">Password</h3>
+            <div className="relative">
               <FormField
                 type={showPassword ? "text" : "password"}
                 label=""
                 value={password}
                 onChange={(un: string) => setPassword(un)}
-                className="password-input"
               />
               <div
-                className="toggle password-toggle"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 <img
+                  className="cursor-pointer"
                   src={showPassword ? "/hide.png" : "/show.png"}
                   alt={showPassword ? "Hide" : "Show"}
                   style={{ width: "24px", height: "24px" }}
                 />
               </div>
             </div>
-            <div className="buttons-container">
+            <div>
                 <Button
+                  className="cursor-pointer w-full p-1 mt-5"
                   type="button"
                   disabled={!firstname || !lastname || !email || !password}
                   onClick={doRegistration}
