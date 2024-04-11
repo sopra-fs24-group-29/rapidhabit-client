@@ -1,6 +1,6 @@
 import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
-import { api } from "helpers/api";
+import { api, handleError } from "helpers/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContainer from "../ui/AuthContainer.tsx";
@@ -28,15 +28,16 @@ const SignUpPage = () => {
       });
       let response = await api.post("/users", requestBody);
       if (response.status === 201) {
-        response = await api.post("/users/login", requestBody);
+        response = await api.put("/users/login", requestBody);
         localStorage.setItem("token", response.data);
         navigate("/app");
       } else if (response.status === 409) {
-        // TODO: Show error message
         console.log("Email is already taken.", response.data);
+        alert("Email is already taken.");
       }
     } catch (error) {
-      // TODO: Show generic error message
+      console.log("something went wrong", error);
+      alert(`Something went wrong during the signup: \n${handleError(error)}`);
     }
   };
 
@@ -77,7 +78,7 @@ const SignUpPage = () => {
                 onChange={(un: string) => setPassword(un)}
               />
               <div
-                className="absolute right-0 top-1/2 transform -translate-y-1/2"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 <img
@@ -90,7 +91,7 @@ const SignUpPage = () => {
             </div>
             <div>
                 <Button
-                  className="cursor-pointer w-full p-1 mt-5"
+                  className="cursor-pointer py-1 px-4 mt-5 w-full"
                   type="button"
                   disabled={!firstname || !lastname || !email || !password}
                   onClick={doRegistration}

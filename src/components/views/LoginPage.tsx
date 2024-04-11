@@ -16,11 +16,12 @@ const LoginPage = () => {
   const doLogin = async () => {
     try {
       const requestBody = JSON.stringify({ email, password });
-      const response = await api.post("/users/login", requestBody);
+      const response = await api.put("/users/login", requestBody);
 
       localStorage.setItem("token", response.data);
       navigate("/app");
     } catch (error) {
+      console.log("Something went wrong during the login: ", error);
       alert(`Something went wrong during the login: \n${handleError(error)}`);
     }
   };
@@ -48,7 +49,7 @@ const LoginPage = () => {
                 onChange={(un: string) => setPassword(un)}
               />
               <div
-                className="absolute right-0 top-1/2 transform -translate-y-1/2"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 <img
