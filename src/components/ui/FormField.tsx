@@ -14,7 +14,7 @@ const FormField = (props: FormFieldProps) => {
         value={props.value}
         type={props.type}
         onChange={(e) => props.onChange(e.target.value)}
-        className="rounded-lg bg-input w-full h-7 px-2"
+        className="rounded-lg bg-input w-full h-7 px-2 placeholder-gray-600"
       />
     </div>
   );

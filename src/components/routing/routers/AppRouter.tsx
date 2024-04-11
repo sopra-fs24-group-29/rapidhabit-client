@@ -6,6 +6,7 @@ import SignUpPage from "../../views/SignUpPage";
 import WelcomePage from "../../views/WelcomePage";
 import { RequireNotSignedIn } from "../routeProtectors/RequireNotSignedIn";
 import { RequireSignedIn } from "../routeProtectors/RequireSignedIn";
+import ProfilePage from "../../views/ProfilePage.tsx";
 
 const AppRouter = () => {
   return (
@@ -13,6 +14,10 @@ const AppRouter = () => {
       <Routes>
         <Route path="/app" element={<RequireSignedIn />}>
           <Route path="/app" element={<DashboardPage />} />
+        </Route>
+
+        <Route path="/profile" element={<RequireNotSignedIn />}>
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
 
         <Route path="/login" element={<RequireNotSignedIn />}>
