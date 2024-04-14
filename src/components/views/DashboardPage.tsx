@@ -1,9 +1,14 @@
 import BaseContainer from "components/ui/BaseContainer";
+import GroupSection from "components/ui/Group";
+import TabBar from "components/ui/Tabbar";
 import { api, handleError } from "helpers/api";
+import { Group } from "models/Group";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
-  const [groups, setGroups] = useState();
+  const [groups, setGroups] = useState<Group[]>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -11,7 +16,8 @@ const DashboardPage = () => {
         const response = await api.get(`/groups`, {
           headers: { Authorization: localStorage.getItem("token") },
         });
-        setGroups(response.data);
+        setGroups(response.data || []);
+        console.log(groups);
       } catch (error) {
         console.error(
           `Something went wrong while fetching the profile: \n${handleError(
@@ -26,78 +32,36 @@ const DashboardPage = () => {
 
     fetchData();
   }, []);
+
+  const countGroups = () => {
+    alert(groups?.length);
+  };
+
   return (
     <BaseContainer>
       <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
-        {groups}
+        Groups
       </h1>
       <div>
         <div className="flex  flex-col ">
-          <div className="flex flex-col bg-dark-green p-6 m-5 rounded-lg mb-1">
-            <div className="flex flex-row justify-between">
-              <div className="font-bold">24🔥</div>
-              <div>
-                <div>Current rank</div>
-                <div className="font-bold">1st👑</div>
-              </div>
-            </div>
-
-            <div className="text-xl font-bold">🏐Volleyball</div>
-            <div className="flex justify-end gap-1.5">
-              <div className="rounded-full bg-light-green w-8 h-8 ">
-                <text className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-                  RO
-                </text>
-              </div>
-              <div className="rounded-full bg-light-green w-8 h-8 ">
-                <text className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-                  RO
-                </text>
-              </div>
-              <div className="rounded-full bg-light-green w-8 h-8 ">
-                <text className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-                  RO
-                </text>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col bg-dark-green p-6 m-5 rounded-lg mb-1">
-            <div className="flex flex-row justify-between">
-              <div className="font-bold">24🔥</div>
-              <div>
-                <div>Current rank</div>
-                <div className="font-bold">1st👑</div>
-              </div>
-            </div>
-
-            <div className="text-xl font-bold">🏐Volleyball</div>
-            <div className="flex justify-end gap-1.5">
-              <div className="rounded-full bg-light-green w-8 h-8 ">
-                <text className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-                  RO
-                </text>
-              </div>
-              <div className="rounded-full bg-light-green w-8 h-8 ">
-                <text className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-                  RO
-                </text>
-              </div>
-              <div className="rounded-full bg-light-green w-8 h-8 ">
-                <text className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-                  RO
-                </text>
-              </div>
-            </div>
-          </div>
+          {groups?.map((group) => (
+            <GroupSection key={group.id} name={group.name} id={group.id} />
+          ))}
         </div>
-        <div className="flex flex-row">
-          <div className="flex-col bg-input p-6 m-5 mr-1 rounded-lg mb-1">
+        <div className="flex flex-row pb-20">
+          <button
+            className="flex-col bg-input p-6 m-5 mr-1 rounded-lg mb-1"
+            onClick={() => navigate("/app/newGroup")}
+          >
             <div className="flex justify-center font-bold text-2xl">+</div>
             <div className="flex justify-center font-semibold text-m text-a text-center">
               start new group
             </div>
-          </div>
-          <div className="flex-col bg-input p-6 m-5 rounded-lg mb-1">
+          </button>
+          <div
+            className="flex-col bg-input p-6 m-5 rounded-lg mb-1"
+            onClick={() => countGroups()}
+          >
             <div className="flex justify-center font-bold text-2xl">+</div>
             <div className="flex justify-center font-semibold text-m text-a text-center">
               join with code
@@ -105,6 +69,7 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
+      <TabBar />
     </BaseContainer>
   );
 };
