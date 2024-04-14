@@ -46,8 +46,19 @@ const ProfilePage = () => {
     window.location.reload();
   };
 
-  const handleSave = () => {
-    window.location.reload();
+  const handleSave = async () => {
+    try {
+      console.log("Saving user...")
+      await api.put(`/users/${userId}`, userData, {
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      });
+      console.log("User saved successfully")
+      window.location.reload();
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+    }
   };
 
   return (
@@ -133,6 +144,17 @@ const ProfilePage = () => {
                 </div>
               </div>
             </div>
+
+            {!isDataChanged && (
+            <div>
+              <Button
+                className="cursor-pointer py-0 px-4 mt-5 w-full bg-red-600"
+                type="button"
+              >
+                Delete Account
+              </Button>
+            </div>
+            )}
 
           </div>
         </div>
