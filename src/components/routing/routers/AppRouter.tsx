@@ -1,4 +1,5 @@
 import DashboardPage from "components/views/DashboardPage";
+import GroupDetail from "components/views/GroupDetail.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "../../views/LoginPage";
 import NotFoundPage from "../../views/NotFoundPage";
@@ -15,6 +16,8 @@ const AppRouter = () => {
         <Route path="/app" element={<RequireSignedIn />}>
           <Route path="/app" element={<DashboardPage />} />
         </Route>
+
+        <Route path="/app/:groupId" element={<GroupDetail />} />
 
         <Route path="/profile/:userId" element={<RequireSignedIn />}>
           <Route path="/profile/:userId" element={<ProfilePage />} />
