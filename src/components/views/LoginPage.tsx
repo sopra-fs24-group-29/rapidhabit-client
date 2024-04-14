@@ -18,7 +18,8 @@ const LoginPage = () => {
       const requestBody = JSON.stringify({ email, password });
       const response = await api.put("/users/login", requestBody);
 
-      localStorage.setItem("token", response.data);
+      localStorage.setItem("token", response.data.token);
+      console.log("successful login");
       navigate("/app");
     } catch (error) {
       console.log("Something went wrong during the login: ", error);

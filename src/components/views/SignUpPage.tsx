@@ -24,12 +24,13 @@ const SignUpPage = () => {
         firstname,
         lastname,
         email,
-        password,
+        password
       });
       let response = await api.post("/users", requestBody);
       if (response.status === 201) {
         response = await api.put("/users/login", requestBody);
-        localStorage.setItem("token", response.data);
+        localStorage.setItem("token", response.data.token);
+        console.log("successful registration");
         navigate("/app");
       } else if (response.status === 409) {
         console.log("Email is already taken.", response.data);

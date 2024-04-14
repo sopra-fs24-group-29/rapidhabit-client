@@ -16,8 +16,8 @@ const AppRouter = () => {
           <Route path="/app" element={<DashboardPage />} />
         </Route>
 
-        <Route path="/profile" element={<RequireNotSignedIn />}>
-          <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/:userId" element={<RequireSignedIn />}>
+          <Route path="/profile/:userId" element={<ProfilePage />} />
         </Route>
 
         <Route path="/login" element={<RequireNotSignedIn />}>
