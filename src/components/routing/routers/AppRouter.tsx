@@ -1,3 +1,4 @@
+import CreateGroupPage from "components/views/CreateGroupPage.tsx";
 import DashboardPage from "components/views/DashboardPage";
 import GroupDetail from "components/views/GroupDetail.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -18,6 +19,8 @@ const AppRouter = () => {
         <Route path="/app" element={<RequireSignedIn />}>
           <Route path="/app" element={<DashboardPage />} />
         </Route>
+
+        <Route path="/app/newGroup" element={<CreateGroupPage />} />
 
         <Route path="/app/:groupId" element={<GroupDetail />} />
 
