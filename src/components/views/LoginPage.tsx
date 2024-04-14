@@ -1,6 +1,6 @@
 import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
-import { api, handleError } from "helpers/api";
+import { api } from "helpers/api";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContainer from "../ui/AuthContainer.tsx";
@@ -23,7 +23,7 @@ const LoginPage = () => {
       navigate("/app");
     } catch (error) {
       console.log("Something went wrong during the login: ", error);
-      alert(`Something went wrong during the login: \n${handleError(error)}`);
+      alert("wrong password or email");
     }
   };
 

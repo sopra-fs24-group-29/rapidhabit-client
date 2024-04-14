@@ -3,7 +3,7 @@ import FormField from "../ui/FormField.tsx";
 import { useState, useEffect } from "react";
 import { api } from "helpers/api";
 import { Button } from "../ui/Button.tsx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const ProfilePage = () => {
@@ -12,10 +12,11 @@ const ProfilePage = () => {
     firstname: "",
     lastname: "",
   });
-  const [oldPassword, setOldPassword] = useState<string>("");
+  const [currentPassword, setCurrentPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
   const { userId } = useParams();
   const [isDataChanged, setIsDataChanged] = useState(false);
 
@@ -37,15 +38,18 @@ const ProfilePage = () => {
     fetchUserProfile();
   }, [userId]);
 
+  // profile information (firstname, lastname, email)
   const handleInputChange = (field: string, value: string) => {
     setUserData({ ...userData, [field]: value });
     setIsDataChanged(true);
   };
 
+  // profile information (firstname, lastname, email)
   const handleCancel = () => {
     window.location.reload();
   };
 
+  // profile information (firstname, lastname, email)
   const handleSave = async () => {
     try {
       console.log("Saving user...")
@@ -56,8 +60,68 @@ const ProfilePage = () => {
       });
       console.log("User saved successfully")
       window.location.reload();
+
     } catch (error) {
       console.error("Error updating user profile:", error);
+    }
+  };
+
+  // password change
+  const handlePasswordChange = async  () => {
+    try {
+      const response = await api.put(`/users/${userId}/password`, {
+        currentPassword: currentPassword,
+        newPassword: newPassword
+      }, {
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      });
+      if (response.status === 201)
+      console.log("Password changed successfully");
+      alert("password was changed successfully");
+      window.location.reload();
+
+    } catch (error) {
+      console.error("Error updating password:", error);
+      alert("wrong password")
+    }
+  };
+
+  // logout
+  const doLogout = async () => {
+    try {
+      await api.put("users/logout", null,  {
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      });
+      console.log("logged out successfully");
+      localStorage.removeItem("token");
+      navigate("/");
+    } catch (error) {
+      console.error("logout failed, ", error)
+    }
+  };
+
+  // delete account
+  const doAccountDeletion = async () => {
+    try {
+      const requestBody = {
+        currentPassword: currentPassword
+      };
+      await api.delete(`/users/${userId}`, {
+        headers: {
+          Authorization: localStorage.getItem("token")
+        },
+        data: JSON.stringify(requestBody)
+      });
+      localStorage.removeItem("token");
+      console.log("account deletion was successful")
+      alert("account deletion was successful.\nyou will be redirected to the welcome page")
+      navigate("/");
+    } catch (error) {
+      console.error("Error deleting user account:", error);
     }
   };
 
@@ -121,8 +185,8 @@ const ProfilePage = () => {
                 <FormField
                   type={showPassword ? "text" : "password"}
                   label="Type old password"
-                  value={oldPassword}
-                  onChange={(un: string) => setOldPassword(un)}
+                  value={currentPassword}
+                  onChange={(un: string) => setCurrentPassword(un)}
                 />
               </div>
               <div className="mt-3 relative">
@@ -133,11 +197,21 @@ const ProfilePage = () => {
                   onChange={(un: string) => setNewPassword(un)}
                 />
                 <div
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="flex justify-end mt-1 cursor-pointer"
+                  className="flex mt-1 justify-between"
                 >
+                  {(currentPassword !== "" && newPassword!== "") && (
+                    <Button
+                      className=" mt-2 w-auto py-0 flex-grow-0"
+                      type="button"
+                      disabled={!currentPassword || !newPassword}
+                      onClick={handlePasswordChange}
+                    >
+                      Change
+                    </Button>
+                  )}
                   <img
-                    className="w-6 h-6"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="w-6 h-6 cursor-pointer"
                     src={showPassword ? "/hide.png" : "/show.png"}
                     alt={showPassword ? "Hide" : "Show"}
                   />
@@ -145,14 +219,28 @@ const ProfilePage = () => {
               </div>
             </div>
 
+
+
             {!isDataChanged && (
             <div>
-              <Button
-                className="cursor-pointer py-0 px-4 mt-5 w-full bg-red-600"
-                type="button"
-              >
-                Delete Account
-              </Button>
+              <div>
+                <Button
+                  className="cursor-pointer py-0 px-4 mt-5 w-full"
+                  type="button"
+                  onClick={doLogout}
+                  >
+                  Logout
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className="cursor-pointer py-0 px-4 mt-5 w-full bg-red-600"
+                  type="button"
+                  onClick={doAccountDeletion}
+                >
+                  Delete Account
+                </Button>
+              </div>
             </div>
             )}
 
