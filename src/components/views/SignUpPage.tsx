@@ -4,8 +4,8 @@ import { api, handleError } from "helpers/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContainer from "../ui/AuthContainer.tsx";
-import Logo from "../ui/Logo.tsx";
 import { Button } from "../ui/Button.tsx";
+import Logo from "../ui/Logo.tsx";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -91,14 +91,14 @@ const SignUpPage = () => {
               </div>
             </div>
             <div>
-                <Button
-                  className="cursor-pointer py-1 px-4 mt-5 w-full"
-                  type="button"
-                  disabled={!firstname || !lastname || !email || !password}
-                  onClick={doRegistration}
-                >
-                  Create account
-                </Button>
+              <Button
+                className="cursor-pointer py-1 px-4 mt-5 w-full"
+                type="button"
+                disabled={!firstname || !lastname || !email || !password}
+                onClick={doRegistration}
+              >
+                Create account
+              </Button>
             </div>
           </div>
         </div>

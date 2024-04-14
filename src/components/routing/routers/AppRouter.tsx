@@ -2,11 +2,11 @@ import DashboardPage from "components/views/DashboardPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "../../views/LoginPage";
 import NotFoundPage from "../../views/NotFoundPage";
+import ProfilePage from "../../views/ProfilePage.tsx";
 import SignUpPage from "../../views/SignUpPage";
 import WelcomePage from "../../views/WelcomePage";
 import { RequireNotSignedIn } from "../routeProtectors/RequireNotSignedIn";
 import { RequireSignedIn } from "../routeProtectors/RequireSignedIn";
-import ProfilePage from "../../views/ProfilePage.tsx";
 
 const AppRouter = () => {
   return (

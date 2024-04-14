@@ -4,8 +4,8 @@ import { api } from "helpers/api";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContainer from "../ui/AuthContainer.tsx";
-import Logo from "../ui/Logo.tsx";
 import { Button } from "../ui/Button.tsx";
+import Logo from "../ui/Logo.tsx";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ const LoginPage = () => {
       const response = await api.put("/users/login", requestBody);
 
       localStorage.setItem("token", response.data.token);
-      console.log("successful login");
       navigate("/app");
     } catch (error) {
       console.log("Something went wrong during the login: ", error);
