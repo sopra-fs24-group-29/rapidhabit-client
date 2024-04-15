@@ -9,6 +9,10 @@ export const theme = {
       "dark-green": "#0B261A",
       "light-green": "#57BF84",
     },
+    width: {
+      "custom-236": "236px",
+      "custom-472": "472px",
+    }
   },
 };
 export const plugins = [];

@@ -38,39 +38,41 @@ const DashboardPage = () => {
   };
 
   return (
-    <BaseContainer>
-      <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
-        Groups
-      </h1>
-      <div>
-        <div className="flex  flex-col ">
-          {groups?.map((group) => (
-            <GroupSection key={group.id} name={group.name} id={group.id} />
-          ))}
-        </div>
-        <div className="flex flex-row pb-20">
-          <button
-            className="flex-col bg-input p-6 m-5 mr-1 rounded-lg mb-1"
-            onClick={() => navigate("/app/newGroup")}
-          >
-            <div className="flex justify-center font-bold text-2xl">+</div>
-            <div className="flex justify-center font-semibold text-m text-a text-center">
-              start new group
-            </div>
-          </button>
-          <div
-            className="flex-col bg-input p-6 m-5 rounded-lg mb-1"
-            onClick={() => countGroups()}
-          >
-            <div className="flex justify-center font-bold text-2xl">+</div>
-            <div className="flex justify-center font-semibold text-m text-a text-center">
-              join with code
+    <div>
+      <BaseContainer>
+        <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
+          Groups
+        </h1>
+        <div>
+          <div className="flex  flex-col ">
+            {groups?.map((group) => (
+              <GroupSection key={group.id} name={group.name} id={group.id} />
+            ))}
+          </div>
+          <div className="flex flex-row pb-20">
+            <button
+              className="flex-col bg-input p-6 m-5 mr-1 rounded-lg mb-1"
+              onClick={() => navigate("/app/newGroup")}
+            >
+              <div className="flex justify-center font-bold text-2xl">+</div>
+              <div className="flex justify-center font-semibold text-m text-a text-center">
+                start new group
+              </div>
+            </button>
+            <div
+              className="flex-col bg-input p-6 m-5 rounded-lg mb-1"
+              onClick={() => countGroups()}
+            >
+              <div className="flex justify-center font-bold text-2xl">+</div>
+              <div className="flex justify-center font-semibold text-m text-a text-center">
+                join with code
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </BaseContainer>
       <TabBar />
-    </BaseContainer>
+    </div>
   );
 };
 

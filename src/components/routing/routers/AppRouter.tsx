@@ -8,6 +8,7 @@ import SignUpPage from "../../views/SignUpPage";
 import WelcomePage from "../../views/WelcomePage";
 import { RequireNotSignedIn } from "../routeProtectors/RequireNotSignedIn";
 import { RequireSignedIn } from "../routeProtectors/RequireSignedIn";
+import FeedPage from "../../views/FeedPage.tsx";
 
 const AppRouter = () => {
   return (
@@ -19,8 +20,12 @@ const AppRouter = () => {
 
         <Route path="/app/:groupId" element={<GroupDetail />} />
 
-        <Route path="/profile/:userId" element={<RequireSignedIn />}>
-          <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/profile" element={<RequireSignedIn />}>
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
+
+        <Route path="/feed" element={<RequireSignedIn />}>
+          <Route path="/feed" element={<FeedPage />} />
         </Route>
 
         <Route path="/login" element={<RequireNotSignedIn />}>

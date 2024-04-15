@@ -32,126 +32,128 @@ const GroupDetail = () => {
   }, []);
 
   return (
-    <BaseContainer>
-      <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
-        {group?.name}
-      </h1>
-      <div className="grid grid-cols-2 p-4 gap-4">
-        <GroupCard />
-        <GroupCard />
-        <GroupCard />
-      </div>
-      <div className="flex flex-row gap-7 justify-center pt-6">
-        <div className="font-semibold bg-dark-green p-2 rounded-2xl text-light-green">
-          Your Activity
+    <div>
+      <BaseContainer>
+        <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
+          {group?.name}
+        </h1>
+        <div className="grid grid-cols-2 p-4 gap-4">
+          <GroupCard />
+          <GroupCard />
+          <GroupCard />
         </div>
-        <div className="font-semibold p-2">Ranking</div>
-        <div className="font-semibold p-2">Chat</div>
-      </div>
-      <div className="pt-6 pl-6 font-semibold">2023</div>
-      <div className="flex flex-wrap w-[350px] gap-1 pt-3 px-7">
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-      </div>
-      <div className="pt-6 pl-6 font-semibold">2023</div>
-      <div className="flex flex-wrap w-[350px] gap-1 pt-3 px-7">
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-        <div className="w-2 h-2 bg-light-green m-[1px]"></div>
-      </div>
+        <div className="flex flex-row gap-7 justify-center pt-6">
+          <div className="font-semibold bg-dark-green p-2 rounded-2xl text-light-green">
+            Your Activity
+          </div>
+          <div className="font-semibold p-2">Ranking</div>
+          <div className="font-semibold p-2">Chat</div>
+        </div>
+        <div className="pt-6 pl-6 font-semibold">2023</div>
+        <div className="flex flex-wrap w-[350px] gap-1 pt-3 px-7">
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+        </div>
+        <div className="pt-6 pl-6 font-semibold">2023</div>
+        <div className="flex flex-wrap w-[350px] gap-1 pt-3 px-7">
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+          <div className="w-2 h-2 bg-light-green m-[1px]"></div>
+        </div>
+      </BaseContainer>
       <TabBar />
-    </BaseContainer>
+    </div>
   );
 };
 
