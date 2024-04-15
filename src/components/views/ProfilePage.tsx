@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../ui/Button.tsx";
 import FormField from "../ui/FormField.tsx";
+import TabBar from "../ui/Tabbar.tsx";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState({
