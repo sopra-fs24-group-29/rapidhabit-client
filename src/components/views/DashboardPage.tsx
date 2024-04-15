@@ -64,7 +64,10 @@ const DashboardPage = () => {
               onClick={() => countGroups()}
             >
               <div className="flex justify-center font-bold text-2xl">+</div>
-              <div className="flex justify-center font-semibold text-m text-a text-center">
+              <div
+                className="flex justify-center font-semibold text-m text-a text-center"
+                onClick={() => navigate("/join")}
+              >
                 join with code
               </div>
             </div>
