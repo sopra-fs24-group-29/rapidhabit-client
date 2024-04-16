@@ -1,11 +1,10 @@
 import BaseContainer from "components/ui/BaseContainer";
-import FormField from "../ui/FormField.tsx";
-import { useState, useEffect } from "react";
+import TabBar from "components/ui/Tabbar.tsx";
 import { api } from "helpers/api";
-import { Button } from "../ui/Button.tsx";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TabBar from "../ui/Tabbar.tsx";
-
+import { Button } from "../ui/Button.tsx";
+import FormField from "../ui/FormField.tsx";
 
 const ProfilePage = () => {
   // TODO: change hardcode of userID
@@ -27,8 +26,8 @@ const ProfilePage = () => {
       try {
         const response = await api.get(`/users/${userId}`, {
           headers: {
-            Authorization: localStorage.getItem("token")
-          }
+            Authorization: localStorage.getItem("token"),
+          },
         });
         console.log("Response:", response);
         setUserData(response.data);
@@ -54,55 +53,56 @@ const ProfilePage = () => {
   // profile information (firstname, lastname, email)
   const handleSave = async () => {
     try {
-      console.log("Saving user...")
+      console.log("Saving user...");
       await api.put(`/users/${userId}`, userData, {
         headers: {
-          Authorization: localStorage.getItem("token")
-        }
+          Authorization: localStorage.getItem("token"),
+        },
       });
-      console.log("User saved successfully")
+      console.log("User saved successfully");
       window.location.reload();
-
     } catch (error) {
       console.error("Error updating user profile:", error);
     }
   };
 
   // password change
-  const handlePasswordChange = async  () => {
+  const handlePasswordChange = async () => {
     try {
-      const response = await api.put(`/users/${userId}/password`, {
-        currentPassword: currentPassword,
-        newPassword: newPassword
-      }, {
-        headers: {
-          Authorization: localStorage.getItem("token")
+      const response = await api.put(
+        `/users/${userId}/password`,
+        {
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
         }
-      });
-      if (response.status === 201)
-        console.log("Password changed successfully");
+      );
+      if (response.status === 201) console.log("Password changed successfully");
       alert("password was changed successfully");
       window.location.reload();
-
     } catch (error) {
       console.error("Error updating password:", error);
-      alert("wrong password")
+      alert("wrong password");
     }
   };
 
   // logout
   const doLogout = async () => {
     try {
-      await api.put("users/logout", null,  {
+      await api.put("users/logout", null, {
         headers: {
-          Authorization: localStorage.getItem("token")
-        }
+          Authorization: localStorage.getItem("token"),
+        },
       });
       console.log("logged out successfully");
       localStorage.removeItem("token");
       navigate("/");
     } catch (error) {
-      console.error("logout failed, ", error)
+      console.error("logout failed, ", error);
     }
   };
 
@@ -110,17 +110,19 @@ const ProfilePage = () => {
   const doAccountDeletion = async () => {
     try {
       const requestBody = {
-        currentPassword: currentPassword
+        currentPassword: currentPassword,
       };
       await api.delete(`/users/${userId}`, {
         headers: {
-          Authorization: localStorage.getItem("token")
+          Authorization: localStorage.getItem("token"),
         },
-        data: JSON.stringify(requestBody)
+        data: JSON.stringify(requestBody),
       });
       localStorage.removeItem("token");
-      console.log("account deletion was successful")
-      alert("account deletion was successful.\nyou will be redirected to the welcome page")
+      console.log("account deletion was successful");
+      alert(
+        "account deletion was successful.\nyou will be redirected to the welcome page"
+      );
       navigate("/");
     } catch (error) {
       console.error("Error deleting user account:", error);
@@ -132,7 +134,6 @@ const ProfilePage = () => {
       <BaseContainer>
         <div className="flex flex-col items-center justify-start mt-8">
           <div>
-
             <h1 className="text-left text-2xl lg:text-4xl">Profile</h1>
             <div className="flex items-center justify-center mt-2">
               <div className="w-20 h-20 rounded-full bg-input flex items-center justify-center text-2xl font-bold">
@@ -164,14 +165,12 @@ const ProfilePage = () => {
             />
             {isDataChanged && (
               <div className="flex justify-between mt-5">
-
                 <Button
                   className="cursor-pointer py-0 px-4 w-20"
                   onClick={handleCancel}
                 >
                   Cancel
                 </Button>
-
 
                 <Button
                   className="cursor-pointer py-0 px-4 w-20"
@@ -200,10 +199,8 @@ const ProfilePage = () => {
                   value={newPassword}
                   onChange={(un: string) => setNewPassword(un)}
                 />
-                <div
-                  className="flex mt-1 justify-between"
-                >
-                  {(currentPassword !== "" && newPassword!== "") && (
+                <div className="flex mt-1 justify-between">
+                  {currentPassword !== "" && newPassword !== "" && (
                     <Button
                       className=" mt-2 w-auto py-0 flex-grow-0"
                       type="button"
@@ -222,8 +219,6 @@ const ProfilePage = () => {
                 </div>
               </div>
             </div>
-
-
 
             {!isDataChanged && (
               <div>
@@ -247,7 +242,6 @@ const ProfilePage = () => {
                 </div>
               </div>
             )}
-
           </div>
         </div>
       </BaseContainer>
