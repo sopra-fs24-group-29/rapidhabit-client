@@ -1,5 +1,8 @@
 export interface Group {
-  name: string;
-  description: string;
   id: string;
+  name: string;
+  streaks: number;
+  currentRank: number;
+  userIds: string[];
+  userInitials: string[];
 }

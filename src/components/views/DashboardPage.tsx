@@ -46,7 +46,14 @@ const DashboardPage = () => {
         <div>
           <div className="flex  flex-col ">
             {groups?.map((group) => (
-              <GroupSection key={group.id} name={group.name} id={group.id} />
+              <GroupSection
+                key={group.id}
+                name={group.name}
+                id={group.id}
+                streak={group.streaks}
+                currentRank={group.currentRank}
+                initials={group.userInitials}
+              />
             ))}
           </div>
           <div className="flex flex-row pb-20">
