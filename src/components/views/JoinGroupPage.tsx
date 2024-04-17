@@ -37,8 +37,8 @@ const JoinGroupPage = () => {
     <div>
       <BaseContainer>
         <div className="flex flex-col items-center justify-start mt-8">
-          <div className="flex items-center justify-between w-full">
 
+          <div className="flex items-center justify-between w-full">
             <img
               onClick={() => navigate("/app")}
               className="cursor-pointer h-4"

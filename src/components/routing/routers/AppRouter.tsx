@@ -11,6 +11,7 @@ import { RequireNotSignedIn } from "../routeProtectors/RequireNotSignedIn";
 import { RequireSignedIn } from "../routeProtectors/RequireSignedIn";
 import FeedPage from "../../views/FeedPage.tsx";
 import JoinGroupPage from "../../views/JoinGroupPage.tsx";
+import GroupSettingsPage from "../../views/GroupSettingsPage.tsx";
 
 const AppRouter = () => {
   return (
@@ -19,6 +20,8 @@ const AppRouter = () => {
         <Route path="/app" element={<RequireSignedIn />}>
           <Route path="/app" element={<DashboardPage />} />
         </Route>
+
+        <Route path="/app/settings" element={<GroupSettingsPage />} />
 
         <Route path="/app/newGroup" element={<CreateGroupPage />} />
 

@@ -12,6 +12,7 @@ export const theme = {
     width: {
       "custom-236": "236px",
       "custom-472": "472px",
+      "custom-354": "354px",
     }
   },
 };
