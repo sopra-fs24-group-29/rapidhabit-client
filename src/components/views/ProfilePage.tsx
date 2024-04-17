@@ -7,8 +7,6 @@ import { Button } from "../ui/Button.tsx";
 import FormField from "../ui/FormField.tsx";
 
 const ProfilePage = () => {
-  // TODO: change hardcode of userID
-  const userId = "661cee8f43a7073ca77f3421";
   const [userData, setUserData] = useState({
     email: "",
     firstname: "",
@@ -24,7 +22,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await api.get(`/users/${userId}`, {
+        const response = await api.get("/users/profile", {
           headers: {
             Authorization: localStorage.getItem("token"),
           },
@@ -37,7 +35,7 @@ const ProfilePage = () => {
     };
 
     fetchUserProfile();
-  }, [userId]);
+  }, []);
 
   // profile information (firstname, lastname, email)
   const handleInputChange = (field: string, value: string) => {
@@ -54,7 +52,7 @@ const ProfilePage = () => {
   const handleSave = async () => {
     try {
       console.log("Saving user...");
-      await api.put(`/users/${userId}`, userData, {
+      await api.put("users/update", userData, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -70,7 +68,7 @@ const ProfilePage = () => {
   const handlePasswordChange = async () => {
     try {
       const response = await api.put(
-        `/users/${userId}/password`,
+        "/users/password",
         {
           currentPassword: currentPassword,
           newPassword: newPassword,
@@ -112,7 +110,7 @@ const ProfilePage = () => {
       const requestBody = {
         currentPassword: currentPassword,
       };
-      await api.delete(`/users/${userId}`, {
+      await api.delete("/users", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
