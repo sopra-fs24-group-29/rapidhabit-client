@@ -1,9 +1,33 @@
 import BaseContainer from "components/ui/BaseContainer";
 import TabBar from "../ui/Tabbar.tsx";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { api } from "helpers/api";
 
 const JoinGroupPage = () => {
   const navigate = useNavigate();
+  const [inviteCode, setInviteCode] = useState("");
+
+  const doJoinGroup = async () => {
+    try {
+      await api.post("groups/join", inviteCode, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      console.log("correct invite code, joining group...")
+      navigate("/app/:groupId")
+    } catch (error) {
+      console.error("couldn't join the group: ", error);
+      alert("wrong invite code, try again!")
+    }
+  };
+
+  {/*@PostMapping("/groups/join") // defines a method to for handling post methods for creating new users
+  @ResponseStatus(HttpStatus.CREATED)
+  @ResponseBody
+  public ResponseEntity<?> createUser(@RequestHeader("Authorization") String authHeader */}
+
 
   return (
     <div>
@@ -21,6 +45,7 @@ const JoinGroupPage = () => {
             <button
               className="text-white font-bold"
               type="button"
+              onClick={doJoinGroup}
             >
               Join
             </button>
@@ -38,6 +63,8 @@ const JoinGroupPage = () => {
                 autoFocus // focus on input field when page loaded
                 required  // required field to join group
                 autoComplete="off" // no autocompletion in input field
+                value={inviteCode}
+                onChange={(e) => setInviteCode(e.target.value)}
               />
             </form>
           </div>

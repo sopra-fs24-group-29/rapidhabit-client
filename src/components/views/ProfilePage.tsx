@@ -107,6 +107,11 @@ const ProfilePage = () => {
   // delete account
   const doAccountDeletion = async () => {
     try {
+      if (!currentPassword) {
+        alert("Please enter your current password to delete your account.");
+        return;
+      }
+
       const requestBody = {
         currentPassword: currentPassword,
       };
@@ -124,6 +129,7 @@ const ProfilePage = () => {
       navigate("/");
     } catch (error) {
       console.error("Error deleting user account:", error);
+      alert("wrong password, try again!")
     }
   };
 
@@ -185,7 +191,7 @@ const ProfilePage = () => {
               <div>
                 <FormField
                   type={showPassword ? "text" : "password"}
-                  label="Type old password"
+                  label="Type current password"
                   value={currentPassword}
                   onChange={(un: string) => setCurrentPassword(un)}
                 />
