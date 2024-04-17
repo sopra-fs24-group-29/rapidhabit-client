@@ -10,13 +10,17 @@ const JoinGroupPage = () => {
 
   const doJoinGroup = async () => {
     try {
-      await api.post("groups/join", inviteCode, {
+      const requestBody = {
+        accessKey: inviteCode,
+      };
+
+      await api.post("groups/join", requestBody, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       console.log("correct invite code, joining group...")
-      navigate("/app/:groupId")
+      navigate("/app")
     } catch (error) {
       console.error("couldn't join the group: ", error);
       alert("wrong invite code, try again!")
@@ -59,7 +63,7 @@ const JoinGroupPage = () => {
                 id="inviteCode"
                 name="inviteCode"
                 className="bg-black text-5xl text-center mt-6"
-                maxLength={6} // sets max number of characters to 6
+                maxLength={8} // sets max number of characters to 6
                 autoFocus // focus on input field when page loaded
                 required  // required field to join group
                 autoComplete="off" // no autocompletion in input field
