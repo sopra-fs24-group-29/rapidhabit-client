@@ -6,8 +6,8 @@ import FormField from "../ui/FormField.tsx";
 
 const CreateGroupPage = () => {
   const navigate = useNavigate();
-  const [groupName, setGroupName] = useState<string>("fuck");
-  const [description, setDescription] = useState<string>("fuckers");
+  const [groupName, setGroupName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
 
   const createGroup = async () => {
     try {
