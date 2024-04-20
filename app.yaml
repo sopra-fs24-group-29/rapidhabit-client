@@ -2,7 +2,14 @@
 runtime: nodejs20
 
 handlers:
-  - url: /assets
-    static_dir: dist/assets
-  - url: /
+  - url: /(.*\.(html|js|css|png|jpg|jpeg|gif|ico|svg))
+    static_files: dist/\1
+    upload: dist/(.*\.(html|js|css|png|jpg|jpeg|gif|ico|svg))
+    secure: always
+
+  - url: /.*
+    static_files: dist/index.html
     upload: dist/index.html
+    secure: always
+    http_headers:
+      Cache-Control: no-cache, no-store, must-revalidate
