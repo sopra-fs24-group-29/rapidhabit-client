@@ -2,9 +2,9 @@
 runtime: nodejs20
 
 handlers:
-  - url: /(.*\.(html|js|css|png|jpg|jpeg|gif|ico|svg))
+  - url: /(.*\.(html|js|css|png|jpg|jpeg|gif|ico|svg|webmanifest))
     static_files: dist/\1
-    upload: dist/(.*\.(html|js|css|png|jpg|jpeg|gif|ico|svg))
+    upload: dist/(.*\.(html|js|css|png|jpg|jpeg|gif|ico|svg|webmanifest))
     secure: always
 
   - url: /.*
