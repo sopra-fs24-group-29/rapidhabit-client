@@ -1,23 +1,32 @@
 import clsx from "clsx";
 import BaseContainer from "components/ui/BaseContainer";
+import GroupCard from "components/ui/GroupCard";
 import TabBar from "components/ui/Tabbar";
 import { api, handleError } from "helpers/api";
 import { Group } from "models/Group";
+import { Habit } from "models/Habit";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const GroupDetail = () => {
   const { groupId } = useParams();
   const [group, setGroup] = useState<Group>();
+  const [habits, setHabits] = useState<Habit[]>();
   const [activeTab, setActiveTab] = useState("activity");
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await api.get(`/groups/${groupId}`, {
-          headers: { Authorization: localStorage.getItem("token") },
-        });
-        setGroup(response.data || []);
+        const [groupResponse, habitsResponse] = await Promise.all([
+          api.get(`/groups/${groupId}`, {
+            headers: { Authorization: localStorage.getItem("token") },
+          }),
+          api.get(`/groups/${groupId}/habits`, {
+            headers: { Authorization: localStorage.getItem("token") },
+          }),
+        ]);
+        setGroup(groupResponse.data || []);
+        setHabits(habitsResponse.data || []);
       } catch (error) {
         console.error(
           `Something went wrong while fetching the profile: \n${handleError(
@@ -220,9 +229,16 @@ const GroupDetail = () => {
           {group?.name}
         </h1>
         <div className="grid grid-cols-2 p-4 gap-4">
-          <GroupCard />
-          <GroupCard />
-          <GroupCard />
+          <GroupCard habitName="Test" streaks={2} groupId="1" habitId="1" />
+          {habits?.map((habit) => (
+            <GroupCard
+              habitName={habit.name}
+              streaks={habit.streaks}
+              key={habit.id}
+              groupId={groupId!}
+              habitId={habit.id}
+            />
+          ))}
         </div>
         <div className="flex flex-row gap-7 justify-evenly pt-6 pr-3">
           <div
@@ -262,32 +278,5 @@ const GroupDetail = () => {
     </div>
   );
 };
-
-const GroupCard = () => (
-  <div className="bg-dark-green p-4 rounded-lg">
-    <div className="flex flex-row justify-between">
-      <div>3🔥</div>
-      <div>☑️</div>
-    </div>
-    <div className="pt-6 pb-2 text-xl font-bold truncate">Workout</div>
-    <div className="flex justify-end gap-1.5">
-      <div className="rounded-full bg-light-green w-7 h-7 ">
-        <span className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-          RO
-        </span>
-      </div>
-      <div className="rounded-full bg-light-green w-7 h-7 ">
-        <span className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-          RO
-        </span>
-      </div>
-      <div className="rounded-full bg-light-green w-7 h-7 ">
-        <span className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-          RO
-        </span>
-      </div>
-    </div>
-  </div>
-);
 
 export default GroupDetail;

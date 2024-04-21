@@ -10,7 +10,6 @@ interface GroupSectionProps {
 }
 
 const GroupSection = (props: GroupSectionProps) => {
-  console.log(props.streak);
   return (
     <Link to={`/app/${props.id}`}>
       <div className="flex flex-col bg-dark-green p-6 m-5 rounded-lg mb-1">
