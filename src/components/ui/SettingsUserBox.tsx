@@ -1,9 +1,34 @@
+import { useEffect, useState } from "react";
+import { api } from "../../helpers/api.ts";
+
 interface SettingsUserProps {
-  firstname: string;
-  lastname: string;
+  userId: string;
 }
 
 const SettingsUserBox = (props: SettingsUserProps) => {
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await api.get(`/users/${props.userId}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
+        console.log("Response:", response);
+        const { firstname, lastname } = response.data;
+        setFirstName(firstname);
+        setLastName(lastname);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    fetchUserDetails();
+  }, [props.userId]);
+
   return (
     <div className="flex items-center justify-between w-full h-10 bg-input rounded-lg mb-0.5">
       <div className="flex items-center">
@@ -15,7 +40,7 @@ const SettingsUserBox = (props: SettingsUserProps) => {
           />
         </div>
         <div className="ml-4 text-base">
-          {props.firstname} {props.lastname}
+          {firstName} {lastName}
         </div>
       </div>
       <div className="pr-4">

@@ -1,9 +1,39 @@
 import BaseContainer from "components/ui/BaseContainer";
 import TabBar from "components/ui/Tabbar.tsx";
+import { useEffect, useState } from "react";
+import { api } from "../../helpers/api.ts";
 import SettingsUserBox from "../ui/SettingsUserBox.tsx";
 import SettingsHabitBox from "../ui/SettingsHabitBox.tsx";
 
 const GroupSettingsPage = () => {
+  const groupId = "6624f5470df3ba0e723dd458";
+  const [adminIds, setAdminIds] = useState([]);
+  const [userIds, setUserIds] = useState([]);
+  const [habitIds, setHabitIds] = useState([]);
+
+  useEffect(() => {
+    const fetchGroupDetails = async () => {
+      try {
+        const response = await api.get(`/groups/${groupId}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
+        const { adminIdList, userIdList, habitIdList } = response.data;
+        setAdminIds(adminIdList);
+        setUserIds(userIdList);
+        setHabitIds(habitIdList);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    fetchGroupDetails();
+  }, []);
+
+  console.log('Admin IDs:', adminIds);
+  console.log('User IDs:', userIds);
+  console.log('Habit IDs:', habitIds);
 
   return (
     <div>
@@ -52,14 +82,15 @@ const GroupSettingsPage = () => {
             </div>
             {/*------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">People</h3>
-            <SettingsUserBox firstname={"User"} lastname={"1"}></SettingsUserBox>
-            <SettingsUserBox firstname={"User"} lastname={"2"}></SettingsUserBox>
-            <SettingsUserBox firstname={"User"} lastname={"3"}></SettingsUserBox>
+            {userIds.map(userId => (
+              <SettingsUserBox key={userId} userId={userId} />
+            ))}
             {/*--------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">Habits</h3>
-            <SettingsHabitBox habit={"Medidate"}></SettingsHabitBox>
-            <SettingsHabitBox habit={"Running"}></SettingsHabitBox>
-            <SettingsHabitBox habit={"Push Ups"}></SettingsHabitBox>
+            {habitIds.map(habitId => (
+              <SettingsHabitBox key={habitId} groupId={groupId} habitId={habitId} />
+            ))}
+
           </div>
 
         </div>
