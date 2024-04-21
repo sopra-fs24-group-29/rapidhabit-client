@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Check from "./Check";
 
 interface GroupCardProps {
   habitName: string;
@@ -13,7 +14,7 @@ const GroupCard = (props: GroupCardProps) => {
       <div className="bg-dark-green p-4 rounded-lg">
         <div className="flex flex-row justify-between">
           <div>🔥{props.streaks}</div>
-          <div>☑️</div>
+          <Check />
         </div>
         <div className="pt-6 pb-2 text-xl font-bold truncate">
           {props.habitName}
