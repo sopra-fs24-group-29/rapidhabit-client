@@ -1,49 +1,44 @@
-import { useEffect, useState } from "react";
-import SockJS from "sockjs-client";
+import React, { useEffect, useState } from "react";
 import { Client } from "@stomp/stompjs";
 
 const FeedPage = () => {
   const [feedEntries, setFeedEntries] = useState([]);
-  const [groupId, setGroupId] = useState("123");
+  const [groupId, setGroupId] = useState("6625588357aba20834ece611");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const socket = new SockJS("http://localhost:8080/ws");
-    const client = new Client({
-      webSocketFactory: () => socket,
+    const stompClient = new Client({
+      brokerURL: "ws://localhost:8080/ws",
       connectHeaders: {
-        Authorization: "" + token,
+        Authorization: `${token}`,
       },
+      debug: function (str) {
+        console.log(str);
+      },
+      reconnectDelay: 5000,
       onConnect: () => {
         console.log("Connected to WS");
-        client.subscribe(`/topic/groups/${groupId}/feed`, (message) => {
-          const newEntry = JSON.parse(message.body);
-          setFeedEntries((prevEntries) => prevEntries.concat(newEntry));
-        });
-        fetchInitialFeeds(groupId);
+        subscribeToFeed(stompClient);
       },
-      onDisconnect: () => {
-        console.log("Disconnected from WS");
+      onStompError: (frame) => {
+        console.error("Broker reported error: " + frame.headers["message"]);
+        console.error("Additional details: " + frame.body);
       },
     });
 
-    client.activate();
+    stompClient.activate();
 
     return () => {
-      client.deactivate();
+      stompClient.deactivate();
     };
-  }, [groupId]); // Stelle sicher, dass alle relevanten Abhängigkeiten hier aufgeführt sind
+  }, [groupId]);
 
-  const fetchInitialFeeds = async (groupId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/group/${groupId}/feed`
-      );
-      const data = await response.json();
-      setFeedEntries(data);
-    } catch (error) {
-      console.error("Failed to fetch initial feeds:", error);
-    }
+  const subscribeToFeed = (client) => {
+    client.subscribe(`/topic/groups/${groupId}/feed`, (message) => {
+      const newEntry = JSON.parse(message.body);
+      console.log("Neue Nachricht erhalten:", newEntry); // Druckt die empfangene Nachricht aus
+      // setFeedEntries((prevEntries) => [...prevEntries, newEntry]);
+    });
   };
 
   return (
