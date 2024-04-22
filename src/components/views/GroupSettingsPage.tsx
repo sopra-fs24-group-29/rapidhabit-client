@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { api } from "../../helpers/api.ts";
 import SettingsUserBox from "../ui/SettingsUserBox.tsx";
 import SettingsHabitBox from "../ui/SettingsHabitBox.tsx";
+import { useNavigate, useParams } from "react-router-dom";
 
 const GroupSettingsPage = () => {
-  const groupId = "6624f5470df3ba0e723dd458";
+  const { groupId } = useParams();
+  const navigate = useNavigate();
   const [adminIds, setAdminIds] = useState([]);
   const [userIds, setUserIds] = useState([]);
   const [habitIds, setHabitIds] = useState([]);
@@ -45,6 +47,7 @@ const GroupSettingsPage = () => {
               className="cursor-pointer h-4"
               src="/left-arrow.png"
               alt="back-arrow"
+              onClick={() => navigate(`/app/${groupId}`)}
             />
             <h3 className="text-center">Group Settings</h3>
             <h3></h3>
@@ -56,7 +59,7 @@ const GroupSettingsPage = () => {
               <div className="flex items-center">
                 <div className="pl-4">
                   <img
-                    className="h-7 w-7"
+                    className="h-6 w-6"
                     src="/add.png"
                     alt="add icon"
                   />
@@ -82,13 +85,13 @@ const GroupSettingsPage = () => {
             </div>
             {/*------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">People</h3>
-            {userIds.map(userId => (
-              <SettingsUserBox key={userId} userId={userId} />
+            {userIds.map(userIds => (
+              <SettingsUserBox key={userIds} userId={userIds} />
             ))}
             {/*--------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">Habits</h3>
-            {habitIds.map(habitId => (
-              <SettingsHabitBox key={habitId} groupId={groupId} habitId={habitId} />
+            {habitIds.map(habitIds => (
+              <SettingsHabitBox key={habitIds} groupId={groupId ?? 'defaultGroupId'} habitId={habitIds} />
             ))}
 
           </div>

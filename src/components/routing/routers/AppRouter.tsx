@@ -22,7 +22,7 @@ const AppRouter = () => {
           <Route path="/app" element={<DashboardPage />} />
         </Route>
 
-        <Route path="/app/settings" element={<GroupSettingsPage />} />
+        <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />
 
         <Route path="/app/newGroup" element={<CreateGroupPage />} />
 

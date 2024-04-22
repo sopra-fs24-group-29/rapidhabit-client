@@ -12,13 +12,17 @@ const SettingsHabitBox = (props: SettingsHabitProps) => {
   useEffect(() => {
     const fetchHabitDetails = async () => {
       try {
-        const response = await api.get(`/groups/${props.groupId}/habits/${props.habitId}`);
+        const response = await api.get(`/groups/${props.groupId}/habits/${props.habitId}/edit`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
         console.log("Response:", response);
         const { name } = response.data;
         setName(name);
         console.log(name)
       } catch (error) {
-        console.error("Error fetching user details:", error);
+        console.error("Error fetching habit details:", error);
       }
     };
 
@@ -30,7 +34,7 @@ const SettingsHabitBox = (props: SettingsHabitProps) => {
       <div className="flex items-center">
         <div className="pl-4">
           <img
-            className="h-7 w-7"
+            className="h-6 w-6"
             src="/habit.png"
             alt="habit icon"
           />

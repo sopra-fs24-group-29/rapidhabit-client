@@ -225,7 +225,7 @@ const GroupDetail = () => {
   return (
     <div>
       <BaseContainer>
-        <Link to="/app/settings">
+        <Link to={`/app/${groupId}/settings`}>
           <div className="flex justify-end p-3">setting</div>
         </Link>
         <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">

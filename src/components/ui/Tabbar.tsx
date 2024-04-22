@@ -16,7 +16,7 @@ const TabBar = () => {
         <div>
           <img
             className="h-8 w-8"
-            src={activeTab === "/app" ? "/onhome.png" : "/offhome.png"}
+            src={activeTab !== "/profile" && activeTab !== "/feed" ? "/onhome.png" : "/offhome.png"}
             alt="home tab icon"
           />
         </div>
