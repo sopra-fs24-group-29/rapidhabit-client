@@ -11,11 +11,11 @@ const TabBar = () => {
   }, [location]);
 
   return (
-    <div className="flex flex-row gap-14 lg:gap-48 justify-center fixed bottom-0 w-full bg-input p-8 text-white text-center">
+    <div className="flex flex-row gap-14 lg:gap-48 justify-center fixed bottom-0 w-full bg-input p-4 text-white text-center">
       <div className="px-4 cursor-pointer" onClick={() => navigate("/app")}>
         <div>
           <img
-            className="h-8 w-8"
+            className="h-7 w-7"
             src={activeTab !== "/profile" && activeTab !== "/feed" ? "/onhome.png" : "/offhome.png"}
             alt="home tab icon"
           />
@@ -25,7 +25,7 @@ const TabBar = () => {
       <div className="px-4 cursor-pointer" onClick={() => navigate("/feed")}>
         <div>
           <img
-            className="h-8 w-8"
+            className="h-7 w-7"
             src={activeTab === "/feed" ? "/onfeed.png" : "/offfeed.png"}
             alt="feed tab icon"
           />
@@ -35,7 +35,7 @@ const TabBar = () => {
       <div className="px-4 cursor-pointer" onClick={() => navigate("/profile")}>
         <div>
           <img
-            className="h-8 w-8"
+            className="h-7 w-7"
             src={activeTab === "/profile" ? "/onprofile.png" : "/offprofile.png"}
             alt="profile tab icon"
           />
