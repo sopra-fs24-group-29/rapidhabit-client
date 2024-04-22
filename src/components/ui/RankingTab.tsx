@@ -33,8 +33,6 @@ const RankingTab = (props: RankingTabProps) => {
     return ranking?.sort((a, b) => a.rank - b.rank);
   }, [ranking]);
 
-  const rankingMessage = useMemo(() => {}, []);
-
   if (errorMessage) return <div>{errorMessage}</div>;
   if (!ranking) return null;
 
