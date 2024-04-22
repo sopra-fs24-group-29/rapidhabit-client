@@ -14,7 +14,7 @@ const HabitDetail = () => {
         <div>
           <div className="font-bold text-4xl p-4">🏋🏽Workout</div>
           <div className="flex flex-row justify-between p-4">
-            <div className="text-lg font-semibold">🔥current Strek</div>
+            <div className="text-lg font-semibold">🔥 Current streak</div>
             <div className="text-lg font-semibold">3 days</div>
           </div>
           <div className="flex flex-row justify-end gap-7 pr-4">
