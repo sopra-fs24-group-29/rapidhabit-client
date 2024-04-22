@@ -6,7 +6,7 @@ import { api, handleError } from "helpers/api";
 import { Group } from "models/Group";
 import { Habit } from "models/Habit";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const GroupDetail = () => {
   const { groupId } = useParams();
@@ -225,6 +225,9 @@ const GroupDetail = () => {
   return (
     <div>
       <BaseContainer>
+        <Link to="/app/settings">
+          <div className="flex justify-end p-3">setting</div>
+        </Link>
         <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
           {group?.name}
         </h1>
