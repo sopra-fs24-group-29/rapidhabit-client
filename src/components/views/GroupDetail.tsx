@@ -1,8 +1,11 @@
 import clsx from "clsx";
+import ActivityTab from "components/ui/ActivityTab";
 import BaseContainer from "components/ui/BaseContainer";
 import { Button } from "components/ui/Button";
+import ChatTab from "components/ui/ChatTab";
 import GroupCard from "components/ui/GroupCard";
 import NavigationBar from "components/ui/NavigationBar";
+import RankingTab from "components/ui/RankingTab";
 import TabBar from "components/ui/Tabbar";
 import { api, handleError } from "helpers/api";
 import { Group } from "models/Group";
@@ -46,64 +49,16 @@ const GroupDetail = () => {
   }, []);
 
   const renderContent = () => {
+    if (!group) return null;
     switch (activeTab) {
       case "activity":
-        return (
-          <div>
-            <div className="pt-6 pl-6 font-semibold">2023</div>
-            <div className="flex flex-wrap gap-1 pt-3 px-8">
-              {new Array(72)
-                .fill(0)
-                .map(() => Math.random() > 0.5)
-                .map((isChecked) => (
-                  <div
-                    className={clsx(
-                      "w-2 h-2 m-[1px] rounded-sm",
-                      isChecked ? "bg-light-green" : "bg-dark-green"
-                    )}
-                  />
-                ))}
-            </div>
-          </div>
-        );
+        return <ActivityTab group={group} />;
       case "ranking":
-        return (
-          <>
-            <div className="flex justify-center gap-7 pt-14">
-              <div className="rounded-full bg-light-green w-16 h-16 ">
-                <span className="flex justify-center pt-4 text-dark-green font-semibold text-2xl">
-                  RO
-                </span>
-              </div>
-              <div className="rounded-full bg-yellow-400 w-7 h-7 mt-10 border-2 border-black -ml-11">
-                <span className="text-black font-bold pl-2">1</span>
-              </div>
-              <div className="rounded-full bg-light-green w-16 h-16 ">
-                <span className="flex justify-center pt-4 text-dark-green font-semibold text-2xl">
-                  RO
-                </span>
-              </div>
-              <div className="rounded-full bg-yellow-400 w-7 h-7 mt-10 border-2 border-black -ml-11">
-                <span className="text-black font-bold pl-2">1</span>
-              </div>
-              <div className="rounded-full bg-light-green w-16 h-16 ">
-                <span className="flex justify-center pt-4 text-dark-green font-semibold text-2xl">
-                  RO
-                </span>
-              </div>
-              <div className="rounded-full bg-yellow-400 w-7 h-7 mt-10 border-2 border-black -ml-11">
-                <span className="text-black font-bold pl-2">1</span>
-              </div>
-            </div>
-            <div className="font-semibold p-7">
-              You're currently in second place. Greatjob, keep it up!
-            </div>
-          </>
-        );
+        return <RankingTab group={group} />;
       case "chat":
-        return <div>Chat content goes here...</div>;
+        return <ChatTab group={group} />;
       default:
-        return <div>Activity content goes here...</div>;
+        return <ActivityTab group={group} />;
     }
   };
 
