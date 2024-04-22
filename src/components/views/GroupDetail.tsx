@@ -3,7 +3,7 @@ import ActivityTab from "components/ui/ActivityTab";
 import BaseContainer from "components/ui/BaseContainer";
 import { Button } from "components/ui/Button";
 import ChatTab from "components/ui/ChatTab";
-import GroupCard from "components/ui/GroupCard";
+import HabitCard from "components/ui/HabitCard";
 import NavigationBar from "components/ui/NavigationBar";
 import RankingTab from "components/ui/RankingTab";
 import TabBar from "components/ui/Tabbar";
@@ -11,7 +11,7 @@ import { api, handleError } from "helpers/api";
 import { Group } from "models/Group";
 import { Habit } from "models/Habit";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const GroupDetail = () => {
   const { groupId } = useParams();
@@ -66,6 +66,7 @@ const GroupDetail = () => {
     <div>
       <BaseContainer>
         <NavigationBar
+          backUrl="/app"
           rightAction={
             <Button
               variant="text"
@@ -80,11 +81,12 @@ const GroupDetail = () => {
         </h1>
         <div className="grid grid-cols-2 p-4 gap-4">
           {habits?.map((habit) => (
-            <GroupCard
+            <HabitCard
               key={habit.id}
               groupId={groupId!}
               habitId={habit.id}
               habit={habit}
+              onHabitsUpdated={setHabits}
             />
           ))}
         </div>
