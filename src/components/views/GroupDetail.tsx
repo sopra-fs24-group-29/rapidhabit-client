@@ -1,15 +1,19 @@
 import clsx from "clsx";
 import BaseContainer from "components/ui/BaseContainer";
+import { Button } from "components/ui/Button";
 import GroupCard from "components/ui/GroupCard";
+import NavigationBar from "components/ui/NavigationBar";
 import TabBar from "components/ui/Tabbar";
 import { api, handleError } from "helpers/api";
 import { Group } from "models/Group";
 import { Habit } from "models/Habit";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const GroupDetail = () => {
   const { groupId } = useParams();
+  const navigate = useNavigate();
+
   const [group, setGroup] = useState<Group>();
   const [habits, setHabits] = useState<Habit[]>();
   const [activeTab, setActiveTab] = useState("activity");
@@ -47,136 +51,18 @@ const GroupDetail = () => {
         return (
           <div>
             <div className="pt-6 pl-6 font-semibold">2023</div>
-            <div className="flex flex-wrap w-[350px] gap-1 pt-3 pl-7">
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-            </div>
-            <div className="pt-6 pl-6 font-semibold">2023</div>
-            <div className="flex flex-wrap w-[350px] gap-1 pt-3 px-7">
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-light-green m-[1px] rounded-sm"></div>
-              <div className="w-2 h-2 bg-dark-green m-[1px] rounded-sm"></div>
+            <div className="flex flex-wrap gap-1 pt-3 px-8">
+              {new Array(72)
+                .fill(0)
+                .map(() => Math.random() > 0.5)
+                .map((isChecked) => (
+                  <div
+                    className={clsx(
+                      "w-2 h-2 m-[1px] rounded-sm",
+                      isChecked ? "bg-light-green" : "bg-dark-green"
+                    )}
+                  />
+                ))}
             </div>
           </div>
         );
@@ -210,7 +96,6 @@ const GroupDetail = () => {
               </div>
             </div>
             <div className="font-semibold p-7">
-              {" "}
               You're currently in second place. Greatjob, keep it up!
             </div>
           </>
@@ -225,20 +110,26 @@ const GroupDetail = () => {
   return (
     <div>
       <BaseContainer>
-        <Link to={`/app/${groupId}/settings`}>
-          <div className="flex justify-end p-3">setting</div>
-        </Link>
+        <NavigationBar
+          rightAction={
+            <Button
+              variant="text"
+              onClick={() => navigate(`/app/${groupId}/settings`)}
+            >
+              Settings
+            </Button>
+          }
+        />
         <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
           {group?.name}
         </h1>
         <div className="grid grid-cols-2 p-4 gap-4">
           {habits?.map((habit) => (
             <GroupCard
-              habitName={habit.name}
-              streaks={habit.streaks}
               key={habit.id}
               groupId={groupId!}
               habitId={habit.id}
+              habit={habit}
             />
           ))}
         </div>
