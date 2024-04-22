@@ -1,13 +1,15 @@
 import BaseContainer from "components/ui/BaseContainer";
+import NavigationBar from "components/ui/NavigationBar.tsx";
 import TabBar from "components/ui/Tabbar.tsx";
 import { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { api } from "../../helpers/api.ts";
 import SettingsHabitBox from "../ui/SettingsHabitBox.tsx";
-import { useNavigate, useParams } from "react-router-dom";
 import SettingsUserBox from "../ui/SettingsUserBox.tsx";
 
 const GroupSettingsPage = () => {
   const { groupId } = useParams();
+
   const navigate = useNavigate();
   const [adminIds, setAdminIds] = useState<string[]>([]);
   const [userIds, setUserIds] = useState<string[]>([]);
@@ -52,6 +54,10 @@ const GroupSettingsPage = () => {
   console.log(userNames);
   console.log(adminIds);
   console.log(userIds);
+  console.log("Admin IDs:", adminIds);
+  console.log("User IDs:", userIds);
+  console.log("Habit IDs:", habitIds);
+
 
   return (
     <div>
@@ -68,10 +74,16 @@ const GroupSettingsPage = () => {
             <h3 className="text-center">Group Settings</h3>
             <h3></h3>
           </div>
+        </div>
 
+        <NavigationBar title="Group settings" backUrl={`/app/${groupId}`} />
+        <div className="flex flex-col items-center justify-start">
           <div className="w-custom-354">
             <h3 className="text-left mt-4">Actions</h3>
-            <div className="flex items-center justify-between w-full h-10 bg-input rounded-lg mb-0.5">
+            <Link
+              to={`/app/${groupId}/settings/create-habit`}
+              className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5"
+            >
               <div className="flex items-center">
                 <div className="pl-4">
                   <img
@@ -79,22 +91,20 @@ const GroupSettingsPage = () => {
                     src="/add.png"
                     alt="add icon"
                   />
+                  <img className="h-7 w-7" src="/add.png" alt="add icon" />
+
                 </div>
-                <div className="ml-4 text-base hover:underline cursor-pointer">
+                <div className="ml-4 text-base cursor-pointer">
                   Create Habit
                 </div>
               </div>
-            </div>
-            <div className="flex items-center justify-between w-full h-10 bg-input rounded-lg mb-0.5">
+            </Link>
+            <div className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5">
               <div className="flex items-center">
                 <div className="pl-4">
-                  <img
-                    className="h-7 w-7"
-                    src="/group.png"
-                    alt="group icon"
-                  />
+                  <img className="h-7 w-7" src="/group.png" alt="group icon" />
                 </div>
-                <div className="ml-4 text-base hover:underline cursor-pointer">
+                <div className="ml-4 text-base cursor-pointer">
                   Invite People
                 </div>
               </div>
@@ -128,9 +138,7 @@ const GroupSettingsPage = () => {
             {habitIds.map(habitIds => (
               <SettingsHabitBox key={habitIds} groupId={groupId ?? 'defaultGroupId'} habitId={habitIds} />
             ))}
-
           </div>
-
         </div>
       </BaseContainer>
       <TabBar />

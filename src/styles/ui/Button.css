@@ -1,7 +1,11 @@
 .primary-button {
-  @apply bg-accent text-accent-fg transition-all cursor-pointer p-2.5 rounded-xl font-bold text-lg flex-grow lg:p-4;
+  @apply bg-dark-green text-light-green transition-all cursor-pointer p-2.5 rounded-xl font-bold text-lg flex-grow lg:p-4;
 }
 
 .primary-button:hover {
   @apply opacity-70;
+}
+
+.text-button {
+  @apply text-white font-bold;
 }

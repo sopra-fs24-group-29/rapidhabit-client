@@ -1,4 +1,5 @@
 import CreateGroupPage from "components/views/CreateGroupPage.tsx";
+import CreateHabitPage from "components/views/CreateHabitPage.tsx";
 import DashboardPage from "components/views/DashboardPage";
 import GroupDetail from "components/views/GroupDetail.tsx";
 import HabitDetail from "components/views/HabitDetail.tsx";
@@ -24,6 +25,8 @@ const AppRouter = () => {
         </Route>
 
         <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />
+
+        <Route path="app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
 
         <Route path="/app/newGroup" element={<CreateGroupPage />} />
 

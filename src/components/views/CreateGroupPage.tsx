@@ -1,4 +1,5 @@
 import BaseContainer from "components/ui/BaseContainer";
+import { Button } from "components/ui/Button.tsx";
 import { api, handleError } from "helpers/api.ts";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -45,12 +46,9 @@ const CreateGroupPage = () => {
             onChange={(un: string) => setDescription(un)}
           />
         </div>
-        <button
-          className="flex mt-5 bg-yellow-900 rounded-md"
-          onClick={() => createGroup()}
-        >
-          confirm
-        </button>
+        <Button className="mt-5" onClick={createGroup}>
+          Confirm
+        </Button>
       </div>
     </BaseContainer>
   );

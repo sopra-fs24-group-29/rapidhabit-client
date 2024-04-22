@@ -6,3 +6,8 @@ export interface Habit {
   checked: boolean;
   userCheckStatus: Record<string, boolean>;
 }
+
+export enum HabitRepeatStrategy {
+  Daily = "DAILY",
+  Weekly = "WEEKLY",
+}
