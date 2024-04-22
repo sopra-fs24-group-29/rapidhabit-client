@@ -1,13 +1,13 @@
 import BaseContainer from "../ui/BaseContainer.tsx";
 import TabBar from "../ui/Tabbar.tsx";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { api } from "../../helpers/api.ts";
 
 const CodeInvitePage = () => {
   const navigate = useNavigate();
   const groupId = useParams();
-  const [accessCode, setAccessCode] = useState()
+  const accessCode = "GJ8ICU6v"
 
   useEffect(() => {
     const fetchInviteCode = async () => {
@@ -18,8 +18,6 @@ const CodeInvitePage = () => {
           },
         });
         console.log("Response:", response);
-        const { accessCode } = response.data;
-        setAccessCode(accessCode);
       } catch (error) {
         console.error("Error fetching group information:", error);
       }
@@ -46,7 +44,18 @@ const CodeInvitePage = () => {
 
           <div>
             <h3 className="mt-20 text-center">Other people can join this group by using this code.</h3>
-            <h3>{accessCode}</h3>
+          </div>
+          <div>
+            <h3 className="mt-5 text-5xl">{accessCode}</h3>
+          </div>
+          <div className="hover:text-red-600">
+            <button
+              className="cursor-pointer mt-8 text-sm text-accent p-2 outline outline-accent
+              rounded-lg flex items-center"
+            >
+              <img src="/clipboard.png" alt="copy-icon" className="w-5 h-5 mr-2" />
+              <span>COPY</span>
+            </button>
           </div>
 
         </div>
