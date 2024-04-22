@@ -38,7 +38,7 @@ const ActivityTab = (props: ActivityTabProps) => {
   return (
     <div>
       {Object.keys(activitiesGroupedByYear).map((year) => (
-        <div>
+        <div key={year}>
           <div className="pt-6 pl-6 font-semibold">{year}</div>
           <div className="flex flex-wrap gap-1 pt-3 px-8">
             {activitiesGroupedByYear[year].map((entry) => {
