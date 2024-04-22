@@ -11,6 +11,7 @@
     "generate-pwa-assets": "pwa-assets-generator --preset minimal public/logo.svg"
   },
   "dependencies": {
+    "@stomp/stompjs": "^7.0.0",
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "react": "^18.2.0",
@@ -18,6 +19,7 @@
     "react-router-dom": "^6.22.3",
     "sass": "^1.74.1",
     "sharp": "^0.33.3",
+    "socket.io-client": "^4.7.5",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "devDependencies": {
