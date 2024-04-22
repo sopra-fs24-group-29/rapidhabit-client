@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import BaseContainer from "components/ui/BaseContainer";
 import GroupSection from "components/ui/Group";
 import TabBar from "components/ui/Tabbar";
@@ -19,6 +20,11 @@ const DashboardPage = () => {
         setGroups(response.data || []);
         console.log(groups);
       } catch (error) {
+        if (error instanceof AxiosError && error.response?.status === 401) {
+          // User session expired
+          localStorage.removeItem("token");
+          return navigate("/");
+        }
         console.error(
           `Something went wrong while fetching the profile: \n${handleError(
             error
