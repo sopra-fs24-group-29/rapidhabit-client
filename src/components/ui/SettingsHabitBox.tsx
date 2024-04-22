@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { api } from "../../helpers/api.ts";
 
 interface SettingsHabitProps {
@@ -8,7 +7,7 @@ interface SettingsHabitProps {
 }
 
 const SettingsHabitBox = (props: SettingsHabitProps) => {
-  const { groupId, habitId } = useParams();
+  const { groupId, habitId } = props;
   const [name, setName] = useState<string>("");
 
   useEffect(() => {
