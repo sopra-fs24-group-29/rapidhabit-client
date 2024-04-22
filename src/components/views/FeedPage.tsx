@@ -31,7 +31,7 @@ const FeedPage = () => {
     return () => {
       stompClient.deactivate();
     };
-  }, [groupId]);
+  }, []);
 
   const subscribeToFeed = (client: Client) => {
     client.subscribe(`/topic/groups/${groupId}/feed`, (message) => {

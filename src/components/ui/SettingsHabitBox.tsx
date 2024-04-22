@@ -27,7 +27,21 @@ const SettingsHabitBox = (props: SettingsHabitProps) => {
     };
 
     fetchHabitDetails();
-  }, [props.habitId, props.groupId]);
+  }, );
+
+  const deleteHabit = async () => {
+    try {
+      await api.delete(`/groups/${props.groupId}/habits/${props.habitId}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      console.log("habit deletion was successful")
+      window.location.reload();
+    } catch (error) {
+      console.error("Error fetching habit details:", error);
+    }
+  }
 
   return (
     <div className="flex items-center justify-between w-full h-10 bg-input rounded-lg mb-0.5">
@@ -48,6 +62,7 @@ const SettingsHabitBox = (props: SettingsHabitProps) => {
           className="h-3 w-3 cursor-pointer"
           src="/cross.png"
           alt="delete icon"
+          onClick={deleteHabit}
         />
       </div>
     </div>

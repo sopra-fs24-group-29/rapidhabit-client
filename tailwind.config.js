@@ -8,7 +8,8 @@ export const theme = {
       input: "#1A1A1A",
       "dark-green": "#0B261A",
       "light-green": "#57BF84",
-      "tab-off": "#8A8A8A"
+      "tab-off": "#8A8A8A",
+      "admin": "#E1E1E1",
     },
     width: {
       "custom-236": "236px",
