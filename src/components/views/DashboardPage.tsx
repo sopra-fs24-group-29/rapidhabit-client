@@ -18,7 +18,6 @@ const DashboardPage = () => {
           headers: { Authorization: localStorage.getItem("token") },
         });
         setGroups(response.data || []);
-        console.log(groups);
       } catch (error) {
         if (error instanceof AxiosError && error.response?.status === 401) {
           // User session expired
