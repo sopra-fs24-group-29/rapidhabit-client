@@ -22,6 +22,9 @@ export const handleError = (error: unknown) => {
       "The request was made and answered but was unsuccessful.",
       error.response
     );
+    if (response.data.message) {
+      return response.data.message;
+    }
     return response.statusText;
   } else {
     if (RegExp(/Network Error/).exec(error.message)) {
