@@ -2,7 +2,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import NavigationBar from "components/ui/NavigationBar.tsx";
 import TabBar from "components/ui/Tabbar.tsx";
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../helpers/api.ts";
 import SettingsHabitBox from "../ui/SettingsHabitBox.tsx";
 import SettingsUserBox from "../ui/SettingsUserBox.tsx";
@@ -49,7 +49,7 @@ const GroupSettingsPage = () => {
 
     fetchGroupIds();
     fetchUserNames();
-  }, );
+  }, [groupId]);
 
   console.log(userNames);
   console.log(adminIds);
@@ -57,7 +57,6 @@ const GroupSettingsPage = () => {
   console.log("Admin IDs:", adminIds);
   console.log("User IDs:", userIds);
   console.log("Habit IDs:", habitIds);
-
 
   return (
     <div>
@@ -72,11 +71,7 @@ const GroupSettingsPage = () => {
             >
               <div className="flex items-center">
                 <div className="pl-4">
-                  <img
-                    className="h-6 w-6"
-                    src="/add.png"
-                    alt="add icon"
-                  />
+                  <img className="h-6 w-6" src="/add.png" alt="add icon" />
                 </div>
                 <div className="ml-4 text-base cursor-pointer">
                   Create Habit
@@ -101,15 +96,9 @@ const GroupSettingsPage = () => {
             <div className="flex items-center justify-between w-full h-10 bg-input rounded-lg mb-0.5">
               <div className="flex items-center">
                 <div className="pl-4">
-                  <img
-                    className="h-7 w-7"
-                    src="/user.png"
-                    alt="user icon"
-                  />
+                  <img className="h-7 w-7" src="/user.png" alt="user icon" />
                 </div>
-                <div className="ml-4 text-base">
-                  ali
-                </div>
+                <div className="ml-4 text-base">ali</div>
               </div>
               <div className="pr-4 text-xs text-admin">
                 <h3>admin</h3>
@@ -118,12 +107,21 @@ const GroupSettingsPage = () => {
             {Object.entries(userNames)
               .filter(([userId]) => !adminIds.includes(userId))
               .map(([userId, userName]) => (
-                <SettingsUserBox key={userId} groupId={groupId ?? 'defaultGroupId'} userId={userId} userName={userName} />
+                <SettingsUserBox
+                  key={userId}
+                  groupId={groupId ?? "defaultGroupId"}
+                  userId={userId}
+                  userName={userName}
+                />
               ))}
             {/*--------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">Habits</h3>
-            {habitIds.map(habitIds => (
-              <SettingsHabitBox key={habitIds} groupId={groupId ?? 'defaultGroupId'} habitId={habitIds} />
+            {habitIds.map((habitIds) => (
+              <SettingsHabitBox
+                key={habitIds}
+                groupId={groupId ?? "defaultGroupId"}
+                habitId={habitIds}
+              />
             ))}
           </div>
         </div>
