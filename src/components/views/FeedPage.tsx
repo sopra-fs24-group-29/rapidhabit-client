@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { Client } from "@stomp/stompjs";
+import { useEffect, useState } from "react";
 
 const FeedPage = () => {
   const [feedEntries, setFeedEntries] = useState([]);
@@ -33,7 +33,7 @@ const FeedPage = () => {
     };
   }, [groupId]);
 
-  const subscribeToFeed = (client) => {
+  const subscribeToFeed = (client: Client) => {
     client.subscribe(`/topic/groups/${groupId}/feed`, (message) => {
       const newEntry = JSON.parse(message.body);
       console.log("Neue Nachricht erhalten:", newEntry); // Druckt die empfangene Nachricht aus
