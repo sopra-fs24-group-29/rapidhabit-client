@@ -13,6 +13,7 @@ import SignUpPage from "../../views/SignUpPage";
 import WelcomePage from "../../views/WelcomePage";
 import { RequireNotSignedIn } from "../routeProtectors/RequireNotSignedIn";
 import { RequireSignedIn } from "../routeProtectors/RequireSignedIn";
+import CodeInvitePage from "../../views/CodeInvitePage.tsx";
 
 const AppRouter = () => {
   return (
@@ -30,9 +31,10 @@ const AppRouter = () => {
 
         <Route path="/app/:groupId/habit/:habitId" element={<HabitDetail />} />
 
-        <Route path="/join" element={<RequireSignedIn />}>
-          <Route path="/join" element={<JoinGroupPage />} />
-        </Route>
+        <Route path="/join" element={<JoinGroupPage />} />
+
+        <Route path="/invite/:groupId" element={<CodeInvitePage />} />
+
 
         <Route path="/profile" element={<RequireSignedIn />}>
           <Route path="/profile" element={<ProfilePage />} />

@@ -27,12 +27,6 @@ const JoinGroupPage = () => {
     }
   };
 
-  {/*@PostMapping("/groups/join") // defines a method to for handling post methods for creating new users
-  @ResponseStatus(HttpStatus.CREATED)
-  @ResponseBody
-  public ResponseEntity<?> createUser(@RequestHeader("Authorization") String authHeader */}
-
-
   return (
     <div>
       <BaseContainer>

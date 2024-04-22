@@ -47,9 +47,11 @@ const GroupSettingsPage = () => {
 
     fetchGroupIds();
     fetchUserNames();
-  }, []);
+  }, );
 
   console.log(userNames);
+  console.log(adminIds);
+  console.log(userIds);
 
   return (
     <div>
