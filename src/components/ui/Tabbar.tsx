@@ -12,7 +12,7 @@ const TabBar = () => {
 
   return (
     <div className="flex flex-row gap-14 lg:gap-48 justify-center fixed bottom-0 w-full bg-input p-4 text-white text-center">
-      <div className="px-4 cursor-pointer" onClick={() => navigate("/app")}>
+      <div className="px-4 cursor-pointer flex flex-col items-center" onClick={() => navigate("/app")}>
         <div>
           <img
             className="h-7 w-7"
@@ -22,7 +22,7 @@ const TabBar = () => {
         </div>
         <div className={activeTab === "/app" ? "text-xs" : "text-xs text-tab-off"}>Home</div>
       </div>
-      <div className="px-4 cursor-pointer" onClick={() => navigate("/feed")}>
+      <div className="px-4 cursor-pointer flex flex-col items-center" onClick={() => navigate("/feed")}>
         <div>
           <img
             className="h-7 w-7"
@@ -32,7 +32,7 @@ const TabBar = () => {
         </div>
         <div className={activeTab === "/feed" ? "text-xs" : "text-xs text-tab-off"}>Feed</div>
       </div>
-      <div className="px-4 cursor-pointer" onClick={() => navigate("/profile")}>
+      <div className="px-4 cursor-pointer flex flex-col items-center" onClick={() => navigate("/profile")}>
         <div>
           <img
             className="h-7 w-7"

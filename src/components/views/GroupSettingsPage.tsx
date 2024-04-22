@@ -2,9 +2,9 @@ import BaseContainer from "components/ui/BaseContainer";
 import TabBar from "components/ui/Tabbar.tsx";
 import { useEffect, useState } from "react";
 import { api } from "../../helpers/api.ts";
-import SettingsUserBox from "../ui/SettingsUserBox.tsx";
 import SettingsHabitBox from "../ui/SettingsHabitBox.tsx";
 import { useNavigate, useParams } from "react-router-dom";
+import SettingsUserBox from "../ui/SettingsUserBox.tsx";
 
 const GroupSettingsPage = () => {
   const { groupId } = useParams();
@@ -12,9 +12,10 @@ const GroupSettingsPage = () => {
   const [adminIds, setAdminIds] = useState([]);
   const [userIds, setUserIds] = useState([]);
   const [habitIds, setHabitIds] = useState([]);
+  const [userNames, setUserNames] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    const fetchGroupDetails = async () => {
+    const fetchGroupIds = async () => {
       try {
         const response = await api.get(`/groups/${groupId}`, {
           headers: {
@@ -26,16 +27,29 @@ const GroupSettingsPage = () => {
         setUserIds(userIdList);
         setHabitIds(habitIdList);
       } catch (error) {
-        console.error("Error fetching user profile:", error);
+        console.error("Error fetching group ids:", error);
       }
     };
 
-    fetchGroupDetails();
+    const fetchUserNames = async () => {
+      try {
+        const response = await api.get(`/groups/${groupId}/users`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
+        const userNames = response.data;
+        setUserNames(userNames);
+      } catch (error) {
+        console.error("Error fetching user names:", error);
+      }
+    };
+
+    fetchGroupIds();
+    fetchUserNames();
   }, []);
 
-  console.log('Admin IDs:', adminIds);
-  console.log('User IDs:', userIds);
-  console.log('Habit IDs:', habitIds);
+  console.log(userNames);
 
   return (
     <div>
@@ -85,8 +99,8 @@ const GroupSettingsPage = () => {
             </div>
             {/*------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">People</h3>
-            {userIds.map(userIds => (
-              <SettingsUserBox key={userIds} userId={userIds} />
+            {Object.entries(userNames).map(([userId, userName]) => (
+              <SettingsUserBox key={userId} userId={userId} userName={userName} />
             ))}
             {/*--------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">Habits</h3>
