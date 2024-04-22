@@ -62,20 +62,6 @@ const GroupSettingsPage = () => {
   return (
     <div>
       <BaseContainer>
-        <div className="flex flex-col items-center justify-start mt-8">
-
-          <div className="flex items-center justify-between w-full">
-            <img
-              className="cursor-pointer h-4"
-              src="/left-arrow.png"
-              alt="back-arrow"
-              onClick={() => navigate(`/app/${groupId}`)}
-            />
-            <h3 className="text-center">Group Settings</h3>
-            <h3></h3>
-          </div>
-        </div>
-
         <NavigationBar title="Group settings" backUrl={`/app/${groupId}`} />
         <div className="flex flex-col items-center justify-start">
           <div className="w-custom-354">
@@ -91,8 +77,6 @@ const GroupSettingsPage = () => {
                     src="/add.png"
                     alt="add icon"
                   />
-                  <img className="h-7 w-7" src="/add.png" alt="add icon" />
-
                 </div>
                 <div className="ml-4 text-base cursor-pointer">
                   Create Habit
@@ -104,7 +88,10 @@ const GroupSettingsPage = () => {
                 <div className="pl-4">
                   <img className="h-7 w-7" src="/group.png" alt="group icon" />
                 </div>
-                <div className="ml-4 text-base cursor-pointer">
+                <div
+                  className="ml-4 text-base cursor-pointer"
+                  onClick={() => navigate(`/invite/${groupId}`)}
+                >
                   Invite People
                 </div>
               </div>
