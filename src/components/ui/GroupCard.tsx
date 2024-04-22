@@ -23,6 +23,7 @@ const GroupCard = (props: GroupCardProps) => {
         <div className="flex justify-end gap-1.5">
           {Object.keys(props.habit.userCheckStatus).map((initial) => (
             <div
+              key={initial}
               className={clsx(
                 "rounded-full bg-light-green w-7 h-7",
                 !props.habit.userCheckStatus[initial] && "opacity-20"
