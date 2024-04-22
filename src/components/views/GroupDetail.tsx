@@ -225,14 +225,13 @@ const GroupDetail = () => {
   return (
     <div>
       <BaseContainer>
-        <Link to="/app/settings">
+        <Link to={`/app/${groupId}/settings`}>
           <div className="flex justify-end p-3">setting</div>
         </Link>
         <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
           {group?.name}
         </h1>
         <div className="grid grid-cols-2 p-4 gap-4">
-          <GroupCard habitName="Test" streaks={2} groupId="1" habitId="1" />
           {habits?.map((habit) => (
             <GroupCard
               habitName={habit.name}
