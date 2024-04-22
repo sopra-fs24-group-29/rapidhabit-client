@@ -1,41 +1,46 @@
-import BaseContainer from "components/ui/BaseContainer";
-import TabBar from "../ui/Tabbar.tsx";
-import FeedBox from "../ui/FeedBox.tsx";
-
+import React, { useEffect, useState } from "react";
+import SockJS from "sockjs-client";
+const Stomp = require("@stomp/stompjs");
 
 const FeedPage = () => {
-  return (
-    <div className="overflow-y-auto">
-      <BaseContainer>
-        <div className="flex flex-col items-center justify-start mt-8">
-          <div className="w-custom-236 lg:w-custom-354">
+  const [feedEntries, setFeedEntries] = useState([]);
+  const [groupId, setGroupId] = useState("123");
 
-            <h1 className="text-left text-2xl lg:text-4xl">Feed</h1>
+  useEffect(() => {
+    const socket = new SockJS("http://localhost:8080/ws");
+    const client = new Client({
+      webSocketFactory: () => socket,
+      connectHeaders: {
+        Authorization: "hnXAYyVqZu7Vi1j8JUaw3uu-kpc",
+      },
+      onConnect: () => {
+        console.log("Connected to WS");
+        client.subscribe(`/topic/groups/${groupId}/feed`, (message) => {
+          const newEntry = JSON.parse(message.body);
+          setFeedEntries((prevEntries) => [newEntry, ...prevEntries]);
+        });
 
-            <h2 className="mt-4">Today</h2>
-            <FeedBox group={"G1"} color={"bg-green-500"} p1={"Lena completed a 30-minute meditation session!"} p2={"Peace and calm, Lena! Who else is finding their inner peace today?"}></FeedBox>
+        // Hier könntest du die initialen Feed-Daten vom Server anfordern.
+        fetchInitialFeeds(groupId);
+      },
+      onDisconnect: () => {
+        console.log("Disconnected from WS");
+      },
+    });
 
-            <h2 className="mt-4">Yesterday</h2>
-            <FeedBox group={"G2"} color={"bg-blue-500"} p1={"John reached his daily step goal of 10,000 steps!"} p2={"Way to go, John! Keep those steps coming!"}></FeedBox>
-            <FeedBox group={"G3"} color={"bg-purple-500"} p1={"Welcome to the group, Kim! Let's achieve our goals together!"} p2={"Keep up the great work, everyone! Together, we can accomplish amazing things!"}></FeedBox>
-            <FeedBox group={"G1"} color={"bg-green-500"} p1={"Alex just completed his workout session!"} p2={"Great job, Alex! You’re inspiring us all to sweat a little more today."}></FeedBox>
-            <FeedBox group={"G3"} color={"bg-purple-500"} p1={"Sarah finished reading a chapter of her book!"} p2={"Well done, Sarah! What’s the next chapter about?"}></FeedBox>
+    client.activate();
 
-            <h2 className="mt-4">Recent days</h2>
-            <FeedBox group={"G2"} color={"bg-blue-500"} p1={"Michael practiced playing guitar for 1 hour today!"} p2={"Rock on, Michael! Keep strumming those chords!"}></FeedBox>
-            <FeedBox group={"G1"} color={"bg-green-500"} p1={"Welcome to the group, Emma! Let's work together to build healthy habits!"} p2={"Excited to have you join us, Emma! Let's crush our goals together!"}></FeedBox>
-            <FeedBox group={"G3"} color={"bg-purple-500"} p1={"Emily finished her daily yoga session!"} p2={"Congratulations, Emily! Keep up the consistency and feel the benefits of yoga."}></FeedBox>
-            <FeedBox group={"G2"} color={"bg-blue-500"} p1={"Joined the group: Michael"} p2={"Welcome aboard, Michael! Together, we'll strive for progress, not perfection."}></FeedBox>
-            <FeedBox group={""} color={""} p1={""} p2={""}></FeedBox>
+    return () => {
+      client.deactivate();
+    };
+  }, [groupId]);
 
-
-
-          </div>
-        </div>
-      </BaseContainer>
-      <TabBar />
-    </div>
-  );
+  // Eine Funktion, um die ersten 20 Feed-Einträge zu laden
+  const fetchInitialFeeds = async (groupId) => {
+    const response = await fetch(
+      `http://localhost:8080/api/group/${groupId}/feed`
+    );
+    const data = await response.json();
+    setFeedEntries(data); // Stelle sicher, dass die Daten im richtigen Format sind
+  };
 };
-
-export default FeedPage;
