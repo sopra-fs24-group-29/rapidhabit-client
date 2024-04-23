@@ -19,8 +19,12 @@ const WelcomePage = () => {
           </h2>
         </div>
         <div className="flex gap-4">
-          <Button onClick={() => navigate("login")}>Login</Button>
-          <Button onClick={() => navigate("registration")}>Sign up</Button>
+          <Button onClick={() => navigate("login")} tint="accent">
+            Login
+          </Button>
+          <Button onClick={() => navigate("registration")} tint="accent">
+            Sign up
+          </Button>
         </div>
       </AuthContainer>
     </BaseContainer>
