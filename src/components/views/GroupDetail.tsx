@@ -17,13 +17,17 @@ const GroupDetail = () => {
   const { groupId } = useParams();
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
+  const [activeTab, setActiveTab] = useState("activity");
+
   const [group, setGroup] = useState<Group>();
   const [habits, setHabits] = useState<Habit[]>();
-  const [activeTab, setActiveTab] = useState("activity");
 
   useEffect(() => {
     async function fetchData() {
       try {
+        setIsLoading(true);
         const [groupResponse, habitsResponse] = await Promise.all([
           api.get(`/groups/${groupId}`, {
             headers: { Authorization: localStorage.getItem("token") },
@@ -35,14 +39,10 @@ const GroupDetail = () => {
         setGroup(groupResponse.data || []);
         setHabits(habitsResponse.data || []);
       } catch (error) {
-        console.error(
-          `Something went wrong while fetching the profile: \n${handleError(
-            error
-          )}`
-        );
-        alert(
-          "Something went wrong while loading the profile! See the console for details."
-        );
+        console.error(`Error while fetching habits: \n${handleError(error)}`);
+        setErrorMessage("Group details could not be loaded.");
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchData();
@@ -79,17 +79,33 @@ const GroupDetail = () => {
         <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
           {group?.name}
         </h1>
-        <div className="grid grid-cols-2 p-4 gap-4">
-          {habits?.map((habit) => (
-            <HabitCard
-              key={habit.id}
-              groupId={groupId!}
-              habitId={habit.id}
-              habit={habit}
-              onHabitsUpdated={setHabits}
-            />
-          ))}
-        </div>
+
+        {isLoading ? (
+          <div>Loading…</div>
+        ) : errorMessage ? (
+          <div>{errorMessage}</div>
+        ) : !habits?.length ? (
+          <div className="flex flex-col items-center justify-center gap-4 py-8">
+            <span>No habits in this group.</span>
+            <Button
+              onClick={() => navigate(`/app/${groupId}/settings/create-habit`)}
+            >
+              New habit
+            </Button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 p-4 gap-4">
+            {habits?.map((habit) => (
+              <HabitCard
+                key={habit.id}
+                groupId={groupId!}
+                habitId={habit.id}
+                habit={habit}
+                onHabitsUpdated={setHabits}
+              />
+            ))}
+          </div>
+        )}
         <div className="flex flex-row gap-7 justify-evenly pt-6 pr-3">
           <div
             className={clsx(
