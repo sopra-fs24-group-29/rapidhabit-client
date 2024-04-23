@@ -36,7 +36,7 @@ const CreateHabitPage = () => {
       const requestBody = JSON.stringify({
         name: habitName,
         description: description,
-        repeatStrategy: { type: repeatType, repeatMap },
+        repeatStrategy: { type: repeatType, weekdayMap: repeatMap },
       });
       await api.post(`/groups/${groupId}/habits`, requestBody, {
         headers: { Authorization: localStorage.getItem("token") },
