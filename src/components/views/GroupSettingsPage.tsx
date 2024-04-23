@@ -105,8 +105,8 @@ const GroupSettingsPage = () => {
               </div>
             </div>
             {Object.entries(userNames)
-              .filter(([userId]) => !adminIds.includes(userId))
-              .map(([userId, userName]) => (
+              ?.filter(([userId]) => !adminIds.includes(userId))
+              ?.map(([userId, userName]) => (
                 <SettingsUserBox
                   key={userId}
                   groupId={groupId ?? "defaultGroupId"}
@@ -116,7 +116,7 @@ const GroupSettingsPage = () => {
               ))}
             {/*--------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">Habits</h3>
-            {habitIds.map((habitIds) => (
+            {habitIds?.map((habitIds) => (
               <SettingsHabitBox
                 key={habitIds}
                 groupId={groupId ?? "defaultGroupId"}
