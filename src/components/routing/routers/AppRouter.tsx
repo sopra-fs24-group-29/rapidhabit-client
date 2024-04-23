@@ -24,12 +24,10 @@ const AppRouter = () => {
           <Route path="/app" element={<DashboardPage />} />
         </Route>
 
+        <Route path="app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
+
         <Route path="/app/:groupId/settings" element={<RequireSignedIn />}>
           <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />
-        </Route>
-
-        <Route path="app/:groupId/settings/create-habit" element={<RequireSignedIn />}>
-          <Route path="app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
         </Route>
 
         <Route path="/app/new-group" element={<RequireSignedIn />}>
