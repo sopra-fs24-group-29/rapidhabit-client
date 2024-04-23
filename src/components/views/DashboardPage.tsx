@@ -67,7 +67,7 @@ const DashboardPage = () => {
                 start new group
               </div>
             </button>
-            <div
+            <button
               className="flex-col bg-input p-6 m-5 rounded-lg mb-1"
               onClick={() => navigate("/join")}
             >
@@ -75,7 +75,7 @@ const DashboardPage = () => {
               <div className="flex justify-center font-semibold text-m text-a text-center">
                 join with code
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </BaseContainer>

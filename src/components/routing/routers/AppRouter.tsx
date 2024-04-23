@@ -24,22 +24,33 @@ const AppRouter = () => {
           <Route path="/app" element={<DashboardPage />} />
         </Route>
 
-        <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />
+        <Route path="/app/:groupId/settings" element={<RequireSignedIn />}>
+          <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />
+        </Route>
 
-        <Route
-          path="app/:groupId/settings/create-habit"
-          element={<CreateHabitPage />}
-        />
+        <Route path="app/:groupId/settings/create-habit" element={<RequireSignedIn />}>
+          <Route path="app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
+        </Route>
 
-        <Route path="/app/new-group" element={<CreateGroupPage />} />
+        <Route path="/app/new-group" element={<RequireSignedIn />}>
+          <Route path="/app/new-group" element={<CreateGroupPage />} />
+        </Route>
 
-        <Route path="/app/:groupId" element={<GroupDetail />} />
+        <Route path="/app/:groupId" element={<RequireSignedIn />}>
+          <Route path="/app/:groupId" element={<GroupDetail />} />
+        </Route>
 
-        <Route path="/app/:groupId/habit/:habitId" element={<HabitDetail />} />
+        <Route path="/app/:groupId/habit/:habitId" element={<RequireSignedIn />}>
+          <Route path="/app/:groupId/habit/:habitId" element={<HabitDetail />} />
+        </Route>
 
-        <Route path="/join" element={<JoinGroupPage />} />
+        <Route path="/join" element={<RequireSignedIn />}>
+          <Route path="/join" element={<JoinGroupPage />} />
+        </Route>
 
-        <Route path="/invite/:groupId" element={<CodeInvitePage />} />
+        <Route path="/invite/:groupId" element={<RequireSignedIn />}>
+          <Route path="/invite/:groupId" element={<CodeInvitePage />} />
+        </Route>
 
         <Route path="/profile" element={<RequireSignedIn />}>
           <Route path="/profile" element={<ProfilePage />} />

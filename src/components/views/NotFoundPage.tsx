@@ -19,7 +19,7 @@ const NotFoundPage = () => {
       <p className="text-sm mt-2 lg:text-2xl">The page you&apos;re looking for does not seem to exist</p>
       <div>
         <Button
-          className="cursor-pointer py-1 px-4 mt-5"
+          className="cursor-pointer py-1 px-4 mt-5 text-accent bg-black outline outline-accent"
           onClick={goBack}
         >
           Go back
