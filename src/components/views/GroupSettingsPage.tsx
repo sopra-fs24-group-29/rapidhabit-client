@@ -24,6 +24,7 @@ const GroupSettingsPage = () => {
             Authorization: localStorage.getItem("token"),
           },
         });
+        console.log(response.data);
         const { adminIdList, userIdList, habitIdList } = response.data;
         setAdminIds(adminIdList);
         setUserIds(userIdList);
@@ -50,13 +51,6 @@ const GroupSettingsPage = () => {
     fetchGroupIds();
     fetchUserNames();
   }, [groupId]);
-
-  console.log(userNames);
-  console.log(adminIds);
-  console.log(userIds);
-  console.log("Admin IDs:", adminIds);
-  console.log("User IDs:", userIds);
-  console.log("Habit IDs:", habitIds);
 
   return (
     <div>
@@ -93,27 +87,15 @@ const GroupSettingsPage = () => {
             </div>
             {/*------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">People</h3>
-            <div className="flex items-center justify-between w-full h-10 bg-input rounded-lg mb-0.5">
-              <div className="flex items-center">
-                <div className="pl-4">
-                  <img className="h-7 w-7" src="/user.png" alt="user icon" />
-                </div>
-                <div className="ml-4 text-base">ali</div>
-              </div>
-              <div className="pr-4 text-xs text-admin">
-                <h3>admin</h3>
-              </div>
-            </div>
-            {Object.entries(userNames)
-              ?.filter(([userId]) => !adminIds.includes(userId))
-              ?.map(([userId, userName]) => (
-                <SettingsUserBox
-                  key={userId}
-                  groupId={groupId ?? "defaultGroupId"}
-                  userId={userId}
-                  userName={userName}
-                />
-              ))}
+            {Object.entries(userNames)?.map(([userId, userName]) => (
+              <SettingsUserBox
+                key={userId}
+                groupId={groupId ?? "defaultGroupId"}
+                userId={userId}
+                userName={userName}
+                isAdmin={adminIds.includes(userId)}
+              />
+            ))}
             {/*--------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">Habits</h3>
             {habitIds?.map((habitIds) => (

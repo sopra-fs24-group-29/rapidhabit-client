@@ -8,7 +8,7 @@ interface FormFieldProps {
 
 const FormField = (props: FormFieldProps) => {
   return (
-    <div>
+    <div className="w-full">
       <input
         placeholder={props.label}
         value={props.value}

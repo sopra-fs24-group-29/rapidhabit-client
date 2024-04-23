@@ -64,7 +64,7 @@ const GroupDetail = () => {
 
   return (
     <div>
-      <BaseContainer>
+      <BaseContainer className="pb-40">
         <NavigationBar
           backUrl="/app"
           rightAction={
@@ -107,7 +107,7 @@ const GroupDetail = () => {
           </div>
         )}
         <div className="flex flex-row gap-7 justify-evenly pt-6 pr-3">
-          <div
+          <button
             className={clsx(
               "font-semibold p-2",
               activeTab == "activity" &&
@@ -116,8 +116,8 @@ const GroupDetail = () => {
             onClick={() => setActiveTab("activity")}
           >
             Your Activity
-          </div>
-          <div
+          </button>
+          <button
             className={clsx(
               "font-semibold p-2",
               activeTab == "ranking" &&
@@ -126,8 +126,8 @@ const GroupDetail = () => {
             onClick={() => setActiveTab("ranking")}
           >
             Ranking
-          </div>
-          <div
+          </button>
+          <button
             className={clsx(
               "font-semibold p-2",
               activeTab == "chat" &&
@@ -136,7 +136,7 @@ const GroupDetail = () => {
             onClick={() => setActiveTab("chat")}
           >
             Chat
-          </div>
+          </button>
         </div>
         {renderContent()}
       </BaseContainer>

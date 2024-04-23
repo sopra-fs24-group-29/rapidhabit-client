@@ -1,6 +1,7 @@
 import BaseContainer from "components/ui/BaseContainer";
 import { Button } from "components/ui/Button.tsx";
-import { api, handleError } from "helpers/api.ts";
+import NavigationBar from "components/ui/NavigationBar.tsx";
+import { api } from "helpers/api.ts";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormField from "../ui/FormField.tsx";
@@ -22,33 +23,32 @@ const CreateGroupPage = () => {
 
       navigate("/app");
     } catch (error) {
-      console.log("Something went wrong during the login: ", error);
-      alert(`Something went wrong during the login: \n${handleError(error)}`);
+      console.log("Something went wrong while creating: ", error);
+      alert(
+        "The group could not be created. Check if all fields are filled correctly."
+      );
     }
   };
 
   return (
     <BaseContainer>
+      <NavigationBar
+        backUrl="/app"
+        title="Create new group"
+        rightAction={
+          <Button variant="text" onClick={createGroup}>
+            Confirm
+          </Button>
+        }
+      />
       <div className="flex flex-col items-center justify-start mt-8">
-        <div>
-          <h3 className="text-left  mt-5">Groupname</h3>
-          <FormField
-            type="text"
-            label=""
-            value={groupName}
-            onChange={(un: string) => setGroupName(un)}
-          />
-          <h3 className="text-left  mt-3">Description</h3>
-          <FormField
-            type="text"
-            label=""
-            value={description}
-            onChange={(un: string) => setDescription(un)}
-          />
+        <div className="w-full px-8">
+          <h3 className="py-2">Name of group</h3>
+          <FormField value={groupName} onChange={setGroupName} />
+
+          <h3 className="py-2">Description</h3>
+          <FormField value={description} onChange={setDescription} />
         </div>
-        <Button className="mt-5" onClick={createGroup}>
-          Confirm
-        </Button>
       </div>
     </BaseContainer>
   );

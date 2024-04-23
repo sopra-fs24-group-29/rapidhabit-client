@@ -11,7 +11,7 @@ const Option = (props: OptionProps) => (
   <button
     onClick={props.onSelect}
     className={clsx(
-      "px-3 py-3 rounded",
+      "px-3 py-2 rounded-lg my-2",
       props.isSelected
         ? "bg-light-green text-black"
         : "bg-dark-green text-white"

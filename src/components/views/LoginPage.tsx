@@ -16,9 +16,18 @@ const LoginPage = () => {
   const doLogin = async () => {
     try {
       const requestBody = JSON.stringify({ email, password });
-      const response = await api.put("/users/login", requestBody);
 
-      localStorage.setItem("token", response.data.token);
+      const loginResponse = await api.put("/users/login", requestBody);
+      const token = loginResponse.data.token;
+
+      const profileResponse = await api.get("/users/profile", {
+        headers: { Authorization: token },
+      });
+      const userId = profileResponse.data.id;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+
       navigate("/app");
     } catch (error) {
       console.log("Something went wrong during the login: ", error);

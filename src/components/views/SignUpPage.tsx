@@ -26,10 +26,9 @@ const SignUpPage = () => {
         email,
         password,
       });
-      let response = await api.post("/users", requestBody);
+      const response = await api.post("/users", requestBody);
       if (response.status === 201) {
-        response = await api.put("/users/login", requestBody);
-        localStorage.setItem("token", response.data.token);
+        await loginAfterSignUp(email, password);
         navigate("/app");
       } else if (response.status === 409) {
         console.log("Email is already taken.", response.data);
@@ -39,6 +38,22 @@ const SignUpPage = () => {
       console.log("something went wrong", error);
       alert(`Something went wrong during the signup: \n${handleError(error)}`);
     }
+  };
+
+  const loginAfterSignUp = async (email: string, password: string) => {
+    const loginResponse = await api.put(
+      "/users/login",
+      JSON.stringify({ email, password })
+    );
+    const token = loginResponse.data.token;
+
+    const profileResponse = await api.get("/users/profile", {
+      headers: { Authorization: token },
+    });
+    const userId = profileResponse.data.id;
+
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
   };
 
   return (

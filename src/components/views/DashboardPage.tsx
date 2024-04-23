@@ -60,7 +60,7 @@ const DashboardPage = () => {
           <div className="flex flex-row pb-20">
             <button
               className="flex-col bg-input p-6 m-5 mr-1 rounded-lg mb-1"
-              onClick={() => navigate("/app/newGroup")}
+              onClick={() => navigate("/app/new-group")}
             >
               <div className="flex justify-center font-bold text-2xl">+</div>
               <div className="flex justify-center font-semibold text-m text-a text-center">

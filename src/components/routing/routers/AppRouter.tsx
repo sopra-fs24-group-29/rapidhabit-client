@@ -4,6 +4,7 @@ import DashboardPage from "components/views/DashboardPage";
 import GroupDetail from "components/views/GroupDetail.tsx";
 import HabitDetail from "components/views/HabitDetail.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CodeInvitePage from "../../views/CodeInvitePage.tsx";
 import FeedPage from "../../views/FeedPage.tsx";
 import GroupSettingsPage from "../../views/GroupSettingsPage.tsx";
 import JoinGroupPage from "../../views/JoinGroupPage.tsx";
@@ -14,7 +15,6 @@ import SignUpPage from "../../views/SignUpPage";
 import WelcomePage from "../../views/WelcomePage";
 import { RequireNotSignedIn } from "../routeProtectors/RequireNotSignedIn";
 import { RequireSignedIn } from "../routeProtectors/RequireSignedIn";
-import CodeInvitePage from "../../views/CodeInvitePage.tsx";
 
 const AppRouter = () => {
   return (
@@ -26,9 +26,12 @@ const AppRouter = () => {
 
         <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />
 
-        <Route path="app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
+        <Route
+          path="app/:groupId/settings/create-habit"
+          element={<CreateHabitPage />}
+        />
 
-        <Route path="/app/newGroup" element={<CreateGroupPage />} />
+        <Route path="/app/new-group" element={<CreateGroupPage />} />
 
         <Route path="/app/:groupId" element={<GroupDetail />} />
 
@@ -37,7 +40,6 @@ const AppRouter = () => {
         <Route path="/join" element={<JoinGroupPage />} />
 
         <Route path="/invite/:groupId" element={<CodeInvitePage />} />
-
 
         <Route path="/profile" element={<RequireSignedIn />}>
           <Route path="/profile" element={<ProfilePage />} />
