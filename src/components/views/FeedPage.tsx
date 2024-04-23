@@ -1,8 +1,13 @@
 import { Client } from "@stomp/stompjs";
+import BaseContainer from "components/ui/BaseContainer";
+import FeedBox from "components/ui/FeedBox";
+import TabBar from "components/ui/Tabbar";
 import { useEffect, useState } from "react";
 
 const FeedPage = () => {
   const [feedEntries, setFeedEntries] = useState([]);
+
+  // TODO: Make independent of group id once possible in backend
   const [groupId, setGroupId] = useState("6625588357aba20834ece611");
 
   useEffect(() => {
@@ -27,7 +32,6 @@ const FeedPage = () => {
     });
 
     stompClient.activate();
-
     return () => {
       stompClient.deactivate();
     };
@@ -43,11 +47,20 @@ const FeedPage = () => {
 
   return (
     <div>
-      {feedEntries.map((entry, index) => (
-        <div key={index}>
-          <p>{entry}</p>
+      <BaseContainer>
+        <div className="flex flex-col items-center justify-start mt-8">
+          <div className="w-full px-8 pb-40">
+            <h1 className="text-center text-4xl flex items-start font-bold pb-10">
+              Feed
+            </h1>
+            {feedEntries.map((entry) => (
+              // TODO: Get correct group here and a stable id for the key
+              <FeedBox group={"G3"} color={"bg-green-500"} p1={entry} />
+            ))}
+          </div>
         </div>
-      ))}
+      </BaseContainer>
+      <TabBar />
     </div>
   );
 };
