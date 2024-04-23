@@ -38,10 +38,6 @@ const DashboardPage = () => {
     fetchData();
   }, []);
 
-  const countGroups = () => {
-    alert(groups?.length);
-  };
-
   return (
     <div>
       <BaseContainer>
@@ -73,13 +69,10 @@ const DashboardPage = () => {
             </button>
             <div
               className="flex-col bg-input p-6 m-5 rounded-lg mb-1"
-              onClick={() => countGroups()}
+              onClick={() => navigate("/join")}
             >
               <div className="flex justify-center font-bold text-2xl">+</div>
-              <div
-                className="flex justify-center font-semibold text-m text-a text-center"
-                onClick={() => navigate("/join")}
-              >
+              <div className="flex justify-center font-semibold text-m text-a text-center">
                 join with code
               </div>
             </div>
