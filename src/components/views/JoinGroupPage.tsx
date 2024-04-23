@@ -1,8 +1,9 @@
 import BaseContainer from "components/ui/BaseContainer";
-import TabBar from "../ui/Tabbar.tsx";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import NavigationBar from "components/ui/NavigationBar.tsx";
 import { api } from "helpers/api";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import TabBar from "../ui/Tabbar.tsx";
 
 const JoinGroupPage = () => {
   const navigate = useNavigate();
@@ -18,28 +19,22 @@ const JoinGroupPage = () => {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
-      })
-      console.log("correct invite code, joining group...")
-      navigate("/app")
+      });
+      console.log("correct invite code, joining group...");
+      navigate("/app");
     } catch (error) {
       console.error("couldn't join the group: ", error);
-      alert("wrong invite code, try again!")
+      alert("wrong invite code, try again!");
     }
   };
 
   return (
     <div>
       <BaseContainer>
-        <div className="flex flex-col items-center justify-start mt-8">
-
-          <div className="flex items-center justify-between w-full">
-            <img
-              onClick={() => navigate("/app")}
-              className="cursor-pointer h-4"
-              src="/left-arrow.png"
-              alt="back-arrow"
-            />
-            <h3 className="text-center">Join group</h3>
+        <NavigationBar
+          backUrl="/app"
+          title="Join group"
+          rightAction={
             <button
               className="text-white font-bold"
               type="button"
@@ -47,8 +42,9 @@ const JoinGroupPage = () => {
             >
               Join
             </button>
-          </div>
-
+          }
+        />
+        <div className="flex flex-col items-center justify-start mt-8">
           <div>
             <h3 className="mt-20 text-center">Enter the code of the group</h3>
             <form className="flex items-center justify-center text-center">
@@ -59,14 +55,13 @@ const JoinGroupPage = () => {
                 className="bg-black text-5xl text-center mt-6"
                 maxLength={8} // sets max number of characters to 6
                 autoFocus // focus on input field when page loaded
-                required  // required field to join group
+                required // required field to join group
                 autoComplete="off" // no autocompletion in input field
                 value={inviteCode}
                 onChange={(e) => setInviteCode(e.target.value)}
               />
             </form>
           </div>
-
         </div>
       </BaseContainer>
       <TabBar />
