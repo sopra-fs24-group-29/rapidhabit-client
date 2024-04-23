@@ -6,6 +6,10 @@
   @apply opacity-70;
 }
 
+.primary-button.destructive {
+  @apply bg-red-950 text-red-300;
+}
+
 .text-button {
   @apply text-white font-bold;
 }

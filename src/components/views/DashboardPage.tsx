@@ -45,7 +45,7 @@ const DashboardPage = () => {
           Groups
         </h1>
         <div>
-          <div className="flex  flex-col ">
+          <div className="flex flex-col">
             {groups?.map((group) => (
               <GroupSection
                 key={group.id}

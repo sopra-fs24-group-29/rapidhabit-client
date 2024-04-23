@@ -129,7 +129,7 @@ const ProfilePage = () => {
       navigate("/");
     } catch (error) {
       console.error("Error deleting user account:", error);
-      alert("wrong password, try again!")
+      alert("wrong password, try again!");
     }
   };
 
@@ -137,45 +137,39 @@ const ProfilePage = () => {
     <div>
       <BaseContainer>
         <div className="flex flex-col items-center justify-start mt-8">
-          <div>
-            <h1 className="text-left text-2xl lg:text-4xl">Profile</h1>
+          <div className="w-full px-8 pb-40">
+            <h1 className="text-center text-4xl flex items-start font-bold pb-10">
+              Profile
+            </h1>
             <div className="flex items-center justify-center mt-2">
               <div className="w-20 h-20 rounded-full bg-input flex items-center justify-center text-2xl font-bold">
                 {userData.firstname.charAt(0).toUpperCase()}
                 {userData.lastname.charAt(0).toUpperCase()}
               </div>
             </div>
-
-            <h3 className="text-left  mt-5">Firstname</h3>
+            <h3 className="py-2">First name</h3>
             <FormField
-              type="text"
-              label=""
               value={userData.firstname}
               onChange={(un: string) => handleInputChange("firstname", un)}
             />
-            <h3 className="text-left  mt-3">Lastname</h3>
+            <h3 className="py-2">Last name</h3>
             <FormField
-              type="text"
-              label=""
               value={userData.lastname}
               onChange={(un: string) => handleInputChange("lastname", un)}
             />
-            <h3 className="text-left  mt-3">Email</h3>
+            <h3 className="py-2">Email</h3>
             <FormField
-              type="email"
-              label=""
               value={userData.email}
               onChange={(un: string) => handleInputChange("email", un)}
             />
             {isDataChanged && (
-              <div className="flex justify-between mt-5">
+              <div className="flex justify-between mt-5 gap-2">
                 <Button
                   className="cursor-pointer py-0 px-4 w-20"
                   onClick={handleCancel}
                 >
                   Cancel
                 </Button>
-
                 <Button
                   className="cursor-pointer py-0 px-4 w-20"
                   onClick={handleSave}
@@ -184,9 +178,9 @@ const ProfilePage = () => {
                 </Button>
               </div>
             )}
-            <div className="border-b border-input my-8"></div>
-            <h3 className="text-left  mt-3">Change Password</h3>
 
+            <div className="border-b border-input my-8"></div>
+            <h3 className="text-left mt-3">Change Password</h3>
             <div>
               <div>
                 <FormField
@@ -226,6 +220,7 @@ const ProfilePage = () => {
 
             {!isDataChanged && (
               <div>
+                <div className="border-b border-input my-8"></div>
                 <div>
                   <Button
                     className="cursor-pointer py-0 px-4 mt-5 w-full"
@@ -237,7 +232,8 @@ const ProfilePage = () => {
                 </div>
                 <div>
                   <Button
-                    className="cursor-pointer py-0 px-4 mt-5 w-full bg-red-600"
+                    className="cursor-pointer py-0 px-4 mt-5 w-full"
+                    variant="destructive"
                     type="button"
                     onClick={doAccountDeletion}
                   >

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import "../../styles/ui/Button.css";
 
-type ButtonVariant = "primary" | "text";
+type ButtonVariant = "primary" | "text" | "destructive";
 
 interface ButtonProps extends React.ComponentProps<"button"> {
   style?: React.CSSProperties;
@@ -16,7 +16,11 @@ export const Button = (props: ButtonProps) => (
     {...props}
     style={props.style}
     className={clsx(
-      props.variant === "text" ? "text-button" : "primary-button",
+      props.variant === "text"
+        ? "text-button"
+        : props.variant === "destructive"
+        ? "primary-button destructive"
+        : "primary-button",
       props.className
     )}
   >
