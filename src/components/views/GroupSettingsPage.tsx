@@ -12,7 +12,6 @@ const GroupSettingsPage = () => {
 
   const navigate = useNavigate();
   const [adminIds, setAdminIds] = useState<string[]>([]);
-  const [userIds, setUserIds] = useState<string[]>([]);
   const [habitIds, setHabitIds] = useState<string[]>([]);
   const [userNames, setUserNames] = useState<{ [key: string]: string }>({});
 
@@ -25,9 +24,8 @@ const GroupSettingsPage = () => {
           },
         });
         console.log(response.data);
-        const { adminIdList, userIdList, habitIdList } = response.data;
+        const { adminIdList, habitIdList } = response.data;
         setAdminIds(adminIdList);
-        setUserIds(userIdList);
         setHabitIds(habitIdList);
       } catch (error) {
         console.error("Error fetching group ids:", error);
@@ -37,9 +35,7 @@ const GroupSettingsPage = () => {
     const fetchUserNames = async () => {
       try {
         const response = await api.get(`/groups/${groupId}/users`, {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
+          headers: { Authorization: localStorage.getItem("token") },
         });
         const userNames = response.data;
         setUserNames(userNames);

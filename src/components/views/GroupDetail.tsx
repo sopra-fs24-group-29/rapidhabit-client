@@ -56,7 +56,7 @@ const GroupDetail = () => {
       case "ranking":
         return <RankingTab group={group} />;
       case "chat":
-        return <ChatTab group={group} />;
+        return <ChatTab />;
       default:
         return <ActivityTab group={group} />;
     }

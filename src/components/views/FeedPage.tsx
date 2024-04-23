@@ -5,10 +5,10 @@ import TabBar from "components/ui/Tabbar";
 import { useEffect, useState } from "react";
 
 const FeedPage = () => {
-  const [feedEntries, setFeedEntries] = useState([]);
+  const [feedEntries, setFeedEntries] = useState<string[]>([]);
 
   // TODO: Make independent of group id once possible in backend
-  const [groupId, setGroupId] = useState("6625588357aba20834ece611");
+  const groupId = "6625588357aba20834ece611";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,7 +41,7 @@ const FeedPage = () => {
     client.subscribe(`/topic/groups/${groupId}/feed`, (message) => {
       const newEntry = JSON.parse(message.body);
       console.log("Neue Nachricht erhalten:", newEntry); // Druckt die empfangene Nachricht aus
-      // setFeedEntries((prevEntries) => [...prevEntries, newEntry]);
+      setFeedEntries((prevEntries) => [...prevEntries, newEntry]);
     });
   };
 
