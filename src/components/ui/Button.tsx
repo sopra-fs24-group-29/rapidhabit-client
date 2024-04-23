@@ -3,12 +3,14 @@ import React from "react";
 import "../../styles/ui/Button.css";
 
 type ButtonVariant = "primary" | "text" | "destructive";
+type ButtonTint = "default" | "accent";
 
 interface ButtonProps extends React.ComponentProps<"button"> {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   className?: string;
   variant?: ButtonVariant;
+  tint?: ButtonTint;
 }
 
 export const Button = (props: ButtonProps) => (
@@ -21,7 +23,8 @@ export const Button = (props: ButtonProps) => (
         : props.variant === "destructive"
         ? "primary-button destructive"
         : "primary-button",
-      props.className
+      props.className,
+      props.tint && `tint-${props.tint}`
     )}
   >
     {props.children}

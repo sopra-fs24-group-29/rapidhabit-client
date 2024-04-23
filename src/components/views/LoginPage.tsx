@@ -75,6 +75,7 @@ const LoginPage = () => {
                 type="button"
                 disabled={!email || !password}
                 onClick={doLogin}
+                tint="accent"
               >
                 Login
               </Button>

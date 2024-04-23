@@ -2,6 +2,10 @@
   @apply bg-dark-green text-light-green transition-all cursor-pointer p-2.5 rounded-xl font-bold text-lg flex-grow lg:p-4;
 }
 
+.primary-button.tint-accent {
+  @apply bg-yellow-950 text-accent;
+}
+
 .primary-button:hover {
   @apply opacity-70;
 }
