@@ -97,6 +97,19 @@ const GroupSettingsPage = () => {
                 </div>
               </div>
             </div>
+            <div className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5">
+              <div className="flex items-center">
+                <div className="pl-4">
+                  <img className="h-7 w-7" src="/group.png" alt="group icon" />
+                </div>
+                <div
+                  className="ml-4 text-base cursor-pointer"
+                  onClick={() => navigate(`/app/${groupId}/delete-group`)}
+                >
+                  Delete Group
+                </div>
+              </div>
+            </div>
             {/*------------------------------------------------------------------------------------- */}
             <h3 className="text-left mt-4">Group Members</h3>
             {Object.entries(userNames)?.map(([userId, userName]) => (
