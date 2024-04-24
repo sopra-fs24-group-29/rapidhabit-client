@@ -1,42 +1,49 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Client } from "@stomp/stompjs";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import { api } from "helpers/api";
-import FeedBox from "../ui/FeedBox.tsx";
-import FeedBoxPulseCheck from "../ui/FeedBoxPulseCheck.tsx";
-import BaseContainer from "components/ui/BaseContainer";
-import TabBar from "../ui/Tabbar.tsx";
+import FeedBox from "../ui/FeedBox";
+import FeedBoxPulseCheck from "../ui/FeedBoxPulseCheck";
+import BaseContainer from "../ui/BaseContainer";
+import TabBar from "../ui/Tabbar";
+
+interface FeedEntry {
+  userSubmits?: Record<string, number>;
+  type: string;
+  groupName: string;
+  message: string;
+}
 
 const FeedPage = () => {
-  const [feedEntries, setFeedEntries] = useState([]);
-  const [groups, setGroups] = useState([]);
-  const [userId, setUserId] = useState("");
+  const [feedEntries, setFeedEntries] = useState<FeedEntry[]>([]);
+  const [groups, setGroups] = useState<string[]>([]);
+  const [userId, setUserId] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const userIdResponse = await api.get(`/users/id`, {
-          headers: { Authorization: localStorage.getItem("token") },
+        const userIdResponse = await api.get("/users/id", {
+          headers: { Authorization: localStorage.getItem("token") ?? "" },
         });
         setUserId(userIdResponse.data || "");
 
-        const groupResponse = await api.get(`/groups/groupIds`, {
-          headers: { Authorization: localStorage.getItem("token") },
+        const groupResponse = await api.get("/groups/groupIds", {
+          headers: { Authorization: localStorage.getItem("token") ?? "" },
         });
         setGroups(groupResponse.data || []);
 
-        const feedResponse = await api.get(`/feed`, {
-          headers: { Authorization: localStorage.getItem("token") },
+        const feedResponse = await api.get("/feed", {
+          headers: { Authorization: localStorage.getItem("token") ?? "" },
         });
         setFeedEntries(feedResponse.data || []);
-      } catch (error) {
+      } catch (error: unknown) {
         if (error instanceof AxiosError && error.response?.status === 401) {
           localStorage.removeItem("token");
           navigate("/");
         } else {
-          console.error(`Failed to fetch data: ${error.message}`);
+          console.error(`Failed to fetch data: ${(error as Error).message}`);
           alert("Failed to load data! Check console for details.");
         }
       }
