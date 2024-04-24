@@ -1,5 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "./Button";
+
+interface FeedBoxPulseCheckProps {
+  group: string;
+  color: string;
+  p1: string;
+  p2: string;
+  isDisabled: boolean;
+  initialSliderValue: number;
+}
 
 const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   group,
@@ -7,8 +16,13 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   p1,
   p2,
   isDisabled,
+  initialSliderValue,
 }) => {
-  const [sliderValue, setSliderValue] = useState(0.5);
+  const [sliderValue, setSliderValue] = useState(initialSliderValue);
+
+  useEffect(() => {
+    setSliderValue(initialSliderValue);
+  }, [initialSliderValue]);
 
   return (
     <div

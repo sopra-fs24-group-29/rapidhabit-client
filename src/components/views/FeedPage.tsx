@@ -11,7 +11,7 @@ import TabBar from "../ui/Tabbar.tsx";
 const FeedPage = () => {
   const [feedEntries, setFeedEntries] = useState([]);
   const [groups, setGroups] = useState([]);
-  const [userId, setUserId] = useState(""); // Zustand für userId
+  const [userId, setUserId] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,18 +83,22 @@ const FeedPage = () => {
           <div className="w-custom-236 lg:w-custom-354">
             <h1 className="text-left text-2xl lg:text-4xl">Feed</h1>
             <h2 className="mt-4">Today</h2>
-            {feedEntries.map((entry, index) =>
-              entry.type === "PULSECHECK" ? (
+            {feedEntries.map((entry, index) => {
+              const userSubmitted =
+                entry.userSubmits && userId in entry.userSubmits;
+              const sliderValue = userSubmitted
+                ? entry.userSubmits[userId]
+                : 0.5;
+
+              return entry.type === "PULSECHECK" ? (
                 <FeedBoxPulseCheck
                   key={index}
                   group={entry.groupName}
                   color="bg-blue-500"
                   p1={entry.message}
                   p2="Halte durch, bald hast du es geschafft!"
-                  isDisabled={entry.userSubmits && userId in entry.userSubmits}
-                  sliderValue={
-                    entry.userSubmits ? entry.userSubmits[userId] : 0.5
-                  }
+                  isDisabled={userSubmitted}
+                  initialSliderValue={sliderValue}
                 />
               ) : (
                 <FeedBox
@@ -104,8 +108,8 @@ const FeedPage = () => {
                   p1={entry.message}
                   p2="Halte durch, bald hast du es geschafft!"
                 />
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       </BaseContainer>
