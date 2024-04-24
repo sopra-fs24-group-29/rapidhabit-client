@@ -17,3 +17,11 @@
 .text-button {
   @apply text-white font-bold;
 }
+.button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button-disabled:hover {
+  opacity: 0.5;
+}
