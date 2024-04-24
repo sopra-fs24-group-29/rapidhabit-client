@@ -56,7 +56,7 @@ const GroupSettingsPage = () => {
           <div className="w-custom-354">
             <h3 className="text-left mt-4">Actions</h3>
             <Link
-              to={`/app/${groupId}/settings/create-habit`}
+              to={`/app/${groupId}/create-habit`}
               className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5"
             >
               <div className="flex items-center">

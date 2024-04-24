@@ -84,7 +84,7 @@ const UpdateHabitPage = () => {
     <BaseContainer>
       <NavigationBar
         title="Update habit"
-        backUrl={`/app/${groupId}`}
+        backUrl={`/app/${groupId}/settings`}
         rightAction={
           <Button variant="text" onClick={updateHabit}>
             Update

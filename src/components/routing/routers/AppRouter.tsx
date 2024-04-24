@@ -25,9 +25,13 @@ const AppRouter = () => {
           <Route path="/app" element={<DashboardPage />} />
         </Route>
 
-        <Route path="/app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
+        <Route path="/app/:groupId/create-habit" element={<RequireSignedIn />}>
+          <Route path="/app/:groupId/create-habit" element={<CreateHabitPage />} />
+        </Route>
 
-        <Route path="/app/:groupId/update-habit/:habitId" element={<UpdateHabitPage />} />
+        <Route path="/app/:groupId/update-habit/:habitId" element={<RequireSignedIn />}>
+          <Route path="/app/:groupId/update-habit/:habitId" element={<UpdateHabitPage />} />
+        </Route>
 
         <Route path="/app/:groupId/settings" element={<RequireSignedIn />}>
           <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />

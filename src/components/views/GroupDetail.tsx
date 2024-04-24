@@ -88,7 +88,7 @@ const GroupDetail = () => {
           <div className="flex flex-col items-center justify-center gap-4 py-8">
             <span>No habits in this group.</span>
             <Button
-              onClick={() => navigate(`/app/${groupId}/settings/create-habit`)}
+              onClick={() => navigate(`/app/${groupId}/create-habit`)}
             >
               New habit
             </Button>
