@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Client } from "@stomp/stompjs";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import { api } from "helpers/api";
+import { Client } from "@stomp/stompjs";
+
 import FeedBox from "../ui/FeedBox";
 import FeedBoxPulseCheck from "../ui/FeedBoxPulseCheck";
 import BaseContainer from "../ui/BaseContainer";
 import TabBar from "../ui/Tabbar";
+import { api } from "helpers/api";
 
 interface FeedEntry {
   userSubmits?: Record<string, number>;
@@ -24,18 +25,24 @@ const FeedPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
+        const token = localStorage.getItem("token") ?? "";
+        if (!token) {
+          navigate("/");
+          return;
+        }
+
         const userIdResponse = await api.get("/users/id", {
-          headers: { Authorization: localStorage.getItem("token") ?? "" },
+          headers: { Authorization: token },
         });
         setUserId(userIdResponse.data || "");
 
         const groupResponse = await api.get("/groups/groupIds", {
-          headers: { Authorization: localStorage.getItem("token") ?? "" },
+          headers: { Authorization: token },
         });
         setGroups(groupResponse.data || []);
 
         const feedResponse = await api.get("/feed", {
-          headers: { Authorization: localStorage.getItem("token") ?? "" },
+          headers: { Authorization: token },
         });
         setFeedEntries(feedResponse.data || []);
       } catch (error: unknown) {
@@ -43,19 +50,21 @@ const FeedPage = () => {
           localStorage.removeItem("token");
           navigate("/");
         } else {
-          console.error(`Failed to fetch data: ${(error as Error).message}`);
+          console.error(
+            `Failed to fetch data: ${(error as AxiosError).message}`
+          );
           alert("Failed to load data! Check console for details.");
         }
       }
     }
 
     fetchData();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
-    if (!groups.length) return;
+    if (groups.length === 0) return;
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") ?? "";
     const stompClient = new Client({
       brokerURL: "ws://sopra-fs24-group29-server.oa.r.appspot.com/ws",
       connectHeaders: {
@@ -80,7 +89,9 @@ const FeedPage = () => {
 
     stompClient.activate();
 
-    return () => stompClient.deactivate();
+    return () => {
+      stompClient.deactivate();
+    };
   }, [groups]);
 
   return (
