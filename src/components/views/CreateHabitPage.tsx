@@ -25,6 +25,7 @@ const CreateHabitPage = () => {
 
   const [habitName, setHabitName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [rewardPoints, setRewardPoints] = useState<number>(1);
 
   const [repeatType, setRepeatType] = useState<HabitRepeatStrategy>(
     HabitRepeatStrategy.Daily
@@ -37,6 +38,7 @@ const CreateHabitPage = () => {
         name: habitName,
         description: description,
         repeatStrategy: { type: repeatType, weekdayMap: repeatMap },
+        rewardPoints: rewardPoints,
       });
       await api.post(`/groups/${groupId}/habits`, requestBody, {
         headers: { Authorization: localStorage.getItem("token") },
@@ -57,7 +59,7 @@ const CreateHabitPage = () => {
     <BaseContainer>
       <NavigationBar
         title="New habit"
-        backUrl={`/app/${groupId}/settings`}
+        backUrl={`/app/${groupId}`}
         rightAction={
           <Button variant="text" onClick={createHabit}>
             Create
@@ -99,6 +101,15 @@ const CreateHabitPage = () => {
             </div>
           </div>
         )}
+        <h3 className="mt-3">Reward Points</h3>
+        <form>
+          <input className="bg-input rounded-lg text-white px-2"
+                 type="number"
+                 value={rewardPoints}
+                 onChange={(event) => setRewardPoints(parseInt(event.target.value))} min="1" max="10"
+          />
+        </form>
+
       </div>
     </BaseContainer>
   );
