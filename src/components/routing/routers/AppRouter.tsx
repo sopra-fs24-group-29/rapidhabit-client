@@ -15,6 +15,7 @@ import SignUpPage from "../../views/SignUpPage";
 import WelcomePage from "../../views/WelcomePage";
 import { RequireNotSignedIn } from "../routeProtectors/RequireNotSignedIn";
 import { RequireSignedIn } from "../routeProtectors/RequireSignedIn";
+import UpdateHabitPage from "../../views/UpdateHabitPage.tsx";
 
 const AppRouter = () => {
   return (
@@ -24,7 +25,9 @@ const AppRouter = () => {
           <Route path="/app" element={<DashboardPage />} />
         </Route>
 
-        <Route path="app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
+        <Route path="/app/:groupId/settings/create-habit" element={<CreateHabitPage />} />
+
+        <Route path="/app/:groupId/update-habit/:habitId" element={<UpdateHabitPage />} />
 
         <Route path="/app/:groupId/settings" element={<RequireSignedIn />}>
           <Route path="/app/:groupId/settings" element={<GroupSettingsPage />} />

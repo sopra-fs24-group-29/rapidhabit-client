@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../../helpers/api.ts";
+import { useNavigate } from "react-router-dom";
 
 interface SettingsHabitProps {
   habitId: string;
@@ -7,6 +8,7 @@ interface SettingsHabitProps {
 }
 
 const SettingsHabitBox = (props: SettingsHabitProps) => {
+  const navigate = useNavigate();
   const { groupId, habitId } = props;
   const [name, setName] = useState<string>("");
 
@@ -53,7 +55,12 @@ const SettingsHabitBox = (props: SettingsHabitProps) => {
         <div className="pl-4">
           <img className="h-6 w-6" src="/habit.png" alt="habit icon" />
         </div>
-        <div className="ml-4 text-base">{name}</div>
+        <div
+          className="ml-4 text-base hover:underline cursor-pointer"
+          onClick={() => navigate(`/app/${props.groupId}/update-habit/${props.habitId}`)}
+        >
+          {name}
+        </div>
       </div>
       <div className="pr-4">
         <img
