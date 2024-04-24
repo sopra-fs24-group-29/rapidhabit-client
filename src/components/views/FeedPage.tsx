@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import { Client } from "@stomp/stompjs";
@@ -62,7 +62,7 @@ const FeedPage = () => {
   }, [navigate]);
 
   useEffect(() => {
-    if (groups.length === 0) return;
+    if (!groups.length) return;
 
     const token = localStorage.getItem("token") ?? "";
     const stompClient = new Client({
@@ -89,9 +89,7 @@ const FeedPage = () => {
 
     stompClient.activate();
 
-    return () => {
-      stompClient.deactivate();
-    };
+    return () => stompClient.deactivate();
   }, [groups]);
 
   return (
