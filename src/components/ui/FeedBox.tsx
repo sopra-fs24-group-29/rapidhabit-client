@@ -2,7 +2,6 @@ interface FeedProps {
   group: string;
   color: string;
   p1: string; // completion msg
-  p2: string; // motivation msg
 }
 
 const FeedBox = (props: FeedProps) => {
@@ -13,7 +12,6 @@ const FeedBox = (props: FeedProps) => {
       <div className="mb-2">
         <h3 className="text-lg font-bold">{props.group}</h3>
         <p className="text-sm">{props.p1}</p>
-        <p className="text-sm">{props.p2}</p>
       </div>
     </div>
   );
