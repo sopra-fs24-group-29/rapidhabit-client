@@ -87,7 +87,7 @@ const GroupSettingsPage = () => {
             <div className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5">
               <div className="flex items-center">
                 <div className="pl-4">
-                  <img className="h-7 w-7" src="/group.png" alt="group icon" />
+                  <img className="h-6 w-6" src="/update.png" alt="update icon" />
                 </div>
                 <div
                   className="ml-4 text-base cursor-pointer"
