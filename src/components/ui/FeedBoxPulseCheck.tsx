@@ -8,6 +8,7 @@ interface FeedBoxPulseCheckProps {
   p2: string;
   isDisabled: boolean;
   initialSliderValue: number;
+  authToken: string; // Assuming authToken is passed as a prop
 }
 
 const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
@@ -17,12 +18,38 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   p2,
   isDisabled,
   initialSliderValue,
+  authToken,
 }) => {
   const [sliderValue, setSliderValue] = useState(initialSliderValue);
+  const [buttonDisabled, setButtonDisabled] = useState(isDisabled);
 
   useEffect(() => {
     setSliderValue(initialSliderValue);
   }, [initialSliderValue]);
+
+  const submitValue = async (sliderValue: number, groupId: string) => {
+    setButtonDisabled(true);
+
+    try {
+      const token = localStorage.getItem("token");
+      await fetch(`http://localhost:8080/groups/${groupId}/feed/pulsecheck/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${authToken}`,
+        },
+        body: JSON.stringify({
+          sliderValue: sliderValue,
+          groupId: groupId,
+        }),
+      });
+
+      alert(`Wert gesendet: ${sliderValue}`);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Fehler beim Senden des Werts");
+    }
+  };
 
   return (
     <div
@@ -42,17 +69,17 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
           value={sliderValue}
           onChange={(e) => setSliderValue(parseFloat(e.target.value))}
           className={`w-full h-2 bg-gray-200 rounded-full cursor-pointer ${
-            isDisabled ? "opacity-50 cursor-not-allowed" : ""
+            buttonDisabled ? "opacity-50 cursor-not-allowed" : ""
           }`}
-          disabled={isDisabled}
+          disabled={buttonDisabled}
         />
       </div>
       <Button
-        onClick={() => alert(`Wert gesendet: ${sliderValue}`)}
+        onClick={() => submitValue(sliderValue, group)}
         variant="primary"
         tint="default"
-        className={`mt-2 ${isDisabled ? "button-disabled" : ""}`}
-        disabled={isDisabled}
+        className={`mt-2 ${buttonDisabled ? "button-disabled" : ""}`}
+        disabled={buttonDisabled}
       >
         Submit
       </Button>

@@ -1,72 +1,56 @@
 import React, { useEffect, useState } from "react";
+import { Client } from "@stomp/stompjs";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import { Client } from "@stomp/stompjs";
-
-import FeedBox from "../ui/FeedBox";
-import FeedBoxPulseCheck from "../ui/FeedBoxPulseCheck";
-import BaseContainer from "../ui/BaseContainer";
-import TabBar from "../ui/Tabbar";
 import { api } from "helpers/api";
-
-interface FeedEntry {
-  userSubmits?: Record<string, number>;
-  type: string;
-  groupName: string;
-  message: string;
-}
+import FeedBox from "../ui/FeedBox.tsx";
+import FeedBoxPulseCheck from "../ui/FeedBoxPulseCheck.tsx";
+import BaseContainer from "components/ui/BaseContainer";
+import TabBar from "../ui/Tabbar.tsx";
 
 const FeedPage = () => {
-  const [feedEntries, setFeedEntries] = useState<FeedEntry[]>([]);
-  const [groups, setGroups] = useState<string[]>([]);
-  const [userId, setUserId] = useState<string>("");
+  const [feedEntries, setFeedEntries] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [userId, setUserId] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const token = localStorage.getItem("token") ?? "";
-        if (!token) {
-          navigate("/");
-          return;
-        }
-
-        const userIdResponse = await api.get("/users/id", {
-          headers: { Authorization: token },
+        const userIdResponse = await api.get(`/users/id`, {
+          headers: { Authorization: localStorage.getItem("token") },
         });
         setUserId(userIdResponse.data || "");
 
-        const groupResponse = await api.get("/groups/groupIds", {
-          headers: { Authorization: token },
+        const groupResponse = await api.get(`/groups/groupIds`, {
+          headers: { Authorization: localStorage.getItem("token") },
         });
         setGroups(groupResponse.data || []);
 
-        const feedResponse = await api.get("/feed", {
-          headers: { Authorization: token },
+        const feedResponse = await api.get(`/feed`, {
+          headers: { Authorization: localStorage.getItem("token") },
         });
         setFeedEntries(feedResponse.data || []);
-      } catch (error: unknown) {
+      } catch (error) {
         if (error instanceof AxiosError && error.response?.status === 401) {
           localStorage.removeItem("token");
           navigate("/");
         } else {
-          console.error(
-            `Failed to fetch data: ${(error as AxiosError).message}`
-          );
+          console.error(`Failed to fetch data: ${error.message}`);
           alert("Failed to load data! Check console for details.");
         }
       }
     }
 
     fetchData();
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     if (!groups.length) return;
 
-    const token = localStorage.getItem("token") ?? "";
+    const token = localStorage.getItem("token");
     const stompClient = new Client({
-      brokerURL: "ws://sopra-fs24-group29-server.oa.r.appspot.com/ws",
+      brokerURL: "ws:/localhost:8080/ws",
       connectHeaders: {
         Authorization: token,
       },
@@ -109,20 +93,18 @@ const FeedPage = () => {
               return entry.type === "PULSECHECK" ? (
                 <FeedBoxPulseCheck
                   key={index}
-                  group={entry.groupName}
+                  group={entry.groupName + ":"}
                   color="bg-blue-500"
                   p1={entry.message}
-                  p2="Halte durch, bald hast du es geschafft!"
                   isDisabled={userSubmitted}
                   initialSliderValue={sliderValue}
                 />
               ) : (
                 <FeedBox
                   key={index}
-                  group={entry.groupName}
+                  group={entry.groupName + ":"}
                   color="bg-blue-500"
                   p1={entry.message}
-                  p2="Halte durch, bald hast du es geschafft!"
                 />
               );
             })}
