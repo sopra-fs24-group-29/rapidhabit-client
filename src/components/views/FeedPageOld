@@ -91,10 +91,7 @@ const FeedPage = () => {
                   color="bg-blue-500"
                   p1={entry.message}
                   p2="Halte durch, bald hast du es geschafft!"
-                  isDisabled={entry.userSubmits && userId in entry.userSubmits}
-                  sliderValue={
-                    entry.userSubmits ? entry.userSubmits[userId] : 0.5
-                  }
+                  isDisabled={entry.userSubmits.includes(userId)}
                 />
               ) : (
                 <FeedBox
