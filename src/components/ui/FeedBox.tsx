@@ -1,8 +1,8 @@
 interface FeedProps {
   group: string;
   color: string;
-  p1: string; // completion msg
-  p2: string; // motivation msg
+  p1: string;
+  p2: string;
 }
 
 const FeedBox = (props: FeedProps) => {
