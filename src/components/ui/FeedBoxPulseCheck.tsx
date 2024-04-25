@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./Button";
 
 interface FeedBoxPulseCheckProps {
   group: string;
   color: string;
   p1: string;
-  p2: string;
+  p2?: string;
   isDisabled: boolean;
   initialSliderValue: number;
-  authToken: string; // Assuming authToken is passed as a prop
 }
 
 const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
@@ -18,7 +17,6 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   p2,
   isDisabled,
   initialSliderValue,
-  authToken,
 }) => {
   const [sliderValue, setSliderValue] = useState(initialSliderValue);
   const [buttonDisabled, setButtonDisabled] = useState(isDisabled);
@@ -31,12 +29,12 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
     setButtonDisabled(true);
 
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token")!;
       await fetch(`http://localhost:8080/groups/${groupId}/feed/pulsecheck/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${authToken}`,
+          Authorization: `${token}`,
         },
         body: JSON.stringify({
           sliderValue: sliderValue,

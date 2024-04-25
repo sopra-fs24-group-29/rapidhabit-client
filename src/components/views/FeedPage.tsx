@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from "react";
 import { Client } from "@stomp/stompjs";
-import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import BaseContainer from "components/ui/BaseContainer";
 import { api } from "helpers/api";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FeedBox from "../ui/FeedBox.tsx";
 import FeedBoxPulseCheck from "../ui/FeedBoxPulseCheck.tsx";
-import BaseContainer from "components/ui/BaseContainer";
 import TabBar from "../ui/Tabbar.tsx";
 
+type FeedEntryType = "PULSECHECK";
+
+interface FeedEntry {
+  type: FeedEntryType;
+  groupName: string;
+  message: string;
+  userSubmits: Record<string, number>;
+}
+
 const FeedPage = () => {
-  const [feedEntries, setFeedEntries] = useState([]);
-  const [groups, setGroups] = useState([]);
+  const [feedEntries, setFeedEntries] = useState<FeedEntry[]>([]);
+  const [groupIds, setGroupIds] = useState<string[]>([]);
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
 
@@ -25,17 +34,17 @@ const FeedPage = () => {
         const groupResponse = await api.get(`/groups/groupIds`, {
           headers: { Authorization: localStorage.getItem("token") },
         });
-        setGroups(groupResponse.data || []);
+        setGroupIds(groupResponse.data || []);
 
         const feedResponse = await api.get(`/feed`, {
           headers: { Authorization: localStorage.getItem("token") },
         });
         setFeedEntries(feedResponse.data || []);
-      } catch (error) {
+      } catch (error: unknown) {
         if (error instanceof AxiosError && error.response?.status === 401) {
           localStorage.removeItem("token");
           navigate("/");
-        } else {
+        } else if (error instanceof Error) {
           console.error(`Failed to fetch data: ${error.message}`);
           alert("Failed to load data! Check console for details.");
         }
@@ -46,9 +55,9 @@ const FeedPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!groups.length) return;
+    if (!groupIds.length) return;
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token")!;
     const stompClient = new Client({
       brokerURL: "ws:/localhost:8080/ws",
       connectHeaders: {
@@ -58,7 +67,7 @@ const FeedPage = () => {
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("Connected to WS");
-        groups.forEach((groupId) => {
+        groupIds.forEach((groupId) => {
           stompClient.subscribe(`/topic/groups/${groupId}/feed`, (message) => {
             const newEntry = JSON.parse(message.body);
             setFeedEntries((prevEntries) => [newEntry, ...prevEntries]);
@@ -73,8 +82,10 @@ const FeedPage = () => {
 
     stompClient.activate();
 
-    return () => stompClient.deactivate();
-  }, [groups]);
+    return () => {
+      stompClient.deactivate();
+    };
+  }, [groupIds]);
 
   return (
     <div className="overflow-y-auto">
