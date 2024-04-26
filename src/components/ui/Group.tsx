@@ -14,10 +14,10 @@ const GroupSection = (props: GroupSectionProps) => {
     <Link to={`/app/${props.id}`}>
       <div className="flex flex-col bg-dark-green p-6 m-5 rounded-lg mb-1">
         <div className="flex flex-row justify-between">
-          <div className="font-bold">{props.streak}🔥</div>
+          <div className="font-bold">{props.streak} 🔥</div>
           <div>
             <div>Current rank</div>
-            <div className="font-bold">{props.currentRank}👑</div>
+            <div className="font-bold">{props.currentRank} 👑</div>
           </div>
         </div>
 

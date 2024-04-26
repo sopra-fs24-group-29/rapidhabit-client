@@ -38,7 +38,7 @@ const HabitCard = (props: HabitCardProps) => {
     <Link to={`/app/${props.groupId}/habit/${props.habitId}`}>
       <div className="bg-dark-green p-4 rounded-lg relative">
         <div className="flex flex-row justify-between">
-          <div>🔥{props.habit.streaks}</div>
+          <div className="font-bold">{props.habit.streaks} 🔥</div>
           {props.habit.onSchedule ? (
             <button
               className={clsx(
