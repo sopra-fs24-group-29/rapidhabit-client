@@ -34,7 +34,7 @@ const CodeInvitePage = () => {
   return (
     <div>
       <BaseContainer>
-        <NavigationBar backUrl={`/app/${groupId}/settings`} title="Invite" />
+        <NavigationBar backUrl={`/app/${groupId}`} title="Invite" />
         <div className="flex flex-col items-center justify-start mt-8">
           <div>
             <h3 className="mt-20 text-center">

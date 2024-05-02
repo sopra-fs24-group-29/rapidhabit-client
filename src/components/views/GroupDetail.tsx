@@ -84,9 +84,17 @@ const GroupDetail = () => {
             )
           }
         />
-        <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
+        <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-5">
           {group?.name}
         </h1>
+        <div>
+          <Button
+            className="text-base bg-input text-white font-medium rounded ml-4 p-3"
+            onClick={() => navigate(`/invite/${groupId}`)}
+          >
+            Invite People
+          </Button>
+        </div>
 
         {isLoading ? (
           <div>Loading…</div>
