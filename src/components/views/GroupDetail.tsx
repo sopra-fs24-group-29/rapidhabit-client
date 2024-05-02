@@ -24,6 +24,10 @@ const GroupDetail = () => {
   const [group, setGroup] = useState<Group>();
   const [habits, setHabits] = useState<Habit[]>();
 
+  const [adminIds, setAdminIds] = useState<string[]>([]);
+  const currentUserId = localStorage.getItem("userId") ?? "";
+  const isAdmin = adminIds.includes(currentUserId);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -36,6 +40,8 @@ const GroupDetail = () => {
             headers: { Authorization: localStorage.getItem("token") },
           }),
         ]);
+        const { adminIdList } = groupResponse.data;
+        setAdminIds(adminIdList);
         setGroup(groupResponse.data || []);
         setHabits(habitsResponse.data || []);
       } catch (error) {
@@ -68,12 +74,14 @@ const GroupDetail = () => {
         <NavigationBar
           backUrl="/app"
           rightAction={
-            <Button
-              variant="text"
-              onClick={() => navigate(`/app/${groupId}/settings`)}
-            >
-              Settings
-            </Button>
+            isAdmin && (
+              <Button
+                variant="text"
+                onClick={() => navigate(`/app/${groupId}/settings`)}
+              >
+                Settings
+              </Button>
+            )
           }
         />
         <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-10">
@@ -87,11 +95,13 @@ const GroupDetail = () => {
         ) : !habits?.length ? (
           <div className="flex flex-col items-center justify-center gap-4 py-8">
             <span>No habits in this group.</span>
+            {isAdmin && (
             <Button
               onClick={() => navigate(`/app/${groupId}/create-habit`)}
             >
               New habit
             </Button>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-2 p-4 gap-4">
