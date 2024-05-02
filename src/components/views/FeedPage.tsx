@@ -90,9 +90,11 @@ const FeedPage = () => {
   return (
     <div className="overflow-y-auto">
       <BaseContainer>
-        <div className="flex flex-col items-center justify-start mt-8">
-          <div className="w-custom-236 lg:w-custom-354">
-            <h1 className="text-left text-2xl lg:text-4xl">Feed</h1>
+        <div className="flex flex-col justify-start mt-6">
+          <div className="w-full px-8 pb-40">
+            <h1 className="text-center text-4xl flex items-start pd font-bold pb-5">
+              Feed
+            </h1>
             <h2 className="mt-4">Today</h2>
             {feedEntries.map((entry, index) => {
               const userSubmitted =
