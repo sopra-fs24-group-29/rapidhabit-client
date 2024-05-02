@@ -2,7 +2,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
 import { api, handleError } from "helpers/api";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContainer from "../ui/AuthContainer.tsx";
 import { Button } from "../ui/Button.tsx";
 import Logo from "../ui/Logo.tsx";
@@ -114,6 +114,9 @@ const SignUpPage = () => {
               >
                 Create account
               </Button>
+            </div>
+            <div className="mt-5 hover:underline">
+              <Link to="/login">Login</Link>
             </div>
           </div>
         </div>
