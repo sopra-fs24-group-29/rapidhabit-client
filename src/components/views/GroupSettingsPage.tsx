@@ -51,7 +51,7 @@ const GroupSettingsPage = () => {
   }, [groupId]);
 
   return (
-    <div>
+    <div className="overflow-y-auto pb-24">
       <BaseContainer>
         <NavigationBar title="Group settings" backUrl={`/app/${groupId}`} />
         <div className="flex flex-col items-center justify-start">
