@@ -1,5 +1,5 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const TabBar = () => {
   const navigate = useNavigate();
@@ -12,17 +12,31 @@ const TabBar = () => {
 
   return (
     <div className="flex flex-row gap-14 lg:gap-48 justify-center fixed bottom-0 w-full bg-input p-4 text-white text-center">
-      <div className="px-4 cursor-pointer flex flex-col items-center" onClick={() => navigate("/app")}>
+      <div
+        className="px-4 cursor-pointer flex flex-col items-center"
+        onClick={() => navigate("/app")}
+      >
         <div>
           <img
             className="h-7 w-7"
-            src={activeTab !== "/profile" && activeTab !== "/feed" ? "/onhome.png" : "/offhome.png"}
+            src={
+              activeTab !== "/profile" && activeTab !== "/feed"
+                ? "/onhome.png"
+                : "/offhome.png"
+            }
             alt="home tab icon"
           />
         </div>
-        <div className={activeTab === "/app" ? "text-xs" : "text-xs text-tab-off"}>Home</div>
+        <div
+          className={activeTab === "/app" ? "text-xs" : "text-xs text-tab-off"}
+        >
+          Home
+        </div>
       </div>
-      <div className="px-4 cursor-pointer flex flex-col items-center" onClick={() => navigate("/feed")}>
+      <div
+        className="px-4 cursor-pointer flex flex-col items-center"
+        onClick={() => navigate("/feed")}
+      >
         <div>
           <img
             className="h-7 w-7"
@@ -30,17 +44,32 @@ const TabBar = () => {
             alt="feed tab icon"
           />
         </div>
-        <div className={activeTab === "/feed" ? "text-xs" : "text-xs text-tab-off"}>Feed</div>
+        <div
+          className={activeTab === "/feed" ? "text-xs" : "text-xs text-tab-off"}
+        >
+          Feed
+        </div>
       </div>
-      <div className="px-4 cursor-pointer flex flex-col items-center" onClick={() => navigate("/profile")}>
+      <div
+        className="px-4 cursor-pointer flex flex-col items-center"
+        onClick={() => navigate("/profile")}
+      >
         <div>
           <img
             className="h-7 w-7"
-            src={activeTab === "/profile" ? "/onprofile.png" : "/offprofile.png"}
+            src={
+              activeTab === "/profile" ? "/onprofile.png" : "/offprofile.png"
+            }
             alt="profile tab icon"
           />
         </div>
-        <div className={activeTab === "/profile" ? "text-xs" : "text-xs text-tab-off"}>Profile</div>
+        <div
+          className={
+            activeTab === "/profile" ? "text-xs" : "text-xs text-tab-off"
+          }
+        >
+          Profile
+        </div>
       </div>
     </div>
   );

@@ -6,7 +6,9 @@ interface BaseContainerProps {
 const BaseContainer = (props: BaseContainerProps) => (
   <div
     {...props}
-    className={`max-w-xl mx-auto h-full flex flex-col ${props.className ?? ""}`}
+    className={`max-w-xl mx-auto h-full flex flex-col w-full ${
+      props.className ?? ""
+    }`}
   >
     {props.children}
   </div>

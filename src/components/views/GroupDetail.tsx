@@ -62,7 +62,7 @@ const GroupDetail = () => {
       case "ranking":
         return <RankingTab group={group} />;
       case "chat":
-        return <ChatTab />;
+        return <ChatTab group={group} />;
       default:
         return <ActivityTab group={group} />;
     }
@@ -104,11 +104,9 @@ const GroupDetail = () => {
           <div className="flex flex-col items-center justify-center gap-4 py-8">
             <span>No habits in this group.</span>
             {isAdmin && (
-            <Button
-              onClick={() => navigate(`/app/${groupId}/create-habit`)}
-            >
-              New habit
-            </Button>
+              <Button onClick={() => navigate(`/app/${groupId}/create-habit`)}>
+                New habit
+              </Button>
             )}
           </div>
         ) : (
