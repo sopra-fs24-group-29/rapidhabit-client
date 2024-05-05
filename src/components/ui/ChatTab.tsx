@@ -101,21 +101,27 @@ const ChatTab = ({ group }: ChatTabProps) => {
             />
           )
         )}
-        {chatEntry?.map((oldChat) =>
-          userId != oldChat.userId ? (
-            <ChatBubble
-              text={oldChat.message}
-              isSelf={true}
-              key={oldChat.date}
-            />
-          ) : (
-            <ChatBubble
-              text={oldChat.message}
-              isSelf={false}
-              initials={oldChat.userInitials}
-            />
+        {chatEntry
+          ?.sort(
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
           )
-        )}
+          .map((oldChat) =>
+            userId !== oldChat.userId ? (
+              <ChatBubble
+                text={oldChat.message}
+                isSelf={true}
+                key={oldChat.date}
+              />
+            ) : (
+              <ChatBubble
+                text={oldChat.message}
+                isSelf={false}
+                initials={oldChat.userInitials}
+                key={oldChat.date}
+              />
+            )
+          )}
+
         {/* <ChatBubble text="hello" isSelf={true} />
         <ChatBubble text="hello" isSelf={false} initials="RO" /> */}
       </div>
