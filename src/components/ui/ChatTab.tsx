@@ -87,7 +87,7 @@ const ChatTab = ({ group }: ChatTabProps) => {
     <BaseContainer>
       <div className="flex flex-col gap-4 items-start w-full p-4">
         {oldChats?.map((oldChat) =>
-          userId != oldChat.userId ? (
+          userId == oldChat.userId ? (
             <ChatBubble
               text={oldChat.message}
               isSelf={true}
@@ -106,7 +106,7 @@ const ChatTab = ({ group }: ChatTabProps) => {
             (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
           )
           .map((oldChat) =>
-            userId !== oldChat.userId ? (
+            userId == oldChat.userId ? (
               <ChatBubble
                 text={oldChat.message}
                 isSelf={true}
