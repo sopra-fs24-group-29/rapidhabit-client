@@ -2,7 +2,7 @@ import { Client } from "@stomp/stompjs";
 import { api } from "helpers/api";
 import { Group } from "models/Group";
 import { oldChat } from "models/oldChat";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BaseContainer from "./BaseContainer";
 import { Button } from "./Button";
 import ChatBubble from "./ChatBubble";
@@ -11,35 +11,32 @@ interface ChatTabProps {
   group: Group;
 }
 
-const ChatTab = (props: ChatTabProps) => {
-  const [oldChats, setOldChats] = useState<oldChat[]>();
+const ChatTab = ({ group }: ChatTabProps) => {
+  const [oldChats, setOldChats] = useState<oldChat[]>([]);
   const [message, setMessage] = useState<string>("");
-  const [chatEntry, setchatEntry] = useState<oldChat[]>([]);
+  const [chatEntry, setChatEntry] = useState<oldChat[]>([]);
   const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
-
-  const groupId = props.group.id;
+  const token = localStorage.getItem("token")!;
+  const stompClient = useRef<Client | null>(null);
 
   useEffect(() => {
     const fetchOldChats = async () => {
       try {
-        const response = await api.get(`/groups/${groupId}/chat`, {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
+        const response = await api.get(`/groups/${group.id}/chat`, {
+          headers: { Authorization: token },
         });
         setOldChats(response.data || []);
+        console.log(oldChats);
       } catch (error) {
         console.error("Error fetching group ids:", error);
       }
     };
     fetchOldChats();
-  }, [groupId]);
+  }, [group.id, token]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token")!;
-    const stompClient = new Client({
-      brokerURL: "ws:/localhost:8080/ws",
+    stompClient.current = new Client({
+      brokerURL: "ws://localhost:8080/ws",
       connectHeaders: {
         Authorization: token,
       },
@@ -47,11 +44,13 @@ const ChatTab = (props: ChatTabProps) => {
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("Connected to WS");
-
-        stompClient.subscribe(`/topic/groups/${groupId}/chat`, (message) => {
-          const newEntry = JSON.parse(message.body);
-          setchatEntry((prevEntries) => [newEntry, ...prevEntries]);
-        });
+        stompClient.current!.subscribe(
+          `/topic/groups/${group.id}/chat`,
+          (message) => {
+            const newEntry = JSON.parse(message.body);
+            setChatEntry((prevEntries) => [newEntry, ...prevEntries]);
+          }
+        );
       },
       onStompError: (frame) => {
         console.error("Broker reported error: " + frame.headers["message"]);
@@ -59,26 +58,28 @@ const ChatTab = (props: ChatTabProps) => {
       },
     });
 
-    stompClient.activate();
+    stompClient.current.activate();
 
     return () => {
-      stompClient.deactivate();
+      stompClient.current!.deactivate();
     };
-  }, [groupId]);
+  }, [group.id, token]);
 
-  const sendMessage = async () => {
-    const requestBody = JSON.stringify({
-      token,
-      message,
-    });
-    try {
-      await api.put(`/groups/${groupId}/chat`, requestBody, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
+  const sendMessage = () => {
+    if (stompClient.current && stompClient.current.connected) {
+      const messageBody = JSON.stringify({
+        token: token,
+        message: message,
       });
-    } catch (error) {
-      console.error("Error fetching group ids:", error);
+
+      stompClient.current.publish({
+        destination: `/app/groups/${group.id}/chat`,
+        body: messageBody,
+      });
+
+      setMessage("");
+    } else {
+      console.log("Not connected to WebSocket.");
     }
   };
 
@@ -86,7 +87,7 @@ const ChatTab = (props: ChatTabProps) => {
     <BaseContainer>
       <div className="flex flex-col gap-4 items-start w-full p-4">
         {oldChats?.map((oldChat) =>
-          userId == oldChat.userId ? (
+          userId != oldChat.userId ? (
             <ChatBubble
               text={oldChat.message}
               isSelf={true}
@@ -101,7 +102,7 @@ const ChatTab = (props: ChatTabProps) => {
           )
         )}
         {chatEntry?.map((oldChat) =>
-          userId == oldChat.userId ? (
+          userId != oldChat.userId ? (
             <ChatBubble
               text={oldChat.message}
               isSelf={true}
@@ -115,8 +116,8 @@ const ChatTab = (props: ChatTabProps) => {
             />
           )
         )}
-        <ChatBubble text="hello" isSelf={true} />
-        <ChatBubble text="hello" isSelf={false} initials="RO" />
+        {/* <ChatBubble text="hello" isSelf={true} />
+        <ChatBubble text="hello" isSelf={false} initials="RO" /> */}
       </div>
       <div className="flex justify-end p-5">
         <div className="flex left-0 fixed pb-24 pt-4 w-full px-4 gap-4 bg-black bottom-0">
