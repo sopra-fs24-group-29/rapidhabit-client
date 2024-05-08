@@ -1,6 +1,7 @@
+import { AxiosError } from "axios";
 import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
-import { api } from "helpers/api";
+import { api, handleError } from "helpers/api";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContainer from "../ui/AuthContainer.tsx";
@@ -12,6 +13,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const doLogin = async () => {
     try {
@@ -30,8 +32,17 @@ const LoginPage = () => {
 
       navigate("/app");
     } catch (error) {
-      console.log("Something went wrong during the login: ", error);
-      alert("wrong password or email");
+      if (error instanceof AxiosError) {
+        setErrorMessage(
+          error.response?.data.message ?? "An unexpected error occurred"
+        );
+      } else {
+        alert(
+          `Something went wrong during the registration: \n${handleError(
+            error
+          )}`
+        );
+      }
     }
   };
 
@@ -69,6 +80,9 @@ const LoginPage = () => {
                 />
               </div>
             </div>
+            {errorMessage && (
+              <div className="font-semibold text-accent">{errorMessage}</div>
+            )}
             <div>
               <Button
                 className="cursor-pointer py-1 px-4 mt-5 w-full"
