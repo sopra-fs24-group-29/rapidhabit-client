@@ -57,6 +57,7 @@ const LoginPage = () => {
             <FormField
               label=""
               type="email"
+              maxLength={50}
               value={email}
               onChange={(un: string) => setEmail(un)}
             />
@@ -65,8 +66,9 @@ const LoginPage = () => {
               <FormField
                 type={showPassword ? "text" : "password"}
                 label=""
+                maxLength={20}
                 value={password}
-                onChange={(un: string) => setPassword(un)}
+                onChange={(un: string) => setPassword(un.replace(/\s/g, ''))}
               />
               <div
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2"

@@ -93,10 +93,10 @@ const UpdateHabitPage = () => {
       />
       <div className="px-8">
         <h3 className="mt-5">Name of habit</h3>
-        <FormField value={habitName} onChange={setHabitName} />
+        <FormField value={habitName} onChange={setHabitName} maxLength={50} />
 
         <h3 className="mt-3">Description</h3>
-        <FormField value={description} onChange={setDescription} />
+        <FormField value={description} onChange={setDescription} maxLength={300}/>
 
         <h3 className="mt-3">Repeat type</h3>
         <RadioOptions

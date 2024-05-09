@@ -69,12 +69,14 @@ const UpdateGroupPage = () => {
           <FormField
             value={groupName}
             onChange={setGroupName}
+            maxLength={50}
           />
 
           <h3 className="py-2">Description</h3>
           <FormField
             value={description}
-            onChange={setDescription} />
+            onChange={setDescription}
+            maxLength={300}/>
         </div>
       </div>
     </BaseContainer>

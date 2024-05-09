@@ -1,6 +1,7 @@
 interface FormFieldProps {
   label?: string;
   value?: string;
+  maxLength?: number;
   className?: string;
   onChange: (value: string) => void;
   type?: React.HTMLInputTypeAttribute;
@@ -13,6 +14,7 @@ const FormField = (props: FormFieldProps) => {
         placeholder={props.label}
         value={props.value}
         type={props.type}
+        maxLength={props.maxLength}
         onChange={(e) => props.onChange(e.target.value)}
         className="rounded-lg bg-input w-full h-7 px-2 placeholder-gray-600"
       />

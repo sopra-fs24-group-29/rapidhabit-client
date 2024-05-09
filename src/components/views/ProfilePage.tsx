@@ -150,15 +150,18 @@ const ProfilePage = () => {
             <h3 className="py-2">First name</h3>
             <FormField
               value={userData.firstname}
+              maxLength={20}
               onChange={(un: string) => handleInputChange("firstname", un)}
             />
             <h3 className="py-2">Last name</h3>
             <FormField
               value={userData.lastname}
+              maxLength={20}
               onChange={(un: string) => handleInputChange("lastname", un)}
             />
             <h3 className="py-2">Email</h3>
             <FormField
+              maxLength={50}
               value={userData.email}
               onChange={(un: string) => handleInputChange("email", un)}
             />
@@ -186,16 +189,18 @@ const ProfilePage = () => {
                 <FormField
                   type={showPassword ? "text" : "password"}
                   label="Type current password"
+                  maxLength={20}
                   value={currentPassword}
-                  onChange={(un: string) => setCurrentPassword(un)}
+                  onChange={(un: string) => setCurrentPassword(un.replace(/\s/g, ''))}
                 />
               </div>
               <div className="mt-3 relative">
                 <FormField
                   type={showPassword ? "text" : "password"}
                   label="Type new password"
+                  maxLength={20}
                   value={newPassword}
-                  onChange={(un: string) => setNewPassword(un)}
+                  onChange={(un: string) => setNewPassword(un.replace(/\s/g, ''))}
                 />
                 <div className="flex mt-1 justify-between">
                   {currentPassword !== "" && newPassword !== "" && (
