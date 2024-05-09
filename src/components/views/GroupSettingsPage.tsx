@@ -1,6 +1,7 @@
 import BaseContainer from "components/ui/BaseContainer";
 import NavigationBar from "components/ui/NavigationBar.tsx";
 import TabBar from "components/ui/Tabbar.tsx";
+import { Habit } from "models/Habit.ts";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../helpers/api.ts";
@@ -15,6 +16,7 @@ const GroupSettingsPage = () => {
   const [habitIds, setHabitIds] = useState<string[]>([]);
   const [userNames, setUserNames] = useState<{ [key: string]: string }>({});
   const [groupName, setGroupName] = useState<string>("");
+  const [habits, setHabits] = useState<Habit[]>();
 
   useEffect(() => {
     const fetchGroupIds = async () => {
@@ -24,6 +26,11 @@ const GroupSettingsPage = () => {
             Authorization: localStorage.getItem("token"),
           },
         });
+        const habitResponse = await api.get(`/groups/${groupId}/habits`, {
+          headers: { Authorization: localStorage.getItem("token") },
+        });
+        setHabits(habitResponse.data || []);
+
         console.log(response.data);
         const { name, adminIdList, habitIdList } = response.data;
         setAdminIds(adminIdList);
@@ -71,23 +78,35 @@ const GroupSettingsPage = () => {
                 </div>
               </div>
             </Link>
-            <div className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5">
-              <div className="flex items-center">
-                <div className="pl-4">
-                  <img className="h-6 w-6" src="/group.png" alt="group icon" />
-                </div>
-                <div
-                  className="ml-4 text-base cursor-pointer"
-                  onClick={() => navigate(`/invite/${groupId}`)}
-                >
-                  Invite People
+            {habits && habits.length > 0 && (
+              <div className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5">
+                <div className="flex items-center">
+                  <div className="pl-4">
+                    <img
+                      className="h-6 w-6"
+                      src="/group.png"
+                      alt="group icon"
+                    />
+                  </div>
+
+                  <div
+                    className="ml-4 text-base cursor-pointer"
+                    onClick={() => navigate(`/invite/${groupId}`)}
+                  >
+                    Invite People
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+
             <div className="flex items-center justify-between hover:underline w-full h-10 bg-input rounded-lg mb-0.5">
               <div className="flex items-center">
                 <div className="pl-4">
-                  <img className="h-6 w-6" src="/update.png" alt="update icon" />
+                  <img
+                    className="h-6 w-6"
+                    src="/update.png"
+                    alt="update icon"
+                  />
                 </div>
                 <div
                   className="ml-4 text-base cursor-pointer"

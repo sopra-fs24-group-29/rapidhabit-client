@@ -95,22 +95,20 @@ const GroupDetail = () => {
         </h1>
 
         <div>
-          <span className="cursor-pointer ml-4 text-xs text-tab-off" onClick={toggleDescription}>
+          <span
+            className="cursor-pointer ml-4 text-xs text-tab-off"
+            onClick={toggleDescription}
+          >
             {showDescription ? "Hide Description" : "Show Description"}
           </span>
           {showDescription && (
-            <div className="ml-4 p-3 bg-input rounded text-sm">{group?.description || "No description available."}</div>
+            <div className="ml-4 p-3 bg-input rounded text-sm">
+              {group?.description || "No description available."}
+            </div>
           )}
         </div>
 
-        <div>
-          <Button
-            className="text-base bg-input text-white font-medium rounded ml-4 p-3 mt-6"
-            onClick={() => navigate(`/invite/${groupId}`)}
-          >
-            Invite People
-          </Button>
-        </div>
+        <div></div>
 
         {isLoading ? (
           <div>Loading…</div>
@@ -118,7 +116,10 @@ const GroupDetail = () => {
           <div>{errorMessage}</div>
         ) : !habits?.length ? (
           <div className="flex flex-col items-center justify-center gap-4 py-8">
-            <span>No habits in this group.</span>
+            <span className="flex text-center p-6">
+              No habits in this group. Please create a habit before inviting
+              people
+            </span>
             {isAdmin && (
               <Button onClick={() => navigate(`/app/${groupId}/create-habit`)}>
                 New habit
@@ -143,7 +144,7 @@ const GroupDetail = () => {
             className={clsx(
               "font-semibold p-2",
               activeTab == "activity" &&
-              "bg-dark-green rounded-2xl text-light-green"
+                "bg-dark-green rounded-2xl text-light-green"
             )}
             onClick={() => setActiveTab("activity")}
           >
@@ -153,7 +154,7 @@ const GroupDetail = () => {
             className={clsx(
               "font-semibold p-2",
               activeTab == "ranking" &&
-              "bg-dark-green rounded-2xl text-light-green"
+                "bg-dark-green rounded-2xl text-light-green"
             )}
             onClick={() => setActiveTab("ranking")}
           >
@@ -163,7 +164,7 @@ const GroupDetail = () => {
             className={clsx(
               "font-semibold p-2",
               activeTab == "chat" &&
-              "bg-dark-green rounded-2xl text-light-green"
+                "bg-dark-green rounded-2xl text-light-green"
             )}
             onClick={() => setActiveTab("chat")}
           >
