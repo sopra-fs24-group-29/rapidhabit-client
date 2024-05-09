@@ -28,6 +28,12 @@ const JoinGroupPage = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      doJoinGroup();
+    }
+  };
+
   return (
     <div>
       <BaseContainer>
@@ -53,10 +59,11 @@ const JoinGroupPage = () => {
                 id="inviteCode"
                 name="inviteCode"
                 className="bg-black text-5xl text-center mt-6"
-                maxLength={8} // sets max number of characters to 6
-                autoFocus // focus on input field when page loaded
-                required // required field to join group
-                autoComplete="off" // no autocompletion in input field
+                onKeyDown={handleKeyPress}
+                maxLength={8}
+                autoFocus
+                required
+                autoComplete="off"
                 value={inviteCode}
                 onChange={(e) => setInviteCode(e.target.value)}
               />
