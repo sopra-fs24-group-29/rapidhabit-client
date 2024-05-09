@@ -80,6 +80,12 @@ const UpdateHabitPage = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      updateHabit();
+    }
+  };
+
   return (
     <BaseContainer>
       <NavigationBar
@@ -93,10 +99,10 @@ const UpdateHabitPage = () => {
       />
       <div className="px-8">
         <h3 className="mt-5">Name of habit</h3>
-        <FormField value={habitName} onChange={setHabitName} maxLength={50} />
+        <FormField value={habitName} onChange={setHabitName} maxLength={50} onKeyDown={handleKeyPress} />
 
         <h3 className="mt-3">Description</h3>
-        <FormField value={description} onChange={setDescription} maxLength={300}/>
+        <FormField value={description} onChange={setDescription} maxLength={300} onKeyDown={handleKeyPress}/>
 
         <h3 className="mt-3">Repeat type</h3>
         <RadioOptions
