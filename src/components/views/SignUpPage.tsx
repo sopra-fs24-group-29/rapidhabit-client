@@ -63,6 +63,12 @@ const SignUpPage = () => {
     localStorage.setItem("userId", userId);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      doRegistration();
+    }
+  };
+
   return (
     <BaseContainer>
       <AuthContainer>
@@ -77,6 +83,7 @@ const SignUpPage = () => {
               maxLength={20}
               value={firstname}
               onChange={(un: string) => setFirstname(un)}
+              onKeyDown={handleKeyPress}
             />
             <h3 className="text-left  mt-3">Lastname</h3>
             <FormField
@@ -85,6 +92,7 @@ const SignUpPage = () => {
               maxLength={20}
               value={lastname}
               onChange={(un: string) => setLastname(un)}
+              onKeyDown={handleKeyPress}
             />
             <h3 className="text-left  mt-3">Email</h3>
             <FormField
@@ -93,6 +101,7 @@ const SignUpPage = () => {
               maxLength={50}
               value={email}
               onChange={(un: string) => setEmail(un)}
+              onKeyDown={handleKeyPress}
             />
             <h3 className="text-left  mt-3">Password</h3>
             <div className="relative">
@@ -102,6 +111,7 @@ const SignUpPage = () => {
                 maxLength={20}
                 value={password}
                 onChange={(un: string) => setPassword(un.replace(/\s/g, ''))}
+                onKeyDown={handleKeyPress}
               />
               <div
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2"

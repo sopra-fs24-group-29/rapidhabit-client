@@ -46,6 +46,12 @@ const LoginPage = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      doLogin();
+    }
+  };
+
   return (
     <BaseContainer>
       <AuthContainer>
@@ -60,6 +66,7 @@ const LoginPage = () => {
               maxLength={50}
               value={email}
               onChange={(un: string) => setEmail(un)}
+              onKeyDown={handleKeyPress}
             />
             <h3 className="text-left mt-3">Password</h3>
             <div className="relative">
@@ -69,6 +76,7 @@ const LoginPage = () => {
                 maxLength={20}
                 value={password}
                 onChange={(un: string) => setPassword(un.replace(/\s/g, ''))}
+                onKeyDown={handleKeyPress}
               />
               <div
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2"

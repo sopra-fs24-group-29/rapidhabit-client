@@ -5,6 +5,7 @@ interface FormFieldProps {
   className?: string;
   onChange: (value: string) => void;
   type?: React.HTMLInputTypeAttribute;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const FormField = (props: FormFieldProps) => {
@@ -16,6 +17,7 @@ const FormField = (props: FormFieldProps) => {
         type={props.type}
         maxLength={props.maxLength}
         onChange={(e) => props.onChange(e.target.value)}
+        onKeyDown={props.onKeyDown}
         className="rounded-lg bg-input w-full h-7 px-2 placeholder-gray-600"
       />
     </div>
