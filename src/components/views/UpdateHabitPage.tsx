@@ -86,7 +86,7 @@ const UpdateHabitPage = () => {
         title="Update habit"
         backUrl={`/app/${groupId}/settings`}
         rightAction={
-          <Button variant="text" onClick={updateHabit}>
+          <Button variant="text" onClick={updateHabit} className="hover:text-accent">
             Update
           </Button>
         }

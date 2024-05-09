@@ -28,7 +28,7 @@ const DeleteGroupPage = () => {
           title="Delete group"
           rightAction={
             <button
-              className="text-white font-bold"
+              className="text-white font-bold hover:text-accent"
               type="button"
               onClick={deleteGroup}
             >

@@ -82,6 +82,7 @@ const GroupDetail = () => {
             isAdmin && (
               <Button
                 variant="text"
+                className="hover:text-accent"
                 onClick={() => navigate(`/app/${groupId}/settings`)}
               >
                 Settings

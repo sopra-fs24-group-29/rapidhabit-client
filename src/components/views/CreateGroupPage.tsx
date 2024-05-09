@@ -36,7 +36,7 @@ const CreateGroupPage = () => {
         backUrl="/app"
         title="Create new group"
         rightAction={
-          <Button variant="text" onClick={createGroup}>
+          <Button variant="text" onClick={createGroup} className="hover:text-accent">
             Confirm
           </Button>
         }

@@ -58,7 +58,7 @@ const UpdateGroupPage = () => {
         backUrl={`/app/${groupId}/settings`}
         title="Update group"
         rightAction={
-          <Button variant="text" onClick={updateGroup}>
+          <Button variant="text" onClick={updateGroup} className="hover:text-accent">
             Update
           </Button>
         }
