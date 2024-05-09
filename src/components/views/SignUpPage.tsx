@@ -135,7 +135,6 @@ const SignUpPage = () => {
                 type="button"
                 disabled={!firstname || !lastname || !email || !password}
                 onClick={doRegistration}
-                tint="accent"
               >
                 Create account
               </Button>
