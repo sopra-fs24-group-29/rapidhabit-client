@@ -6,6 +6,7 @@ export const theme = {
       accent: "#fde047",
       "accent-fg": "#020617",
       input: "#1A1A1A",
+      "input-outline": "#424141",
       "dark-green": "#0B261A",
       "light-green": "#57BF84",
       "tab-off": "#8A8A8A",
