@@ -30,9 +30,9 @@ const Check = (props: CheckProps) => {
         <path
           d="M1.39587 3.29166L5.04171 6.83332L10.875 1.16666"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          stroke-with="2"
+          strokeLinecap="round"
+          strokeWidth="round"
         />
       </svg>
     </div>
