@@ -34,6 +34,11 @@ const HabitDetail = () => {
   const [habitActivity, setHabitActivity] = useState<HabitActivity>();
   const [group, setGroup] = useState<Group>();
 
+  const [showDescription, setShowDescription] = useState(false);
+  const toggleDescription = () => {
+    setShowDescription(!showDescription);
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -63,12 +68,22 @@ const HabitDetail = () => {
 
   if (!group || !habitActivity) return null;
 
+
   return (
     <div>
       <BaseContainer>
         <NavigationBar backUrl={`/app/${groupId}`} />
         <div>
-          <div className="font-bold text-4xl p-4">{habitActivity.name}</div>
+          <div className="font-bold text-4xl px-4 pt-4">{habitActivity.name}</div>
+          <div>
+          <span className="cursor-pointer ml-4 text-xs text-tab-off" onClick={toggleDescription}>
+            {showDescription ? "Hide Description" : "Show Description"}
+          </span>
+            {showDescription && (
+              <div
+                className="ml-4 p-3 bg-input rounded text-sm">{"No description available."}</div>
+            )}
+          </div>
           <div className="flex flex-row justify-between p-4">
             <div className="text-lg font-semibold">🔥 Current streak</div>
             <div className="text-lg font-semibold">

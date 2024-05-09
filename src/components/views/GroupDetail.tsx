@@ -68,7 +68,7 @@ const GroupDetail = () => {
     }
   };
 
-  const [showDescription, setShowDescription] = useState(false); // State to manage visibility of description box
+  const [showDescription, setShowDescription] = useState(false);
   const toggleDescription = () => {
     setShowDescription(!showDescription);
   };
