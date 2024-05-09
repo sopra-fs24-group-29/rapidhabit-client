@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface FormFieldProps {
   label?: string;
   value?: string;
@@ -18,8 +16,6 @@ const FormField = (props: FormFieldProps) => {
         value={props.value}
         type={props.type}
         maxLength={props.maxLength}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
         onChange={(e) => props.onChange(e.target.value)}
         onKeyDown={props.onKeyDown}
         className="rounded-lg bg-input w-full h-7 px-2 placeholder-input-outline focus:border focus:border-input-outline"
