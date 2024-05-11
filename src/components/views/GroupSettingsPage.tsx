@@ -63,7 +63,7 @@ const GroupSettingsPage = () => {
         <NavigationBar title="Group settings" backUrl={`/app/${groupId}`} />
         <div className="flex flex-col items-center justify-start">
           <div className="w-custom-354">
-            <h1 className="text-accent text-2xl mt-4">{groupName}</h1>
+            <h1 className="text-accent text-2xl mt-4 truncate">{groupName}</h1>
             <h3 className="text-left mt-2">Actions</h3>
             <Link
               to={`/app/${groupId}/create-habit`}
