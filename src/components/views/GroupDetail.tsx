@@ -90,9 +90,7 @@ const GroupDetail = () => {
             )
           }
         />
-        <h1 className="text-center text-4xl flex items-start px-4 pt-6 font-bold">
-          {group?.name}
-        </h1>
+        <h1 className="text-4xl px-4 pt-6 font-bold truncate">{group?.name}</h1>
 
         <div>
           <span
