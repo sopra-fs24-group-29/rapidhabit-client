@@ -14,6 +14,12 @@
    * [Groupchat](#groupchat)
    * [Pulse check](#pulse-check)
    * [AI coach](#ai-coach)
+ - [Roadmap](#roadmap)
+   * [Feature 1 - Adding pre-defined Habits](#feature-1-adding-pre-defined-habits)
+   * [Feature 2 - Adding public groups](#feature-2-adding-public-groups)
+   * [Feature 3 - Implementing push notifications](#feature-3-implementing-push-notifications)
+   * [Feature 4 - Adding color to groups](#feature-4-adding-color-to-groups)
+   * [Feature 5 - Changing the authorization principle](#feature-5-changing-the-authorization-principle)
 - [Launch & Deployment](#launch-deployment)
    * [Getting started with Yarn](#getting-started-with-yarn)
    * [Setting up the environment](#setting-up-the-environment)
@@ -21,12 +27,6 @@
       + [2. Install dependencies](#2-install-dependencies)
       + [3. Run the development server](#3-run-the-development-server)
 - [Illustrations](#illustrations)
-- [Roadmap](#roadmap)
-   * [Feature 1 - Adding pre-defined Habits](#feature-1-adding-pre-defined-habits)
-   * [Feature 2 - Adding public groups](#feature-2-adding-public-groups)
-   * [Feature 3 - Implementing push notifications](#feature-3-implementing-push-notifications)
-   * [Feature 4 - Adding color to groups](#feature-4-adding-color-to-groups)
-   * [Feature 5 - Changing the authorization principle](#feature-5-changing-the-authorization-principle)
 - [Authors](#authors)
 - [Acknowledgement](#acknowledgement)
 - [License](#license)
@@ -89,6 +89,32 @@ A Progressive Web App (PWA) built with React utilizes React's component-based ar
 - Role: Twice a day, the AI coach gives users tips on how they can improve their everyday life to achieve the habits even better in the future.
 - Relation: The messages are sent to all users via feed, but are of course highly individualized and further support the user in achieving their goals.
 
+<!-- TOC --><a name="roadmap"></a>
+## Roadmap
+If we were to continue working on our application after the module, or if a new developer were to join us, we would first add the following features:
+
+<!-- TOC --><a name="feature-1-adding-pre-defined-habits"></a>
+### Feature 1 - Adding pre-defined Habits
+First, we would create pre-defined habits in the database, which could then be selected by new group administrators when creating new habits. This would support inexperienced users when using the application for the first time and make it easier to get started.
+
+<!-- TOC --><a name="feature-2-adding-public-groups"></a>
+### Feature 2 - Adding public groups
+Public groups could also be created to network with other people with similar goals and improve their own performance together
+
+We deliberately did not include this feature in our project because we did not want to lose any time or take any avoidable risks due to possible misuse of the application by third parties.
+
+<!-- TOC --><a name="feature-3-implementing-push-notifications"></a>
+### Feature 3 - Implementing push notifications
+Another step forward would be to receive push notifications for important events. an example of this could be when the pulse check is started, when a new user joins the group or when the AI coach gives feedback on their own habits.
+
+<!-- TOC --><a name="feature-4-adding-color-to-groups"></a>
+### Feature 4 - Adding color to groups
+A relatively small but very useful update would be to add a color to each group. This could provide a better overview on the group dashboard and improve the overall user experience of the application.
+
+<!-- TOC --><a name="feature-5-changing-the-authorization-principle"></a>
+### Feature 5 - Changing the authorization principle
+The authorization principle could also be adapted. currently, only the admin of a group can manage the habits and group members. Here it could be considered whether the admin can appoint further admins, or whether the authorizations should be broken down further in order to separate the administration of the habits and the group members.
+
 <!-- TOC --><a name="launch-deployment"></a>
 ## Launch & Deployment
 Before you can start our applications you need to do some steps for the Backend as well as for the frontend as explained below.
@@ -123,32 +149,6 @@ yarn dev
 <!-- TOC --><a name="illustrations"></a>
 ## Illustrations
 - WIP
-
-<!-- TOC --><a name="roadmap"></a>
-## Roadmap
-If we were to continue working on our application after the module, or if a new developer were to join us, we would first add the following features:
-
-<!-- TOC --><a name="feature-1-adding-pre-defined-habits"></a>
-### Feature 1 - Adding pre-defined Habits
-First, we would create pre-defined habits in the database, which could then be selected by new group administrators when creating new habits. This would support inexperienced users when using the application for the first time and make it easier to get started.
-
-<!-- TOC --><a name="feature-2-adding-public-groups"></a>
-### Feature 2 - Adding public groups
-Public groups could also be created to network with other people with similar goals and improve their own performance together
-
-We deliberately did not include this feature in our project because we did not want to lose any time or take any avoidable risks due to possible misuse of the application by third parties.
-
-<!-- TOC --><a name="feature-3-implementing-push-notifications"></a>
-### Feature 3 - Implementing push notifications
-Another step forward would be to receive push notifications for important events. an example of this could be when the pulse check is started, when a new user joins the group or when the AI coach gives feedback on their own habits.
-
-<!-- TOC --><a name="feature-4-adding-color-to-groups"></a>
-### Feature 4 - Adding color to groups
-A relatively small but very useful update would be to add a color to each group. This could provide a better overview on the group dashboard and improve the overall user experience of the application.
-
-<!-- TOC --><a name="feature-5-changing-the-authorization-principle"></a>
-### Feature 5 - Changing the authorization principle
-The authorization principle could also be adapted. currently, only the admin of a group can manage the habits and group members. Here it could be considered whether the admin can appoint further admins, or whether the authorizations should be broken down further in order to separate the administration of the habits and the group members.
 
 <!-- TOC --><a name="authors"></a>
 ## Authors
