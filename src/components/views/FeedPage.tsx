@@ -67,11 +67,14 @@ const FeedPage = () => {
       console.error("Keine UserId erhalten oder UserId ist leer.");
     }
 
-    const token = localStorage.getItem("token")!;
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found in localStorage");
+    }
     const stompClient = new Client({
       brokerURL: "wss://sopra-fs24-group29-server.oa.r.appspot.com/ws",
       connectHeaders: {
-        Authorization: token,
+        Authorization: `${token}`,
       },
       debug: (str) => console.log(str),
       reconnectDelay: 5000,
