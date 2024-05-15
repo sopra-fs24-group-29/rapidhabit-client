@@ -103,13 +103,15 @@ const CreateHabitPage = () => {
         )}
         <h3 className="mt-3">Reward Points</h3>
         <form>
-          <input className="bg-input rounded-lg text-white px-2"
-                 type="number"
-                 value={rewardPoints}
-                 onChange={(event) => setRewardPoints(parseInt(event.target.value))} min="1" max="10"
+          <input
+            className="bg-input rounded-lg text-white px-2"
+            type="number"
+            value={rewardPoints}
+            onChange={(event) => setRewardPoints(parseInt(event.target.value))}
+            min="1"
+            max="10"
           />
         </form>
-
       </div>
     </BaseContainer>
   );

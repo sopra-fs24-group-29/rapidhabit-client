@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "./Button";
+import { api } from "helpers/api";
 
 interface FeedBoxPulseCheckProps {
+  formId: string;
+  groupId: string;
   group: string;
   color: string;
   p1: string;
@@ -12,6 +15,8 @@ interface FeedBoxPulseCheckProps {
 
 const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   group,
+  formId,
+  groupId,
   color,
   p1,
   p2,
@@ -28,24 +33,34 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   const submitValue = async (sliderValue: number, groupId: string) => {
     setButtonDisabled(true);
 
-    try {
-      const token = localStorage.getItem("token")!;
-      await fetch(`http://localhost:8080/groups/${groupId}/feed/pulsecheck/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-        body: JSON.stringify({
-          sliderValue: sliderValue,
-          groupId: groupId,
-        }),
-      });
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    if (!token || !userId) {
+      alert("Authentifizierungstoken oder Benutzer-ID fehlt");
+      setButtonDisabled(false);
+      return;
+    }
 
-      alert(`Wert gesendet: ${sliderValue}`);
+    try {
+      const response = await api.put(
+        `/groups/${groupId}/feed/pulsecheck`,
+        {
+          value: sliderValue,
+          userId: userId,
+          formId: formId,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log("Wert wurde gesendet:", response.data);
+      window.location.reload();
     } catch (error) {
       console.error("Error:", error);
       alert("Fehler beim Senden des Werts");
+      setButtonDisabled(false);
     }
   };
 
@@ -73,7 +88,7 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
         />
       </div>
       <Button
-        onClick={() => submitValue(sliderValue, group)}
+        onClick={() => submitValue(sliderValue, groupId)}
         variant="primary"
         tint="default"
         className={`mt-2 ${buttonDisabled ? "button-disabled" : ""}`}

@@ -44,6 +44,7 @@ const ChatTab = ({ group }: ChatTabProps) => {
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("Connected to WS");
+        console.log(`Subscribe to group chat ${group.id} ...`);
         stompClient.current!.subscribe(
           `/topic/groups/${group.id}/chat`,
           (message) => {

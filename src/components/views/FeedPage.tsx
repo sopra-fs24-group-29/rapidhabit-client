@@ -12,6 +12,8 @@ type FeedEntryType = "PULSECHECK";
 
 interface FeedEntry {
   type: FeedEntryType;
+  formId: string;
+  groupId: string;
   groupName: string;
   message: string;
   userSubmits: Record<string, number>;
@@ -56,6 +58,14 @@ const FeedPage = () => {
 
   useEffect(() => {
     if (!groupIds.length) return;
+
+    if (userId) {
+      console.log("User ID is:");
+      console.log(userId);
+      localStorage.setItem("userId", userId); // Save userId within localStorage
+    } else {
+      console.error("Keine UserId erhalten oder UserId ist leer.");
+    }
 
     const token = localStorage.getItem("token")!;
     const stompClient = new Client({
@@ -107,6 +117,8 @@ const FeedPage = () => {
                 <FeedBoxPulseCheck
                   key={index}
                   group={entry.groupName + ":"}
+                  formId={entry.formId}
+                  groupId={entry.groupId}
                   color="bg-blue-500"
                   p1={entry.message}
                   isDisabled={userSubmitted}
