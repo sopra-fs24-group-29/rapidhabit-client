@@ -70,6 +70,8 @@ const FeedPage = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       console.error("No token found in localStorage");
+    } else {
+      console.log(token);
     }
     const stompClient = new Client({
       brokerURL: "wss://sopra-fs24-group29-server.oa.r.appspot.com/ws",
