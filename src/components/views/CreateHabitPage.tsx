@@ -26,6 +26,7 @@ const CreateHabitPage = () => {
   const [habitName, setHabitName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [rewardPoints, setRewardPoints] = useState<number>(1);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const [repeatType, setRepeatType] = useState<HabitRepeatStrategy>(
     HabitRepeatStrategy.Daily
@@ -40,6 +41,17 @@ const CreateHabitPage = () => {
         repeatStrategy: { type: repeatType, weekdayMap: repeatMap },
         rewardPoints: rewardPoints,
       });
+      if (habitName == "" || !rewardPoints || rewardPoints < 1) {
+        setErrorMessage("Name of the habit or reward points are missing");
+        return;
+      }
+
+      if (repeatType === "WEEKLY" && Object.keys(repeatMap).length === 0) {
+        setErrorMessage("Choose which day you want to repeat the habit");
+        return;
+      }
+
+      console.log(repeatMap);
       await api.post(`/groups/${groupId}/habits`, requestBody, {
         headers: { Authorization: localStorage.getItem("token") },
       });
@@ -55,23 +67,48 @@ const CreateHabitPage = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      createHabit();
+    }
+  };
+
   return (
     <BaseContainer>
       <NavigationBar
         title="New habit"
         backUrl={`/app/${groupId}`}
         rightAction={
-          <Button variant="text" onClick={createHabit}>
+          <Button
+            variant="text"
+            onClick={createHabit}
+            className="hover:text-accent"
+          >
             Create
           </Button>
         }
       />
+      {errorMessage && (
+        <div className="flex justify-center font-semibold text-rose-800 text-center px-8">
+          {errorMessage}
+        </div>
+      )}
       <div className="px-8">
         <h3 className="mt-5">Name of habit</h3>
-        <FormField value={habitName} onChange={setHabitName} />
+        <FormField
+          value={habitName}
+          onChange={setHabitName}
+          maxLength={50}
+          onKeyDown={handleKeyPress}
+        />
 
         <h3 className="mt-3">Description</h3>
-        <FormField value={description} onChange={setDescription} />
+        <FormField
+          value={description}
+          onChange={setDescription}
+          maxLength={300}
+          onKeyDown={handleKeyPress}
+        />
 
         <h3 className="mt-3">Repeat type</h3>
         <RadioOptions
@@ -104,8 +141,7 @@ const CreateHabitPage = () => {
         <h3 className="mt-3">Reward Points</h3>
         <form>
           <input
-            className="bg-input rounded-lg text-white px-2"
-            type="number"
+            className="bg-input rounded-lg text-white px-2 focus:border focus:border-input-outline"
             value={rewardPoints}
             onChange={(event) => setRewardPoints(parseInt(event.target.value))}
             min="1"

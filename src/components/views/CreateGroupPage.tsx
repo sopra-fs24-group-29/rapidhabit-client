@@ -30,13 +30,19 @@ const CreateGroupPage = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      createGroup();
+    }
+  };
+
   return (
     <BaseContainer>
       <NavigationBar
         backUrl="/app"
         title="Create new group"
         rightAction={
-          <Button variant="text" onClick={createGroup}>
+          <Button variant="text" onClick={createGroup} className="hover:text-accent">
             Confirm
           </Button>
         }
@@ -44,10 +50,10 @@ const CreateGroupPage = () => {
       <div className="flex flex-col items-center justify-start mt-8">
         <div className="w-full px-8">
           <h3 className="py-2">Name of group</h3>
-          <FormField value={groupName} onChange={setGroupName} />
+          <FormField value={groupName} onChange={setGroupName} maxLength={50} onKeyDown={handleKeyPress} />
 
           <h3 className="py-2">Description</h3>
-          <FormField value={description} onChange={setDescription} />
+          <FormField value={description} onChange={setDescription} maxLength={300} onKeyDown={handleKeyPress}/>
         </div>
       </div>
     </BaseContainer>

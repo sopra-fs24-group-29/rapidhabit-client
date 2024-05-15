@@ -52,13 +52,19 @@ const UpdateGroupPage = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      updateGroup();
+    }
+  };
+
   return (
     <BaseContainer>
       <NavigationBar
         backUrl={`/app/${groupId}/settings`}
         title="Update group"
         rightAction={
-          <Button variant="text" onClick={updateGroup}>
+          <Button variant="text" onClick={updateGroup} className="hover:text-accent">
             Update
           </Button>
         }
@@ -69,12 +75,17 @@ const UpdateGroupPage = () => {
           <FormField
             value={groupName}
             onChange={setGroupName}
+            maxLength={50}
+            onKeyDown={handleKeyPress}
           />
 
           <h3 className="py-2">Description</h3>
           <FormField
             value={description}
-            onChange={setDescription} />
+            onChange={setDescription}
+            maxLength={300}
+            onKeyDown={handleKeyPress}
+          />
         </div>
       </div>
     </BaseContainer>

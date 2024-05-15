@@ -68,6 +68,11 @@ const GroupDetail = () => {
     }
   };
 
+  const [showDescription, setShowDescription] = useState(false); // State to manage visibility of description box
+  const toggleDescription = () => {
+    setShowDescription(!showDescription);
+  };
+
   return (
     <div>
       <BaseContainer className="pb-40">
@@ -77,6 +82,7 @@ const GroupDetail = () => {
             isAdmin && (
               <Button
                 variant="text"
+                className="hover:text-accent"
                 onClick={() => navigate(`/app/${groupId}/settings`)}
               >
                 Settings
@@ -84,17 +90,23 @@ const GroupDetail = () => {
             )
           }
         />
-        <h1 className="text-center text-4xl flex items-start pd p-6 font-bold pb-5">
-          {group?.name}
-        </h1>
+        <h1 className="text-4xl px-4 pt-6 font-bold truncate">{group?.name}</h1>
+
         <div>
-          <Button
-            className="text-base bg-input text-white font-medium rounded ml-4 p-3"
-            onClick={() => navigate(`/invite/${groupId}`)}
+          <span
+            className="cursor-pointer ml-4 text-xs text-tab-off"
+            onClick={toggleDescription}
           >
-            Invite People
-          </Button>
+            {showDescription ? "Hide Description" : "Show Description"}
+          </span>
+          {showDescription && (
+            <div className="ml-4 p-3 bg-input rounded text-sm">
+              {group?.description || "No description available."}
+            </div>
+          )}
         </div>
+
+        <div></div>
 
         {isLoading ? (
           <div>Loading…</div>
@@ -102,7 +114,10 @@ const GroupDetail = () => {
           <div>{errorMessage}</div>
         ) : !habits?.length ? (
           <div className="flex flex-col items-center justify-center gap-4 py-8">
-            <span>No habits in this group.</span>
+            <span className="flex text-center p-6">
+              No habits in this group. Please create a habit before inviting
+              people
+            </span>
             {isAdmin && (
               <Button onClick={() => navigate(`/app/${groupId}/create-habit`)}>
                 New habit

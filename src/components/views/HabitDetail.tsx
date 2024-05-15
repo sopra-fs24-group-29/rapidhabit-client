@@ -34,6 +34,11 @@ const HabitDetail = () => {
   const [habitActivity, setHabitActivity] = useState<HabitActivity>();
   const [group, setGroup] = useState<Group>();
 
+  const [showDescription, setShowDescription] = useState(false);
+  const toggleDescription = () => {
+    setShowDescription(!showDescription);
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -67,49 +72,58 @@ const HabitDetail = () => {
     <div>
       <BaseContainer>
         <NavigationBar backUrl={`/app/${groupId}`} />
-        <div>
-          <div className="font-bold text-4xl p-4">{habitActivity.name}</div>
-          <div className="flex flex-row justify-between p-4">
-            <div className="text-lg font-semibold">🔥 Current streak</div>
-            <div className="text-lg font-semibold">
-              {habitActivity.currentTeamStreak} days
+          <div>
+            <div className="font-bold text-4xl px-4 pt-4">{habitActivity.name}</div>
+            <div>
+              <span className="cursor-pointer ml-4 text-xs text-tab-off" onClick={toggleDescription}>
+              {showDescription ? "Hide Description" : "Show Description"}
+              </span>
+              {showDescription && (
+              <div className="ml-4 p-3 bg-input rounded text-sm">{"No description available."}</div>
+              )}
             </div>
+
+            <div className="flex flex-row justify-between p-4">
+              <div className="text-lg font-semibold">🔥 Current streak</div>
+              <div className="text-lg font-semibold">
+                {habitActivity.currentTeamStreak} days
+              </div>
+            </div>
+            <div className="flex flex-row justify-end gap-7 pr-4 mb-4">
+              {group.userInitials?.map((user) => (
+                <AvaterHabitDetail initials={user} key={user} />
+              ))}
+            </div>
+            {Object.entries(habitActivity.statusMap).map(
+              ([date, peopleActivity]) => {
+                const completedByAllUsers = !Object.values(peopleActivity).some(
+                  (status) => status !== ActivityStatus.Success
+                );
+                return (
+                  <div
+                    key={date}
+                    className={clsx("flex flex-row justify-end p-6 gap-11", {
+                      "bg-dark-green": completedByAllUsers,
+                    })}
+                  >
+                    <div className="flex-grow">{formattedDate(date)}</div>
+                    {Object.entries(peopleActivity).map(
+                      ([userInitials, status]) => (
+                        <Check
+                          key={userInitials}
+                          isChecked={status === ActivityStatus.Success}
+                        />
+                      )
+                    )}
+                  </div>
+                );
+              }
+            )}
           </div>
-          <div className="flex flex-row justify-end gap-7 pr-4 mb-4">
-            {group.userInitials?.map((user) => (
-              <AvaterHabitDetail initials={user} key={user} />
-            ))}
-          </div>
-          {Object.entries(habitActivity.statusMap).map(
-            ([date, peopleActivity]) => {
-              const completedByAllUsers = !Object.values(peopleActivity).some(
-                (status) => status !== ActivityStatus.Success
-              );
-              return (
-                <div
-                  key={date}
-                  className={clsx("flex flex-row justify-end p-6 gap-11", {
-                    "bg-dark-green": completedByAllUsers,
-                  })}
-                >
-                  <div className="flex-grow">{formattedDate(date)}</div>
-                  {Object.entries(peopleActivity).map(
-                    ([userInitials, status]) => (
-                      <Check
-                        key={userInitials}
-                        isChecked={status === ActivityStatus.Success}
-                      />
-                    )
-                  )}
-                </div>
-              );
-            }
-          )}
-        </div>
       </BaseContainer>
       <TabBar />
     </div>
-  );
+);
 };
 
 export default HabitDetail;

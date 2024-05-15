@@ -21,21 +21,11 @@ const GroupSection = (props: GroupSectionProps) => {
           </div>
         </div>
 
-        <div className="text-xl font-bold">{props.name}</div>
+        <div className="text-xl font-bold truncate">{props.name}</div>
         <div className="flex justify-end gap-1.5">
-          {props.initials?.map((initial) => (
-            <Avatar initials={initial} />
+          {props.initials?.map((initial, index) => (
+            <Avatar initials={initial} key={index} />
           ))}
-          {/* <div className="rounded-full bg-light-green w-8 h-8 ">
-            <span className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-              RO
-            </span>
-          </div>
-          <div className="rounded-full bg-light-green w-8 h-8 ">
-            <span className="flex justify-center pt-2 text-dark-green font-semibold text-xs">
-              RO
-            </span>
-          </div> */}
         </div>
       </div>
     </Link>

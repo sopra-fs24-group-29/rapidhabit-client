@@ -80,23 +80,29 @@ const UpdateHabitPage = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      updateHabit();
+    }
+  };
+
   return (
     <BaseContainer>
       <NavigationBar
         title="Update habit"
         backUrl={`/app/${groupId}/settings`}
         rightAction={
-          <Button variant="text" onClick={updateHabit}>
+          <Button variant="text" onClick={updateHabit} className="hover:text-accent">
             Update
           </Button>
         }
       />
       <div className="px-8">
         <h3 className="mt-5">Name of habit</h3>
-        <FormField value={habitName} onChange={setHabitName} />
+        <FormField value={habitName} onChange={setHabitName} maxLength={50} onKeyDown={handleKeyPress} />
 
         <h3 className="mt-3">Description</h3>
-        <FormField value={description} onChange={setDescription} />
+        <FormField value={description} onChange={setDescription} maxLength={300} onKeyDown={handleKeyPress}/>
 
         <h3 className="mt-3">Repeat type</h3>
         <RadioOptions
@@ -129,7 +135,7 @@ const UpdateHabitPage = () => {
 
         <h3 className="mt-3">Reward Points</h3>
         <form>
-          <input className="bg-input rounded-lg text-white px-2"
+          <input className="bg-input rounded-lg text-white px-2 focus:border focus:border-input-outline"
                  type="number"
                  value={rewardPoints}
                  onChange={(event) => setRewardPoints(parseInt(event.target.value))} min="1" max="10"

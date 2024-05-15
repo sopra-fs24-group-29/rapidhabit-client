@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import BaseContainer from "components/ui/BaseContainer";
 import FormField from "components/ui/FormField";
 import { api, handleError } from "helpers/api";
@@ -17,6 +18,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState<string>("");
 
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const doRegistration = async () => {
     try {
@@ -30,16 +32,21 @@ const SignUpPage = () => {
       if (response.status === 201) {
         await loginAfterSignUp(email, password);
         navigate("/app");
-      } else if (response.status === 409) {
-        console.log("Email is already taken.", response.data);
-        alert("Email is already taken.");
       }
     } catch (error) {
-      console.log("something went wrong", error);
-      alert(`Something went wrong during the signup: \n${handleError(error)}`);
+      if (error instanceof AxiosError) {
+        setErrorMessage(
+          error.response?.data.message ?? "An unexpected error occurred"
+        );
+      } else {
+        alert(
+          `Something went wrong during the registration: \n${handleError(
+            error
+          )}`
+        );
+      }
     }
   };
-
   const loginAfterSignUp = async (email: string, password: string) => {
     const loginResponse = await api.put(
       "/users/login",
@@ -56,6 +63,12 @@ const SignUpPage = () => {
     localStorage.setItem("userId", userId);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      doRegistration();
+    }
+  };
+
   return (
     <BaseContainer>
       <AuthContainer>
@@ -67,30 +80,38 @@ const SignUpPage = () => {
             <FormField
               type="text"
               label=""
+              maxLength={20}
               value={firstname}
               onChange={(un: string) => setFirstname(un)}
+              onKeyDown={handleKeyPress}
             />
             <h3 className="text-left  mt-3">Lastname</h3>
             <FormField
               type="text"
               label=""
+              maxLength={20}
               value={lastname}
               onChange={(un: string) => setLastname(un)}
+              onKeyDown={handleKeyPress}
             />
             <h3 className="text-left  mt-3">Email</h3>
             <FormField
               type="email"
               label=""
+              maxLength={50}
               value={email}
               onChange={(un: string) => setEmail(un)}
+              onKeyDown={handleKeyPress}
             />
             <h3 className="text-left  mt-3">Password</h3>
             <div className="relative">
               <FormField
                 type={showPassword ? "text" : "password"}
                 label=""
+                maxLength={20}
                 value={password}
-                onChange={(un: string) => setPassword(un)}
+                onChange={(un: string) => setPassword(un.replace(/\s/g, ''))}
+                onKeyDown={handleKeyPress}
               />
               <div
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2"
@@ -104,13 +125,16 @@ const SignUpPage = () => {
                 />
               </div>
             </div>
+            {errorMessage && (
+              <div className="font-semibold text-accent">{errorMessage}</div>
+            )}
+
             <div>
               <Button
                 className="cursor-pointer py-1 px-4 mt-5 w-full"
                 type="button"
                 disabled={!firstname || !lastname || !email || !password}
                 onClick={doRegistration}
-                tint="accent"
               >
                 Create account
               </Button>
