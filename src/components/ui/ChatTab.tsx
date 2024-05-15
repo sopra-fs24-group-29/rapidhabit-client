@@ -36,7 +36,7 @@ const ChatTab = ({ group }: ChatTabProps) => {
 
   useEffect(() => {
     stompClient.current = new Client({
-      brokerURL: "wss://sopra-fs24-group29-server.oa.r.appspot.com/ws",
+      brokerURL: "ws://sopra-fs24-group29-server.oa.r.appspot.com/ws",
       connectHeaders: {
         Authorization: token,
       },
