@@ -69,7 +69,7 @@ const FeedPage = () => {
 
     const token = localStorage.getItem("token")!;
     const stompClient = new Client({
-      brokerURL: "ws:/localhost:8080/ws",
+      brokerURL: "wss://sopra-fs24-group29-server.oa.r.appspot.com/ws",
       connectHeaders: {
         Authorization: token,
       },
