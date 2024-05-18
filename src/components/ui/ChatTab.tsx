@@ -37,9 +37,6 @@ const ChatTab = ({ group }: ChatTabProps) => {
   useEffect(() => {
     stompClient.current = new Client({
       brokerURL: "wss://sopra-fs24-group29-server.oa.r.appspot.com/ws",
-      connectHeaders: {
-        Authorization: token,
-      },
       debug: (str) => console.log(str),
       reconnectDelay: 5000,
       onConnect: () => {
@@ -84,47 +81,21 @@ const ChatTab = ({ group }: ChatTabProps) => {
     }
   };
 
+  const chatMessages = [...oldChats, ...chatEntry].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
   return (
     <BaseContainer>
       <div className="flex flex-col gap-4 items-start w-full p-4">
-        {oldChats?.map((oldChat) =>
-          userId == oldChat.userId ? (
-            <ChatBubble
-              text={oldChat.message}
-              isSelf={true}
-              key={oldChat.date}
-            />
-          ) : (
-            <ChatBubble
-              text={oldChat.message}
-              isSelf={false}
-              initials={oldChat.userInitials}
-            />
-          )
-        )}
-        {chatEntry
-          ?.sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-          )
-          .map((oldChat) =>
-            userId == oldChat.userId ? (
-              <ChatBubble
-                text={oldChat.message}
-                isSelf={true}
-                key={oldChat.date}
-              />
-            ) : (
-              <ChatBubble
-                text={oldChat.message}
-                isSelf={false}
-                initials={oldChat.userInitials}
-                key={oldChat.date}
-              />
-            )
-          )}
-
-        {/* <ChatBubble text="hello" isSelf={true} />
-        <ChatBubble text="hello" isSelf={false} initials="RO" /> */}
+        {chatMessages?.map((chatMessage) => (
+          <ChatBubble
+            text={chatMessage.message}
+            isSelf={userId == chatMessage.userId}
+            initials={chatMessage.userInitials}
+            key={chatMessage.date}
+          />
+        ))}
       </div>
       <div className="flex justify-end p-5">
         <div className="flex left-0 fixed pb-24 pt-4 w-full px-4 gap-4 bg-black bottom-0">
