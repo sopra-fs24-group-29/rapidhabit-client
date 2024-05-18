@@ -25,7 +25,7 @@ const CreateHabitPage = () => {
 
   const [habitName, setHabitName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [rewardPoints, setRewardPoints] = useState<number>(1);
+  const [rewardPoints, setRewardPoints] = useState<number | null>(1);
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const [repeatType, setRepeatType] = useState<HabitRepeatStrategy>(
@@ -142,8 +142,15 @@ const CreateHabitPage = () => {
         <form>
           <input
             className="bg-input rounded-lg text-white px-2 focus:border focus:border-input-outline"
-            value={rewardPoints}
-            onChange={(event) => setRewardPoints(parseInt(event.target.value))}
+            value={rewardPoints !== null ? rewardPoints : ""}
+            onChange={(event) => {
+              const numericValue = parseInt(event.target.value);
+              if (!isNaN(numericValue)) {
+                setRewardPoints(numericValue);
+              } else {
+                setRewardPoints(null);
+              }
+            }}
             min="1"
             max="10"
           />
