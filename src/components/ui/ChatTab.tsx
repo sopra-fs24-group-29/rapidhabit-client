@@ -98,14 +98,16 @@ const ChatTab = ({ group }: ChatTabProps) => {
         ))}
       </div>
       <div className="flex justify-end p-5">
-        <div className="flex left-0 fixed pb-24 pt-4 w-full px-4 gap-4 bg-black bottom-0">
-          <input
-            className="flex rounded-lg bg-input placeholder-gray-600 p-3 w-full"
-            placeholder="Type in your message"
-            onChange={(event) => setMessage(event.target.value)}
-            value={message}
-          />
-          <Button onClick={sendMessage}>Send</Button>
+        <div className="flex left-0 fixed pb-24 pt-4 w-full justify-center px-4 bg-black bottom-0">
+          <div className="max-w-xl flex gap-4 w-full">
+            <input
+              className="flex rounded-lg bg-input placeholder-gray-600 p-3 w-full"
+              placeholder="Type in your message"
+              onChange={(event) => setMessage(event.target.value)}
+              value={message}
+            />
+            <Button onClick={sendMessage}>Send</Button>
+          </div>
         </div>
       </div>
     </BaseContainer>
