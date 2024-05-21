@@ -61,6 +61,9 @@ const ProfilePage = () => {
       window.location.reload();
     } catch (error) {
       console.error("Error updating user profile:", error);
+      alert(
+        "The user could not be updated. Check if all fields are filled correctly."
+      );
     }
   };
 

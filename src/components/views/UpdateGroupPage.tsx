@@ -49,6 +49,9 @@ const UpdateGroupPage = () => {
       navigate(`/app/${groupId}`);
     } catch (error) {
       console.error("Error updating group:", error);
+      alert(
+        "The group could not be updated. Check if all fields are filled correctly."
+      );
     }
   };
 
