@@ -1,6 +1,7 @@
 import { api } from "helpers/api";
 import { Group } from "models/Group";
 import { Ranking } from "models/Ranking";
+import { Score } from "models/Score";
 import { useEffect, useMemo, useState } from "react";
 import RankingAvatar from "./RankingAvatar";
 
@@ -14,14 +15,22 @@ const RankingTab = (props: RankingTabProps) => {
 
   const [ranking, setRanking] = useState<Ranking>();
   const [errorMessage, setErrorMessage] = useState<string>();
+  const [scores, setScores] = useState<Score[]>();
 
   useEffect(() => {
     const loadRanking = async () => {
       try {
-        const response = await api.get(`/groups/${groupId}/ranking`, {
-          headers: { Authorization: localStorage.getItem("token") },
-        });
-        setRanking(response.data);
+        const [rankingResponse, scoreResponse] = await Promise.all([
+          api.get(`/groups/${groupId}/ranking`, {
+            headers: { Authorization: localStorage.getItem("token") },
+          }),
+          api.get(`/groups/${groupId}/scores`, {
+            headers: { Authorization: localStorage.getItem("token") },
+          }),
+        ]);
+
+        setRanking(rankingResponse.data);
+        setScores(scoreResponse.data.scores);
       } catch (error) {
         setErrorMessage("The ranking of this group is currently unavailable.");
         console.error("Error while loading ranking of group", error);
@@ -45,8 +54,12 @@ const RankingTab = (props: RankingTabProps) => {
         ))}
       </div>
       <div className="flex justify-center p-6 font-semibold text-center">
-        Stay consistent to be the best! Your current rank:
+        Your current rank:
         {ranking.find((user) => user.id === userId)?.rank}
+      </div>
+      <div className="flex justify-center font-semibold text-center">
+        Your current points:
+        {scores?.find((score) => score.userId === userId)?.points}
       </div>
     </>
   );
