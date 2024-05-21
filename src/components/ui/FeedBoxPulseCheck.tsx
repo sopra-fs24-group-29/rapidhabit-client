@@ -1,6 +1,6 @@
+import { api } from "helpers/api";
 import React, { useEffect, useState } from "react";
 import { Button } from "./Button";
-import { api } from "helpers/api";
 
 interface FeedBoxPulseCheckProps {
   formId: string;
@@ -11,6 +11,7 @@ interface FeedBoxPulseCheckProps {
   p2?: string;
   isDisabled: boolean;
   initialSliderValue: number;
+  dateTime: string;
 }
 
 const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
@@ -22,6 +23,7 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   p2,
   isDisabled,
   initialSliderValue,
+  dateTime,
 }) => {
   const [sliderValue, setSliderValue] = useState(initialSliderValue);
   const [buttonDisabled, setButtonDisabled] = useState(isDisabled);
@@ -29,6 +31,12 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
   useEffect(() => {
     setSliderValue(initialSliderValue);
   }, [initialSliderValue]);
+
+  const formattedDateTime = new Date(dateTime).toLocaleString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 
   const submitValue = async (sliderValue: number, groupId: string) => {
     setButtonDisabled(true);
@@ -68,10 +76,13 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
     <div
       className={`w-full ${color} bg-opacity-50 rounded-lg shadow-lg mt-2 p-4 flex flex-col justify-between`}
     >
-      <div className="mb-4">
-        <h3 className="text-lg font-bold">{group}</h3>
-        <p className="text-sm">{p1}</p>
-        <p className="text-sm">{p2}</p>
+      <div className="flex flex-row justify-between ">
+        <div className="mb-4">
+          <h3 className="text-lg font-bold">{group}</h3>
+          <p className="text-sm">{p1}</p>
+          <p className="text-sm">{p2}</p>
+        </div>
+        <div className="pt-[2px] font-medium">{formattedDateTime}</div>
       </div>
       <div className="mb-2">
         <input

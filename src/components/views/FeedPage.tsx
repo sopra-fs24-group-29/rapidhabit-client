@@ -1,11 +1,11 @@
 import { Client } from "@stomp/stompjs";
 import { AxiosError } from "axios";
 import BaseContainer from "components/ui/BaseContainer";
+import FeedBoxPulseCheck from "components/ui/FeedBoxPulseCheck.tsx";
 import { api } from "helpers/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FeedBox from "../ui/FeedBox.tsx";
-import FeedBoxPulseCheck from "../ui/FeedBoxPulseCheck.tsx";
 import TabBar from "../ui/Tabbar.tsx";
 
 type FeedEntryType = "PULSECHECK";
@@ -17,6 +17,7 @@ interface FeedEntry {
   groupName: string;
   message: string;
   userSubmits: Record<string, number>;
+  dateTime: string;
 }
 
 const FeedPage = () => {
@@ -110,7 +111,6 @@ const FeedPage = () => {
             <h1 className="text-center text-4xl flex items-start pd font-bold pb-5">
               Feed
             </h1>
-            <h2 className="mt-4">Today</h2>
             {feedEntries.map((entry, index) => {
               const userSubmitted =
                 entry.userSubmits && userId in entry.userSubmits;
@@ -128,6 +128,7 @@ const FeedPage = () => {
                   p1={entry.message}
                   isDisabled={userSubmitted}
                   initialSliderValue={sliderValue}
+                  dateTime={entry.dateTime}
                 />
               ) : (
                 <FeedBox
@@ -135,6 +136,7 @@ const FeedPage = () => {
                   group={entry.groupName + ":"}
                   color="bg-blue-500"
                   p1={entry.message}
+                  dateTime={entry.dateTime}
                 />
               );
             })}
