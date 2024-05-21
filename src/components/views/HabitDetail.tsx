@@ -79,7 +79,7 @@ const HabitDetail = () => {
               {showDescription ? "Hide Description" : "Show Description"}
               </span>
               {showDescription && (
-              <div className="ml-4 p-3 bg-input rounded text-sm">{"No description available."}</div>
+              <div className="ml-4 p-3 bg-input rounded text-sm">{habitActivity?.description || "No description available."}</div>
               )}
             </div>
 

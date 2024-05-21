@@ -85,6 +85,12 @@ const ChatTab = ({ group }: ChatTabProps) => {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      sendMessage();
+    }
+  };
+
   return (
     <BaseContainer>
       <div className="flex flex-col gap-4 items-start w-full p-4">
@@ -105,6 +111,7 @@ const ChatTab = ({ group }: ChatTabProps) => {
               placeholder="Type in your message"
               onChange={(event) => setMessage(event.target.value)}
               value={message}
+              onKeyDown={handleKeyPress}
             />
             <Button onClick={sendMessage}>Send</Button>
           </div>

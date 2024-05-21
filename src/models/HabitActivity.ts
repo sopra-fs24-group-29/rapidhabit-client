@@ -1,6 +1,7 @@
 import { ActivityStatus } from "./Activity";
 
 export interface HabitActivity {
+  description: string;
   name: string;
   currentTeamStreak: number;
   statusMap: HabitStatusMap;
