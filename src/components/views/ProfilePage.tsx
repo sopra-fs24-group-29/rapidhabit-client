@@ -139,7 +139,7 @@ const ProfilePage = () => {
   return (
     <div>
       <BaseContainer>
-        <h1 className="text-center text-4xl flex pd p-6 items-start font-bold pb-10">
+        <h1 className="text-center text-4xl flex lg:pd lg:p-6 items-start font-bold pb-10">
           Profile
         </h1>
         <div className="flex flex-col items-center justify-start mt-6">
