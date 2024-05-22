@@ -124,7 +124,7 @@ const FeedPage = () => {
                   group={entry.groupName + ":"}
                   formId={entry.formId}
                   groupId={entry.groupId}
-                  color="bg-blue-500"
+                  color="bg-green-950"
                   p1={entry.message}
                   isDisabled={userSubmitted}
                   initialSliderValue={sliderValue}
@@ -134,7 +134,7 @@ const FeedPage = () => {
                 <FeedBox
                   key={index}
                   group={entry.groupName + ":"}
-                  color="bg-blue-500"
+                  color="bg-green-950"
                   p1={entry.message}
                   dateTime={entry.dateTime}
                 />

@@ -74,15 +74,19 @@ const FeedBoxPulseCheck: React.FC<FeedBoxPulseCheckProps> = ({
 
   return (
     <div
-      className={`w-full ${color} bg-opacity-50 rounded-lg shadow-lg mt-2 p-4 flex flex-col justify-between`}
+      className={`w-full ${color} bg-opacity-50 rounded-lg shadow-lg mt-2 p-4 flex flex-col justify-between my-5`}
     >
       <div className="flex flex-row justify-between ">
-        <div className="mb-4">
+        <div className="mb-2">
           <h3 className="text-lg font-bold">{group}</h3>
-          <p className="text-sm">{p1}</p>
-          <p className="text-sm">{p2}</p>
         </div>
-        <div className="pt-[2px] font-medium">{formattedDateTime}</div>
+        <div className="pt-[2px] font-medium text-xs s flex-shrink-0 ">
+          {formattedDateTime}
+        </div>
+      </div>
+      <div className="mb-4">
+        <p className="text-sm">{p1}</p>
+        <p className="text-sm">{p2}</p>
       </div>
       <div className="mb-2">
         <input
