@@ -139,11 +139,11 @@ const ProfilePage = () => {
   return (
     <div>
       <BaseContainer>
+        <h1 className="text-center text-4xl flex pd p-6 items-start font-bold pb-10">
+          Profile
+        </h1>
         <div className="flex flex-col items-center justify-start mt-6">
           <div className="w-custom-354 px-8 pb-40">
-            <h1 className="text-center text-4xl flex items-start font-bold pb-10">
-              Profile
-            </h1>
             <div className="flex items-center justify-center mt-2">
               <div className="w-20 h-20 rounded-full bg-input flex items-center justify-center text-2xl font-bold">
                 {userData.firstname.charAt(0).toUpperCase()}
