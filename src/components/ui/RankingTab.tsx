@@ -53,7 +53,7 @@ const RankingTab = (props: RankingTabProps) => {
           <RankingAvatar key={rankingMember.id} rankingMember={rankingMember} />
         ))}
       </div>
-      <div className="flex flex-col justify-center items-center font-semibold text-center">
+      <div className="flex flex-col justify-center items-center font-semibold text-center pt-14">
         <span>Your current points:</span>
         <span>{scores?.find((score) => score.userId === userId)?.points}</span>
       </div>
