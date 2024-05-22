@@ -27,6 +27,7 @@ const UpdateHabitPage = () => {
   const [habitName, setHabitName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [rewardPoints, setRewardPoints] = useState<number>(1);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const [repeatType, setRepeatType] = useState<HabitRepeatStrategy>(
     HabitRepeatStrategy.Daily
@@ -59,20 +60,21 @@ const UpdateHabitPage = () => {
 
   const updateHabit = async () => {
     try {
-      await api.put(
-        `/groups/${groupId}/habits/${habitId}/update`,
-        {
-          name: habitName,
-          description: description,
-          repeatStrategy: { type: repeatType, weekdayMap: repeatMap },
-          rewardPoints: rewardPoints,
-        },
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
+      const requestBody = JSON.stringify({
+        name: habitName,
+        description: description,
+        repeatStrategy: { type: repeatType, weekdayMap: repeatMap },
+        rewardPoints: rewardPoints,
+      });
+      if (habitName == "" || !rewardPoints || rewardPoints < 1) {
+        setErrorMessage("Name of the habit or reward points are missing");
+        return;
+      }
+
+      await api.put(`/groups/${groupId}/habits/${habitId}/update`, requestBody, {
+        headers: { Authorization: localStorage.getItem("token") },
+      });
+
       console.log("Habit updated successfully!");
       navigate(`/app/${groupId}`);
     } catch (error) {
@@ -97,6 +99,11 @@ const UpdateHabitPage = () => {
           </Button>
         }
       />
+      {errorMessage && (
+        <div className="flex justify-center font-semibold text-rose-800 text-center px-8">
+          {errorMessage}
+        </div>
+      )}
       <div className="px-8">
         <h3 className="mt-5">Name of habit</h3>
         <FormField value={habitName} onChange={setHabitName} maxLength={50} onKeyDown={handleKeyPress} />
