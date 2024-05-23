@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import clsx from "clsx";
 import ActivityTab from "components/ui/ActivityTab";
 import BaseContainer from "components/ui/BaseContainer";
@@ -45,6 +46,11 @@ const GroupDetail = () => {
         setGroup(groupResponse.data || []);
         setHabits(habitsResponse.data || []);
       } catch (error) {
+        if (error instanceof AxiosError && error.response?.status === 401) {
+          // Session likely expired
+          localStorage.removeItem("token");
+          navigate("/");
+        }
         console.error(`Error while fetching habits: \n${handleError(error)}`);
         setErrorMessage("Group details could not be loaded.");
       } finally {
