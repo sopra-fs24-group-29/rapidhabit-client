@@ -148,7 +148,67 @@ yarn dev
 
 <!-- TOC --><a name="illustrations"></a>
 ## Illustrations
-- WIP
+<div style="display: flex; align-items: center;">
+    <img src="public/screenshots/Dashboard.png" alt="DashboardImage" width="200">
+    <div style="margin-left: 20px;">
+        <p>Upon successful login or registration, users are directed to their dashboard, where they can view all their groups alongside streaks, ranks, and member information. From here, they can easily navigate to a specific group or choose to create or join a new one, facilitating seamless engagement and community interaction.</p>
+    </div>
+</div>
+
+<br>
+
+<div style="display: flex; align-items: center;">
+    <img src="public/screenshots/Habit.png" alt="HabitImage" width="200">
+    <div style="margin-left: 20px;">
+        <p>The admin has the capability to create habits by specifying a name, description, reward points, and frequency, choosing between daily repetition or specific days of the week. This feature empowers tailored habit formation, enabling users to track progress and earn rewards according to their desired schedule.</p>
+    </div>
+</div>
+
+<br>
+
+<div style="display: flex; align-items: center;">
+    <img src="public/screenshots/Group.png" alt="GroupImage" width="200">
+    <div style="margin-left: 20px;">
+        <p>The group overview presents a comprehensive snapshot of tracked habits, recent activities, member rankings, and a dedicated chat section. This streamlined interface fosters efficient communication, progress tracking, and engagement within the group, enhancing collaboration and motivation among members.<p/>
+    </div>
+</div>
+
+<br>
+
+<div style="display: flex; align-items: center;">
+    <img src="public/screenshots/History.png" alt="HistoryImage" width="200">
+    <div style="margin-left: 20px;">
+        <p>The habit history feature logs the description, completion records of each member, and the current streak. This comprehensive tracking system provides insights into individual progress and group performance, fostering accountability and motivation for habit formation.</p>
+    </div>
+</div>
+
+<br>
+
+<div style="display: flex; align-items: center;">
+    <img src="public/screenshots/Settings.png" alt="SettingsImage" width="200">
+    <div style="margin-left: 20px;">
+        <p>In the admin settings, administrators possess the authority to invite or remove users, modify habits, and update group details. This centralized control ensures efficient management of user access, habit configurations, and group dynamics, facilitating smooth administration and customization of the platform.</p>
+    </div>
+</div>
+
+<br>
+
+<div style="display: flex; align-items: center;">
+    <img src="public/screenshots/Feed.png" alt="FeedImage" width="200">
+    <div style="margin-left: 20px;">
+        <p>The feed function initiates a daily "Pulse Check" survey that measures the state of mind of each group member, which is then evaluated and returned back to the group. In addition, the feed provides insightful tips to address identified areas for improvement, fostering a supportive and proactive community environment.</p>
+    </div>
+</div>
+
+<br>
+
+<div style="display: flex; align-items: center;">
+    <img src="public/screenshots/Profile.png" alt="ProfileImage" width="200">
+    <div style="margin-left: 20px;">
+        <p>The profile section allows users to edit personal details such as their name, and provides options to log out or delete their account altogether. This ensures users have control over their account information and can manage their presence on the platform according to their preferences.</p>
+    </div>
+</div>
+
 
 <!-- TOC --><a name="authors"></a>
 ## Authors
