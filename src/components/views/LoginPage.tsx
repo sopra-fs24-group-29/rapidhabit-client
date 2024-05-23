@@ -16,6 +16,11 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const doLogin = async () => {
+    if (!email || !password) {
+      setErrorMessage("Please fill out all fields,");
+      return;
+    }
+    setErrorMessage("");
     try {
       const requestBody = JSON.stringify({ email, password });
 
@@ -47,7 +52,7 @@ const LoginPage = () => {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       doLogin();
     }
   };
@@ -75,7 +80,7 @@ const LoginPage = () => {
                 label=""
                 maxLength={20}
                 value={password}
-                onChange={(un: string) => setPassword(un.replace(/\s/g, ''))}
+                onChange={(un: string) => setPassword(un.replace(/\s/g, ""))}
                 onKeyDown={handleKeyPress}
               />
               <div
@@ -97,7 +102,6 @@ const LoginPage = () => {
               <Button
                 className="cursor-pointer py-1 px-4 mt-5 w-full"
                 type="button"
-                disabled={!email || !password}
                 onClick={doLogin}
               >
                 Login

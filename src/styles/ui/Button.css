@@ -10,6 +10,10 @@
   @apply opacity-70;
 }
 
+.primary-button:disabled {
+  @apply opacity-30;
+}
+
 .primary-button.destructive {
   @apply bg-red-950 text-red-300;
 }
