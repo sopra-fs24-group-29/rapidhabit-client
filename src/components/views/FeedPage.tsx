@@ -111,6 +111,11 @@ const FeedPage = () => {
             <h1 className="text-center text-4xl flex items-start pd font-bold pb-5">
               Feed
             </h1>
+            {feedEntries.length === 0 && (
+              <div className="text-center text-xl text-gray-500">
+                Your feed is empty
+              </div>
+            )}
             {feedEntries.map((entry, index) => {
               const userSubmitted =
                 entry.userSubmits && userId in entry.userSubmits;
