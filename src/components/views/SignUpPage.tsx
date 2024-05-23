@@ -21,6 +21,11 @@ const SignUpPage = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const doRegistration = async () => {
+    if (!firstname || !lastname || !email || !password) {
+      setErrorMessage("Please fill out all fields,");
+      return;
+    }
+    setErrorMessage("");
     try {
       const requestBody = JSON.stringify({
         firstname,
@@ -64,7 +69,7 @@ const SignUpPage = () => {
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       doRegistration();
     }
   };
@@ -110,7 +115,7 @@ const SignUpPage = () => {
                 label=""
                 maxLength={20}
                 value={password}
-                onChange={(un: string) => setPassword(un.replace(/\s/g, ''))}
+                onChange={(un: string) => setPassword(un.replace(/\s/g, ""))}
                 onKeyDown={handleKeyPress}
               />
               <div
@@ -133,7 +138,6 @@ const SignUpPage = () => {
               <Button
                 className="cursor-pointer py-1 px-4 mt-5 w-full"
                 type="button"
-                disabled={!firstname || !lastname || !email || !password}
                 onClick={doRegistration}
               >
                 Create account
