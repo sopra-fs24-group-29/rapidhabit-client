@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   const doLogin = async () => {
     if (!email || !password) {
-      setErrorMessage("Please fill out all fields,");
+      setErrorMessage("Please fill out all fields.");
       return;
     }
     setErrorMessage("");
