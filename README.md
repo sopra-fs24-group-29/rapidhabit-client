@@ -196,7 +196,7 @@ yarn dev
 <div style="display: flex; align-items: center;">
     <img src="public/screenshots/Feed.png" alt="FeedImage" width="200">
     <div style="margin-left: 20px;">
-        <p>The feed function initiates a daily "Pulse Check" survey that measures the state of mind of each group member, which is then evaluated and returned back to the group. In addition, the feed provides insightful tips to address identified areas for improvement, fostering a supportive and proactive community environment.</p>
+        <p>The feed function initiates a daily "Pulse Check" survey that measures the state of mind of each group member, which is then evaluated and returned back to the group. The survey is initialized everyday at 07:00 AM (Zurich Time). At 12:00 AM the survey gets closed and the results of each survey gets published for each group via feed message. At 06:00 PM each user receives a group-related evening notification summarizing which habits have been completed and which habits are still to be checked by some group members.</p>
     </div>
 </div>
 
